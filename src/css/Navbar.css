@@ -801,6 +801,7 @@
 /* Mặc định: placeholder & text màu trắng */
 .search-bar input {
   color: #fff;
+  font-family: 'Font2';
 }
 
 .search-bar input::placeholder {
@@ -812,13 +813,13 @@
 .maxwell-header.scrolled ~ .search-overlay .search-bar input,
 .maxwell-header:hover ~ .search-overlay .search-bar input {
   color: rgba(0, 0, 0, 0.66) !important;
-  font-family: 'Font1';
+  font-family: 'Font2';
 }
 
 .maxwell-header.scrolled ~ .search-overlay .search-bar input::placeholder,
 .maxwell-header:hover ~ .search-overlay .search-bar input::placeholder {
   color: rgba(0, 0, 0, 0.55) !important;
-  font-family: 'Font1';
+  font-family: 'Font2';
 }
 
 
