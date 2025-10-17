@@ -33,6 +33,7 @@
   letter-spacing: 0.08em;
   font-size: 14px;
   font-family: "Font1", sans-serif;
+  
 }
 
 .cart-count {
@@ -63,12 +64,38 @@
 
 
 .nav-links li {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 4px;
   cursor: pointer;
-  transition: opacity 0.3s ease;
 }
-.nav-links li:hover { 
-  border-bottom: 1px solid black;
+
+/* Tạo border ảo */
+.nav-links li::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: #000;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.28s ease-in-out;
 }
+
+/* Khi hover: chạy từ trái sang phải */
+.nav-links li:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Khi rời chuột: biến mất từ trái sang phải */
+.nav-links li:not(:hover)::after {
+  transform: scaleX(0);
+  transform-origin: right;
+}
+
 
 /* ===== LOGO CENTER ===== */
 .nav-logo {
