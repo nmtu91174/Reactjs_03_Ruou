@@ -165,9 +165,18 @@ export default function Navbar() {
             <i className="bi bi-search"></i>
             <input type="text" placeholder="Search our wines..." />
             <i
-              className="bi bi-x-lg"
-              onClick={() => setSearchOpen(false)}
-            ></i>
+  className="bi bi-x-lg"
+  onClick={() => {
+    const overlay = document.querySelector(".search-overlay");
+    if (overlay) {
+      overlay.classList.add("fade-out");
+      setTimeout(() => setSearchOpen(false), 350);
+    } else {
+      setSearchOpen(false);
+    }
+  }}
+></i>
+
           </div>
         </div>
       )}
