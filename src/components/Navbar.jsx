@@ -23,7 +23,7 @@ export default function Navbar() {
   // === random recommended ===
   useEffect(() => {
     const shuffled = [...productsData.products].sort(() => 0.5 - Math.random());
-    setRecommended(shuffled.slice(0, 8));
+    setRecommended(shuffled.slice(0, 10));
   }, []);
 
   // === cart logic ===
