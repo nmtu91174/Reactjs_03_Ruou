@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "Font1";
+  src: url("assets/fonts/NeueHaasDisplayRoman.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Font2";
+  src: url("assets/fonts/Utopia-Regular.otf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}

@@ -1,0 +1,162 @@
+.footer {
+  font-family: "Font1", sans-serif;
+  background: #e7e5e4;
+}
+
+.footer a:hover {
+  color: #8c7a66 !important; /* hover màu vàng champagne Maxwell */
+}
+
+.footer h2 {
+  font-family: "Font2", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.footer h2.display-6 {
+    font-size: calc(3rem + 1.5vw);
+}
+
+
+.subscribe input::placeholder {
+  color: #666;
+}
+
+.footer-logo {
+  width: 80px !important;
+  height: auto;
+}
+
+.text{
+    display: flex;
+    gap:30px;
+}
+
+.btn.btn-sm.text-dark{
+    border: 1px solid #000 !important;
+    border-radius: 18px;
+}
+
+.btn.btn-sm.text-dark:hover{
+    background-color: #000;
+    color: #fff !important;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    position: relative;
+    text-align: center;
+    padding-top: 80px; /* chừa chỗ cho tiêu đề MAXWELL–MADE */
+  }
+
+  /* === Đưa MAXWELL–MADE lên đầu === */
+  .footer .maxwell {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    z-index: 5;
+  }
+
+  .footer .maxwell h2 {
+    font-size: 1.8rem;
+    margin: 0;
+  }
+
+  /* Icon mạng xã hội xuống dòng sau MAXWELL–MADE */
+  .footer .col-md-3.d-flex.justify-content-md-end.justify-content-center {
+    justify-content: center !important;
+    margin-top: 60px; /* để cách MAXWELL–MADE */
+    margin-bottom: 20px;
+  }
+
+  /* Menu hai cột */
+  .footer .d-flex.gap-5.text-end {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    text-align: left;
+    justify-items: center;
+    gap: 0.8rem 2rem;
+    margin-bottom: 25px;
+  }
+
+  /* Subscribe nằm sau menu */
+  .subscribe-block {
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .subscribe-block .d-flex {
+    justify-content: center;
+    border-bottom: 1px solid #000;
+    width: 80%;
+    max-width: 320px;
+    margin: 0 auto;
+    padding-bottom: 5px;
+  }
+
+  .subscribe-block input {
+    text-align: left;
+    font-size: 15px;
+  }
+
+  .subscribe-block button {
+    border: 1px solid #000;
+    border-radius: 50px;
+    height: 34px;
+    width: 48px;
+  }
+
+ 
+
+  .footer-logo {
+    width: 60px !important;
+    margin: 0;
+    margin-top: 70px;
+  }
+
+  .footer .col-md-3 p {
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .menu{
+    margin-right: 40px;
+  }
+  .part1{
+    padding-bottom: 0px !important;
+  }
+  .part2{
+    padding-bottom: 0px !important;
+  }
+
+  .ic{
+    margin-top: 15px !important;
+    margin-bottom: 0px !important;
+  }
+
+  .t{
+    margin-top: 0px !important;
+  }
+  /* Phần bản quyền cuối cùng */
+  .footer .container-fluid.py-3.px-5.text-secondary.small {
+    text-align: center !important;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-top: 25px;
+  }
+
+  .footer .container-fluid.py-3.px-5.text-secondary.small .row {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px;
+  }
+
+  .footer .container-fluid.py-3.px-5.text-secondary.small a {
+    display: inline-block;
+    margin: 0 8px;
+  }
+}

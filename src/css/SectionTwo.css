@@ -1,0 +1,183 @@
+.section-two {
+  background: #E3E1E1;
+  font-family: "Font2", serif;
+  color: #000;
+  padding-bottom: 300px;
+}
+
+/* === TOP AREA === */
+.section-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 48px 2.8%;
+  gap: 60px;
+  min-height: 400px; /* tạo khoảng đứng giữa hai khối */
+  position: relative;
+}
+
+/* Cột trái luôn trên */
+.text-left {
+  flex: 1;
+  align-self: flex-start;
+}
+
+.text-left h2 {
+  font-size: clamp(40px, 5vw, 80px);
+  line-height: 1.15;
+  font-weight: 300;
+  margin-top:40px;
+}
+
+.text-left em {
+  font-style: italic;
+}
+
+/* Cột phải nằm thấp xuống */
+.text-right {
+  flex: 1;
+  align-self: flex-end;
+  max-width: 430px;
+  font-size: 16px;
+  line-height: 1.8;
+  text-align: left;
+  margin-top: 240px;
+}
+
+.btn-darkline {
+  margin-top: 24px;
+  background: none;
+  border: none;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  position: relative;
+  padding-bottom: 5px;
+  cursor: pointer;
+}
+.btn-darkline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: #000;
+  transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+  transform-origin: right;
+}
+.btn-darkline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  background: #000;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.btn-darkline:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* === IMAGE OVERLAY === */
+.section-image {
+  position: relative;
+  overflow: hidden;
+  max-width: 97.8%;   
+  margin: 0 auto;  
+ 
+}
+
+
+.section-image img {
+    width:100%;
+    height: 800px;
+    object-fit: cover;
+    display: block;
+}
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+  padding: 3%;
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.overlay-top-left {
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  font-family: 'Font1';
+  font-size: 22px;
+}
+.overlay-bottom-right {
+  max-width: 460px;
+  align-self: flex-end;
+  text-align: right;
+}
+.btn-lightline {
+  margin-top: 16px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  position: relative;
+  cursor: pointer;
+  padding: 5px 0;
+}
+.btn-lightline::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #fff;
+}
+.btn-lightline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #fff;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.btn-lightline:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* === FADE IN UP === */
+.fadeInUp {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 2s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.fadeInUp.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .section-top {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 80px 6%;
+  }
+  .overlay {
+    padding: 40px 6%;
+  }
+  .overlay-bottom-right {
+    text-align: left;
+    align-self: flex-start;
+  }
+}

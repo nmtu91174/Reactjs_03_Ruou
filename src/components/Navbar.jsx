@@ -1,0 +1,289 @@
+import { useEffect, useState, useRef } from "react";
+import "../css/Navbar.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import productsData from "../data/maxwellwines.json"; // ✅ đọc sản phẩm
+
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
+  const [recommended, setRecommended] = useState([]);
+  const recRef = useRef(null);
+
+  // === scroll logic ===
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // === random recommended ===
+  useEffect(() => {
+    const shuffled = [...productsData.products].sort(() => 0.5 - Math.random());
+    setRecommended(shuffled.slice(0, 4));
+  }, []);
+
+  // === cart logic ===
+  const addItem = (item) => {
+    setCartItems((prev) => {
+      const exist = prev.find((i) => i.id === item.id);
+      if (exist) {
+        return prev.map((i) =>
+          i.id === item.id ? { ...i, qty: i.qty + 1 } : i
+        );
+      } else {
+        return [...prev, { ...item, qty: 1 }];
+      }
+    });
+  };
+
+  const updateQty = (id, delta) => {
+    setCartItems((prev) =>
+      prev.map((i) =>
+        i.id === id ? { ...i, qty: Math.max(1, i.qty + delta) } : i
+      )
+    );
+  };
+
+  const removeItem = (id) =>
+    setCartItems((prev) => prev.filter((i) => i.id !== id));
+
+  const subtotal = cartItems.reduce(
+    (sum, i) => sum + i.price * i.qty,
+    0
+  );
+
+  // === total count (đếm tất cả số lượng sp) ===
+  const totalCount = cartItems.reduce((sum, i) => sum + i.qty, 0);
+
+  // === recommend scroll ===
+  const handleScroll = (dir) => {
+  if (!recRef.current) return;
+  const card = recRef.current.querySelector(".recommend-card");
+  if (!card) return;
+  const gap = 12; // khớp với CSS
+  const moveBy = card.offsetWidth * 2 + gap;
+  recRef.current.scrollBy({
+    left: dir === "left" ? -moveBy : moveBy,
+    behavior: "smooth",
+  });
+};
+
+
+
+  // === disable body scroll khi sidebar mở ===
+  useEffect(() => {
+    document.body.style.overflow =
+      menuOpen || cartOpen ? "hidden" : "auto";
+  }, [menuOpen, cartOpen]);
+
+  const iconColor = scrolled || hovered ? "#111" : "#fff";
+
+  return (
+    <>
+      {/* ===== HEADER ===== */}
+      <header
+        className={`maxwell-header ${scrolled || hovered ? "scrolled" : ""}`}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <nav className="maxwell-nav">
+          {/* === LEFT MENU ICON === */}
+          <div className="nav-left mobile-only">
+            <img
+              src={
+                scrolled || hovered
+                  ? "/assets/icon-menu.png"
+                  : "/assets/icon-menu2.png"
+              }
+              alt="menu"
+              onClick={() => setMenuOpen(true)}
+            />
+          </div>
+
+          {/* === LINKS === */}
+          <ul className="nav-links desktop-only">
+            <li>RESTAURANT</li>
+            <li>SHOP</li>
+            <li>VISIT</li>
+            <li>CLUB</li>
+            <li>EVENTS</li>
+            <li>ABOUT</li>
+          </ul>
+
+          {/* === LOGO === */}
+          <div className="nav-logo">
+            <img
+              src={
+                scrolled || hovered
+                  ? "/assets/logo-black.webp"
+                  : "/assets/logo-white.webp"
+              }
+              alt="Maxwell Logo"
+              className="logo"
+            />
+          </div>
+
+          {/* === ACTIONS === */}
+          <div className="nav-actions">
+            <button
+              className="btn-reserve desktop-only"
+            >
+              RESERVATIONS
+            </button>
+
+            <i
+              className="bi bi-person desktop-only "
+              style={{ color: iconColor, fontSize: "24px" }}
+            ></i>
+
+            <i
+              className="bi bi-search desktop-only"
+              style={{ color: iconColor, fontSize: "18px" }}
+            ></i>
+
+            {/* === CART ICON === */}
+            <div
+              className="bag-icon"
+              onClick={() => setCartOpen(true)}
+              style={{ position: "relative" }}
+            >
+              <i className="bi bi-bag" style={{ color: iconColor, fontSize:"20px" }}></i>
+              <span className="cart-count">{totalCount}</span> {/* luôn hiển thị */}
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      {/* ===== SIDEBAR MENU ===== */}
+      <div className={`sidebar left ${menuOpen ? "open" : ""}`}>
+        <div className="sidebar-header">
+          <i
+            className="bi bi-x-lg"
+            onClick={() => setMenuOpen(false)}
+            style={{ cursor: "pointer" }}
+          ></i>
+          <img
+            src="/assets/logo-black.webp"
+            alt="Logo"
+            className="sidebar-logo"
+          />
+        </div>
+
+        <ul className="sidebar-links">
+          <li><span>Restaurant</span></li>
+          <li className="has-arrow"><span>Shop</span></li>
+          <li className="has-arrow"><span>Visit</span></li>
+          <li><span>Club</span></li>
+          <li className="has-arrow"><span>Events</span></li>
+          <li className="has-arrow"><span>About</span></li>
+        </ul>
+
+        <div className="sidebar-search">
+          <input type="text" placeholder="Search" />
+          <i className="bi bi-search"></i>
+        </div>
+
+        <div className="sidebar-book">
+          <img src="/assets/sitebar.webp" alt="Book a Table" />
+          <div className="book-info">
+            <h4>Book a Table</h4>
+            <button>Learn More →</button>
+          </div>
+        </div>
+      </div>
+
+      {/* ===== SIDEBAR CART ===== */}
+      <div className={`sidebar right cart-sidebar ${cartOpen ? "open" : ""}`}>
+            {/* HEADER */}
+            <div className="cart-header">
+              <i className="bi bi-x-lg" onClick={() => setCartOpen(false)}></i>
+              <h2>Cart</h2>
+            </div>
+
+            {/* BODY */}
+            <div className="cart-body">
+              {cartItems.length === 0 ? (
+                <p className="empty-cart">Your cart is empty</p>
+              ) : (
+                <div className="cart-list">
+                  {cartItems.map((item) => (
+                    <div className="cart-item" key={item.id}>
+                      <i className="bi bi-x" onClick={() => removeItem(item.id)}></i>
+                      <img src={item.image} alt={item.name} className="cart-thumb" />
+
+                      <div className="cart-info">
+                        <h5>{item.name}</h5>
+                      </div>
+
+                      <div className="cart-right">
+                        <div className="item-price">${item.price.toFixed(2)}</div>
+                        <div className="qty-box">
+                          <button onClick={() => updateQty(item.id, -1)}>-</button>
+                          <span>{item.qty}</span>
+                          <button onClick={() => updateQty(item.id, 1)}>+</button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+
+
+                </div>
+              )}
+
+              {/* === RECOMMEND === */}
+              <div className="cart-recommend">
+                <div className="recommend-header">
+                  <h4>We Recommend</h4>
+                  <div className="arrows">
+                    <i className="bi bi-arrow-left" onClick={() => handleScroll("left")}></i>
+                    <i className="bi bi-arrow-right" onClick={() => handleScroll("right")}></i>
+                  </div>
+                </div>
+
+                <div className="recommend-list" ref={recRef}>
+                  {recommended.map((rec) => (
+                    <div className="recommend-card" key={rec.id}>
+                      <img src={rec.image} alt={rec.name} />
+                      <div className="recommend-content">
+                        <h5>{rec.name}</h5>
+                        <p>${rec.price.toFixed(2)}</p>
+                        <button className="add-btn" onClick={() => addItem(rec)}>+</button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+
+            </div>
+
+            {/* FOOTER */}
+            <div className="cart-footer">
+              <div className="subtotal-row">
+                <span>SUBTOTAL</span>
+                <span>${subtotal.toFixed(2)}</span>
+              </div>
+              <label className="checkbox-row">
+                <input type="checkbox" />
+                <span>I confirm that I am over 18 years of age</span>
+              </label>
+              <button className="btn-cartcheck">CHECKOUT</button>
+            </div>
+      </div>
+
+      {/* BACKDROP */}
+      {(menuOpen || cartOpen) && (
+        <div
+          className="backdrop"
+          onClick={() => {
+            setMenuOpen(false);
+            setCartOpen(false);
+          }}
+        ></div>
+      )}
+    </>
+  );
+}
