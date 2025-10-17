@@ -12,6 +12,7 @@ export default function Navbar() {
   const [recommended, setRecommended] = useState([]);
   const recRef = useRef(null);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [confirmed, setConfirmed] = useState(false); // 🟢 thêm state
 
   // === scroll logic ===
   useEffect(() => {
@@ -292,12 +293,26 @@ export default function Navbar() {
               <div className="subtotal-row">
                 <span>SUBTOTAL</span>
                 <span>${subtotal.toFixed(2)}</span>
-              </div>
+              </div>                 
               <label className="checkbox-row">
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  checked={confirmed}
+                  onChange={(e) => setConfirmed(e.target.checked)}
+                />
                 <span>I confirm that I am over 18 years of age</span>
               </label>
-              <button className="btn-cartcheck">CHECKOUT</button>
+
+              <button
+                className="btn-cartcheck"
+                disabled={!confirmed} 
+                style={{
+                  opacity: confirmed ? 1 : 0.8,
+                  cursor: confirmed ? "pointer" : "not-allowed",
+                }}
+              >
+                CHECKOUT
+              </button>
             </div>
       </div>
 

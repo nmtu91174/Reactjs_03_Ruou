@@ -649,11 +649,31 @@
   padding: 14px 0;
   cursor: pointer;
   letter-spacing: 0.03em;
+  transition: all 0.2s ease;
   
 }
 .btn-cartcheck:hover {
   opacity: 0.9;
 }
+
+
+
+/* Khi disabled */
+.btn-cartcheck:disabled,
+.btn-cartcheck.disabled {
+  background: #888;
+  color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+  transition: all 0.2s ease; /* ✅ Giữ transition ở đây */
+}
+
+/* Khi hover, vẫn cho phép transition xảy ra */
+.btn-cartcheck:not(:disabled):hover {
+  background: #818164;
+  color: #fff;
+}
+
 
 /* === CART COUNT === */
 .cart-count {
@@ -1086,3 +1106,6 @@
     transform: translateY(-8px);
   }
 }
+
+
+
