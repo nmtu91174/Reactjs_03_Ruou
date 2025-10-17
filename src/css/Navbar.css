@@ -397,7 +397,7 @@
 .cart-header h2 {
   font-family: "Font1", serif;
   font-size: 26px;
-  font-weight: 500;
+  font-weight: 00;
   margin: 0;
 }
 
@@ -681,6 +681,152 @@
   backdrop-filter: blur(3px);
 }
 
+/* ===== SEARCH OVERLAY ===== */
+.search-overlay {
+  position: absolute;
+  top: 88px; /* chiều cao header */
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 500;
+  animation: fadeIn 0.4s ease;
+}
+
+/* ===== SEARCH OVERLAY (Chuẩn Maxwell) ===== */
+.search-overlay {
+  position: fixed; /* luôn cố định theo header */
+  top: 88px; /* nằm ngay dưới header */
+  left: 0;
+  width: 100%;
+  z-index: 450;
+  background: transparent; /* để nền của .search-bar quyết định */
+  display: flex;
+  justify-content: center;
+  transition: all 0.4s ease;
+}
+
+/* ===== THANH SEARCH ===== */
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%; /* full width của header */
+  max-width: none;
+  padding: 1rem 3rem 1rem 3.7rem; 
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  background: transparent;
+  color: #fff;
+  transition: all 0.35s ease;
+  margin-top: 0rem;
+}
+
+/* Khi header scroll → đồng bộ nền trắng, chữ đen */
+.search-overlay.scrolled .search-bar {
+  background: rgba(255, 255, 255, 0.97);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #111;
+}
+
+/* Icon trái phải */
+.search-bar i {
+  font-size: 18px;
+  color: currentColor;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+.search-bar i:hover { opacity: 0.7; }
+
+/* Ô nhập */
+.search-bar input {
+  flex: 1;
+  margin: 0 16px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+}
+
+.ip{
+  color:#fff;
+}
+
+/* Animation khi xuất hiện */
+.search-overlay.show {
+  animation: fadeInDown 0.4s ease forwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Khi navbar chuyển nền trắng → đồng bộ */
+.maxwell-header.scrolled + .search-overlay .search-bar {
+  background: rgba(255, 255, 255, 0.97);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #111;
+}
+
+/* Icon & input */
+.search-bar i {
+  font-size: 18px;
+  color: currentColor;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.search-bar .bi-x-lg {
+  margin-left: 10px;
+}
+.search-bar input::placeholder {
+  color: rgba(255, 255, 255, 0.7); /* trắng mờ */
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+.search-overlay.scrolled .search-bar input::placeholder {
+  color: rgba(0, 0, 0, 0.5); /* xám đen mờ */
+}
+
+/* ======== TRẠNG THÁI 1: HEADER TRONG SUỐT ======== */
+/* Mặc định: placeholder & text màu trắng */
+.search-bar input {
+  color: #fff;
+}
+
+.search-bar input::placeholder {
+  color: rgba(255, 255, 255, 0.75);
+  transition: color 0.3s ease;
+}
+
+/* Khi header có class .scrolled hoặc .hovered → đổi toàn bộ sang màu đen */
+.maxwell-header.scrolled ~ .search-overlay .search-bar input,
+.maxwell-header:hover ~ .search-overlay .search-bar input {
+  color: #111 !important;
+}
+
+.maxwell-header.scrolled ~ .search-overlay .search-bar input::placeholder,
+.maxwell-header:hover ~ .search-overlay .search-bar input::placeholder {
+  color: rgba(0, 0, 0, 0.55) !important;
+}
+
+
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 
 /* ============ RESPONSIVE TABLET ============ */
 @media (max-width: 1024px) {
@@ -688,6 +834,12 @@
     padding: 0 32px;
     height: 80px;
   }
+
+  .search-bar {
+  margin-top: -0.5rem;
+  padding: 1rem 1.3rem 1rem 2.2rem;
+  }
+
 
   .nav-logo .logo {
     height: 2.8rem;
@@ -728,6 +880,11 @@
   .maxwell-nav {
     padding: 0 20px;
     height: 70px;
+  }
+
+  .search-bar {
+     margin-top: -1.2rem;
+     padding: 1rem 0.6rem 1rem 1.5rem;
   }
 
   .nav-logo .logo {

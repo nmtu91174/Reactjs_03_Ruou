@@ -11,6 +11,7 @@ export default function Navbar() {
   const [cartItems, setCartItems] = useState([]);
   const [recommended, setRecommended] = useState([]);
   const recRef = useRef(null);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   // === scroll logic ===
   useEffect(() => {
@@ -141,7 +142,8 @@ export default function Navbar() {
 
             <i
               className="bi bi-search desktop-only"
-              style={{ color: iconColor, fontSize: "18px" }}
+              style={{ color: iconColor, fontSize: "18px", cursor: "pointer" }}
+              onClick={() => setSearchOpen(true)}
             ></i>
 
             {/* === CART ICON === */}
@@ -156,6 +158,22 @@ export default function Navbar() {
           </div>
         </nav>
       </header>
+
+      {searchOpen && (
+        <div className={`search-overlay ${scrolled ? "scrolled" : ""}`}>
+          <div className="search-bar">
+            <i className="bi bi-search"></i>
+            <input type="text" placeholder="Search our wines..." />
+            <i
+              className="bi bi-x-lg"
+              onClick={() => setSearchOpen(false)}
+            ></i>
+          </div>
+        </div>
+      )}
+
+
+
 
       {/* ===== SIDEBAR MENU ===== */}
       <div className={`sidebar left ${menuOpen ? "open" : ""}`}>
