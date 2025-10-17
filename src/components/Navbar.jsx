@@ -23,7 +23,7 @@ export default function Navbar() {
   // === random recommended ===
   useEffect(() => {
     const shuffled = [...productsData.products].sort(() => 0.5 - Math.random());
-    setRecommended(shuffled.slice(0, 4));
+    setRecommended(shuffled.slice(0, 8));
   }, []);
 
   // === cart logic ===
@@ -165,17 +165,17 @@ export default function Navbar() {
             <i className="bi bi-search"></i>
             <input type="text" placeholder="Search our wines..." />
             <i
-  className="bi bi-x-lg"
-  onClick={() => {
-    const overlay = document.querySelector(".search-overlay");
-    if (overlay) {
-      overlay.classList.add("fade-out");
-      setTimeout(() => setSearchOpen(false), 350);
-    } else {
-      setSearchOpen(false);
-    }
-  }}
-></i>
+        className="bi bi-x-lg"
+        onClick={() => {
+          const overlay = document.querySelector(".search-overlay");
+          if (overlay) {
+            overlay.classList.add("fade-out");
+            setTimeout(() => setSearchOpen(false), 350);
+          } else {
+            setSearchOpen(false);
+          }
+        }}
+      ></i>
 
           </div>
         </div>
