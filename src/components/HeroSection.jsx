@@ -18,7 +18,6 @@ export default function HeroSection() {
         <source src="/assets/homepage.mp4" type="video/mp4" />
       </video>
 
-      {/* ✅ CHỈ CẦN DI CHUYỂN OVERLAY XUỐNG SAU VIDEO */}
       <div className="overlay"></div>
 
       {/* === NỘI DUNG HERO === */}

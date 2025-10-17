@@ -1,0 +1,642 @@
+{
+  "products": [
+    {
+      "id": "silver-hammer-shiraz-2022",
+      "name": "Silver Hammer Shiraz 2022",
+      "vintage": "2022",
+      "variety": "Shiraz",
+      "region": "McLaren Vale",
+      "description": "Rich fruits, smooth with savoury spice. Great value Shiraz for every day.",
+      "tasting_notes": "Fragrant aromas of florals and plum. Palate shows fruit intensity, savoury spices and fine tannins. Mouth filling, great length. Full bodied, but restrained.",
+      "price": {
+        "regular": 28,
+        "wine_club": 22,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/silver-hammer-shiraz-2022",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/SilverHammerbottle1200x1200_cab4a119-bb20-42d6-95ec-5a917b8f272d.png?v=1754444205&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "nero-davola-2023",
+      "name": "Nero d'Avola 2023",
+      "vintage": "2023",
+      "variety": "Nero d'Avola",
+      "region": "McLaren Vale",
+      "description": "Vibrant, soft with juicy acidity, savoury. The ultimate pizza wine.",
+      "tasting_notes": "Vibrant red wine with soft tannins and juicy acidity, featuring savoury characteristics that make it an ideal pairing with pizza and Italian cuisine.",
+      "price": {
+        "regular": 35,
+        "wine_club": 28,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/nero-davola-2023",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/NerodAvolabottle1200x1200_081c39a3-4710-4f44-90a3-14b455a6e59c.png?v=1754443837&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "ellen-street-shiraz-2022",
+      "name": "Ellen Street Shiraz 2022",
+      "vintage": "2022",
+      "variety": "Shiraz",
+      "region": "McLaren Vale",
+      "description": "Aromatic spice, rich dark fruits, length and intensity. Quintessential McLaren Vale Shiraz.",
+      "tasting_notes": "Aromatic nose with spice notes, rich dark fruit flavors, excellent length and intensity. A classic representation of McLaren Vale Shiraz.",
+      "price": {
+        "regular": 50,
+        "wine_club": 40,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/ellen-street-shiraz-2022",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/EllenStreetShirazbottle1200x1200.png?v=1754440689&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "fiano-2025",
+      "name": "Fiano 2025",
+      "vintage": "2025",
+      "variety": "Fiano",
+      "region": "McLaren Vale",
+      "description": "Zesty, textured, complex. One of Italy's oldest varieties, a newfound favourite in McLaren Vale.",
+      "tasting_notes": "Zesty and textured with complex flavor profile. This ancient Italian variety thrives in McLaren Vale, offering a refreshing and sophisticated white wine experience.",
+      "price": {
+        "regular": 35,
+        "wine_club": 28,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/fiano-2025",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/fiano-2025.png",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "grenache-rose-2024",
+      "name": "Grenache Rosé 2024",
+      "vintage": "2024",
+      "variety": "Grenache Rosé",
+      "region": "McLaren Vale",
+      "description": "Fresh, vibrant, textured. Inspired by the great dry style Roses of Provence.",
+      "tasting_notes": "Fresh and vibrant with excellent texture, inspired by the dry style rosés of Provence. A sophisticated and refreshing rosé wine.",
+      "price": {
+        "regular": 35,
+        "wine_club": 28,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/grenache-rose-2024",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/Fianobottle1200x1200_2506f7ec-29ee-4b2e-a7c9-450e6a31f2b8.png?v=1754441315&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "spiced-mead-750ml",
+      "name": "Spiced Mead 750ml",
+      "vintage": "NV",
+      "variety": "Mead",
+      "region": "McLaren Vale",
+      "description": "Heady spice, complex, satisfying. A winter favourite, served warm.",
+      "tasting_notes": "Heady spice with complex flavors that create a satisfying experience. Perfect as a winter warmer, best served warm.",
+      "price": {
+        "regular": 42,
+        "wine_club": 34,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/spiced-mead-750ml",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/SpicedMeadbottle1200x1200.png?v=1754444531&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "honey-mead-750ml",
+      "name": "Honey Mead 750ml",
+      "vintage": "NV",
+      "variety": "Mead",
+      "region": "McLaren Vale",
+      "description": "Floral and deliciously sweet. The original mead, Australia's favourite since 1966.",
+      "tasting_notes": "Floral aromas with deliciously sweet honey flavors. The original Maxwell mead that has been Australia's favorite since 1966.",
+      "price": {
+        "regular": 42,
+        "wine_club": 34,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/honey-mead-750ml",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/HoneyMeadbottle1200x1200.png?v=1754442572&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "liqueur-mead-375ml",
+      "name": "Liqueur Mead 375ml",
+      "vintage": "NV",
+      "variety": "Fortified Mead",
+      "region": "McLaren Vale",
+      "description": "Fortified, spiced, delicious. Aged in bourbon casks. Dessert in a glass.",
+      "tasting_notes": "Fortified and spiced mead aged in bourbon casks, offering a rich, dessert-like experience in a glass.",
+      "price": {
+        "regular": 42,
+        "wine_club": 34,
+        "currency": "AUD"
+      },
+      "volume": "375ml",
+      "product_url": "https://maxwellwines.com.au/products/liqueur-mead-375ml",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/LiqueurMeadbottle1200x1200.png?v=1754443213&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "little-demon-envious-sparkling-nv",
+      "name": "Little Demon Envious Sparkling NV",
+      "vintage": "NV",
+      "variety": "Sparkling White",
+      "region": "McLaren Vale",
+      "description": "Bright, fresh, easy-drinking. Made for celebrations, enjoy it now. What are you waiting for?",
+      "tasting_notes": "Bright and fresh with easy-drinking appeal. Perfect for celebrations and ready to enjoy now.",
+      "price": {
+        "regular": 35,
+        "wine_club": 28,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/little-demon-envious-sparkling-nv",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/LDNVSSparklingbottle1200x1200.png?v=1754442653&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "sparkling-mead-4-pack-330ml-cans",
+      "name": "Sparkling Mead 4 pack x 330ml",
+      "vintage": "NV",
+      "variety": "Sparkling Mead",
+      "region": "McLaren Vale",
+      "description": "Contemporary, refreshing, sessionable. Ideal for everyday summer drinking.",
+      "tasting_notes": "Contemporary and refreshing sparkling mead in convenient cans. Sessionable and ideal for everyday summer drinking.",
+      "price": {
+        "regular": 28,
+        "wine_club": 22,
+        "currency": "AUD"
+      },
+      "volume": "4 x 330ml",
+      "product_url": "https://maxwellwines.com.au/products/sparkling-mead-4-pack-330ml-cans",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/sparklingmead_4pkbottleshot1.png?v=1756785174&width=2000",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "lime-cave-cabernet-sauvignon-2022",
+      "name": "Lime Cave Cabernet Sauvignon 2022",
+      "vintage": "2022",
+      "variety": "Cabernet Sauvignon",
+      "region": "McLaren Vale",
+      "description": "Concentrated, generous, delicious. Epitome of McLaren Vale Cabernet, drink now or cellar.",
+      "tasting_notes": "Concentrated and generous with delicious flavors. The epitome of McLaren Vale Cabernet Sauvignon, suitable for drinking now or cellaring.",
+      "price": {
+        "regular": 50,
+        "wine_club": 40,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/lime-cave-cabernet-sauvignon-2022",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/LimeCaveCabernetSauvignonbottle1200x1200_6045dd10-1224-47e5-816c-33578f9680db.png?v=1754442829&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "fresca-grenache-2024",
+      "name": "Fresca Grenache 2024",
+      "vintage": "2024",
+      "variety": "Grenache",
+      "region": "McLaren Vale",
+      "description": "Bright, delicious, unique. An early, easy drinking style that can be enjoyed chilled (or not).",
+      "tasting_notes": "Bright and delicious with unique characteristics. An early-drinking style that can be enjoyed chilled or at room temperature.",
+      "price": {
+        "regular": 35,
+        "wine_club": 28,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/fresca-grenache-2024",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/FrescaGrenachebottle1200x1200.png?v=1754441893&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "eocene-ancient-earth-shiraz-2023",
+      "name": "Eocene 'Ancient Earth' Shiraz 2023",
+      "vintage": "2023",
+      "variety": "Shiraz",
+      "region": "McLaren Vale",
+      "description": "Layered, complex, savoury. Single Vineyard Shiraz showcasing terroir of Maxwell estate.",
+      "tasting_notes": "Layered and complex with savoury characteristics. A single vineyard Shiraz that showcases the unique terroir of the Maxwell estate.",
+      "price": {
+        "regular": 75,
+        "wine_club": 60,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/eocene-ancient-earth-shiraz-2023",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/Eocenebottle200x1200_5c7a7481-7b87-43db-93b9-70880291e5eb.png?v=1754441201&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "verdelho-2024",
+      "name": "Verdelho 2024",
+      "vintage": "2024",
+      "variety": "Verdelho",
+      "region": "McLaren Vale",
+      "description": "Fresh, tropical, soft and textured. Sheer drinkability, a great match with spicier dishes.",
+      "tasting_notes": "Fresh and tropical with soft, textured palate. Highly drinkable and pairs excellently with spicy dishes.",
+      "price": {
+        "regular": 28,
+        "wine_club": 22,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/verdelho-2024",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/Verdelhobottle1200x1200_9a54bc18-f51e-41c8-8388-de6864741e9c.png?v=1754445075&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "sparkling-mead-24pack-330ml-cans",
+      "name": "Sparkling Mead 24 pack x 330ml",
+      "vintage": "NV",
+      "variety": "Sparkling Mead",
+      "region": "McLaren Vale",
+      "description": "Contemporary, refreshing, sessionable. Ideal for everyday summer drinking.",
+      "tasting_notes": "Contemporary and refreshing sparkling mead in convenient cans. Sessionable and ideal for everyday summer drinking.",
+      "price": {
+        "regular": 150,
+        "wine_club": 120,
+        "currency": "AUD"
+      },
+      "volume": "24 x 330ml",
+      "product_url": "https://maxwellwines.com.au/products/sparkling-mead-24pack-330ml-cans",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/SparklingMeadCan1000pxweb_a93aada2-fe66-436b-b2cd-924e3ade10a3.png?v=1754444510&width=300",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "four-roads-grenache-2023",
+      "name": "Four Roads Grenache 2023",
+      "vintage": "2023",
+      "variety": "Grenache",
+      "region": "McLaren Vale",
+      "description": "Red fruits balanced with earthy spice. Uniquely McLaren Vale Grenache.",
+      "tasting_notes": "Red fruit flavors balanced with earthy spice. A uniquely McLaren Vale expression of Grenache.",
+      "price": {
+        "regular": 50,
+        "wine_club": 40,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/four-roads-grenache-2023",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/FourRoadsbottle1200x1200_df5454ec-be32-4c32-926b-9746cfee5679.png?v=1754441513&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "clan-exclusive-malbec-2024",
+      "name": "Clan Exclusive Malbec 2024",
+      "vintage": "2024",
+      "variety": "Malbec",
+      "region": "McLaren Vale",
+      "description": "Aromatic and juicy, intense mixed spice. Clan wine club exclusive.",
+      "tasting_notes": "Aromatic and juicy with intense mixed spice characteristics. An exclusive offering for Clan wine club members.",
+      "price": {
+        "regular": 35,
+        "wine_club": 28,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/clan-exclusive-malbec-2024",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/MalbecBottle1200x1200.png?v=1754443264&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "tiers-of-wisdom-grenache-2024",
+      "name": "Tiers of Wisdom Grenache 2024",
+      "vintage": "2024",
+      "variety": "Grenache",
+      "region": "McLaren Vale",
+      "description": "Perfumed. Crushed raspberries, bramble, violet florals, hints of pepper.",
+      "tasting_notes": "Perfumed with aromas and flavors of crushed raspberries, bramble, violet florals, and hints of pepper.",
+      "price": {
+        "regular": 75,
+        "wine_club": 60,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/tiers-of-wisdom-grenache-2024",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/TiersWisdombottle1200x1200.png?v=1754444695&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "cabernet-franc-2024",
+      "name": "Cabernet Franc 2024",
+      "vintage": "2024",
+      "variety": "Cabernet Franc",
+      "region": "McLaren Vale",
+      "description": "Light, lively and fresh. A versatile food-friendly wine.",
+      "tasting_notes": "Light and lively with fresh characteristics. A versatile, food-friendly wine suitable for many occasions.",
+      "price": {
+        "regular": 35,
+        "wine_club": 28,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/cabernet-franc-2024",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/CabernetFrancbottle1200x1200_109a5e55-92ca-4bcf-9b57-9b12e41e85aa.png?v=1754440326&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "minotaur-reserve-shiraz-2023",
+      "name": "Minotaur Reserve Shiraz 2023",
+      "vintage": "2023",
+      "variety": "Shiraz",
+      "region": "McLaren Vale",
+      "description": "Powerful, complex, captivating. A selection of the very best barrels from the Minotaur vineyard.",
+      "tasting_notes": "Powerful and complex with captivating characteristics. A premium selection of the very best barrels from the Minotaur vineyard.",
+      "price": {
+        "regular": 100,
+        "wine_club": 80,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/minotaur-reserve-shiraz-2023",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/MinotaurReserveShirazBottle1200x1200_595452b9-7b19-4a2a-a5e2-9f3306b0b48c.png?v=1754443619&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "gsm-2023",
+      "name": "GSM 2023",
+      "vintage": "2023",
+      "variety": "Grenache Shiraz Mataro",
+      "region": "McLaren Vale",
+      "description": "Fresh, modern, bright with subtle spice. A lovely blend of Grenache, Shiraz, and Mataro.",
+      "tasting_notes": "Fresh and modern with bright fruit and subtle spice. A lovely blend of Grenache, Shiraz, and Mataro that showcases the best of each variety.",
+      "price": {
+        "regular": 35,
+        "wine_club": 28,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/gsm-2023",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/GSMbottle1200x1200.png?v=1754442473&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "chardonnay-2024",
+      "name": "Chardonnay 2024",
+      "vintage": "2024",
+      "variety": "Chardonnay",
+      "region": "Adelaide Hills",
+      "description": "Nashi pear, creamy and subtle toasty oak. Cool climate Chardonnay from the Adelaide Hills.",
+      "tasting_notes": "Nashi pear flavors with creamy texture and subtle toasty oak. A cool climate Chardonnay from the Adelaide Hills.",
+      "price": {
+        "regular": 35,
+        "wine_club": 28,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/chardonnay-2024",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/Chardonnaybottle1200x1200_a30caee2-8a24-4df0-ad8d-3ecb4fbbcc7b.png?v=1754440390&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "grenache-blanc-2025",
+      "name": "Grenache Blanc 2025",
+      "vintage": "2025",
+      "variety": "Grenache Blanc",
+      "region": "McLaren Vale",
+      "description": "Textured, bright with saline minerality. A refreshing, complex white wine perfect with seafood.",
+      "tasting_notes": "Textured and bright with saline minerality. A refreshing and complex white wine that pairs perfectly with seafood.",
+      "price": {
+        "regular": 35,
+        "wine_club": 28,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/grenache-blanc-2025",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/GrenacheBlancbottle1200x1200_5e0e4546-eab8-471c-b24a-3e64709aa954.png?v=1754517155&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "silver-hammer-shiraz-2022-magnum",
+      "name": "Silver Hammer Shiraz 2022 Magnum",
+      "vintage": "2022",
+      "variety": "Shiraz",
+      "region": "McLaren Vale",
+      "description": "Rich fruits, smooth with savoury spice. Great value Shiraz for every day.",
+      "tasting_notes": "Fragrant aromas of florals and plum. Palate shows fruit intensity, savoury spices and fine tannins. Mouth filling, great length. Full bodied, but restrained.",
+      "price": {
+        "regular": 70,
+        "wine_club": 70,
+        "currency": "AUD"
+      },
+      "volume": "1500ml",
+      "product_url": "https://maxwellwines.com.au/products/silver-hammer-shiraz-2022-magnum",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/SilverHammerbottle1200x1200_b9ff1cd6-dca9-40e8-982f-4f4e6ed63916.png?v=1754444138&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "the-orchard-cabernet-sauvignon-2023",
+      "name": "The Orchard Cabernet Sauvignon 2023",
+      "vintage": "2023",
+      "variety": "Cabernet Sauvignon",
+      "region": "McLaren Vale",
+      "description": "Smooth, subtle, hints of chocolate. A Classic Cabernet for any occasion.",
+      "tasting_notes": "Smooth and subtle with hints of chocolate. A classic Cabernet Sauvignon suitable for any occasion.",
+      "price": {
+        "regular": 28,
+        "wine_club": 22,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/the-orchard-cabernet-sauvignon-2023",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/TheOrchardbottle1200x1200.png?v=1754444620&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "dining-gift-card",
+      "name": "Dining Gift Card",
+      "vintage": "N/A",
+      "variety": "Gift Card",
+      "region": "N/A",
+      "description": "Gift card for dining at Maxwell Wines restaurant.",
+      "tasting_notes": "N/A",
+      "price": {
+        "regular": 100,
+        "wine_club": 100,
+        "currency": "AUD"
+      },
+      "volume": "N/A",
+      "product_url": "https://maxwellwines.com.au/products/dining-gift-card",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/GC.png?v=1758692521&width=2000",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "eocene-ancient-earth-shiraz-2022-magnum",
+      "name": "Eocene 'Ancient Earth' Shiraz 2022 Magnum",
+      "vintage": "2022",
+      "variety": "Shiraz",
+      "region": "McLaren Vale",
+      "description": "Layered, complex, savoury. Single Vineyard Shiraz showcasing terroir of Maxwell estate.",
+      "tasting_notes": "Layered and complex with savoury characteristics. A single vineyard Shiraz that showcases the unique terroir of the Maxwell estate.",
+      "price": {
+        "regular": 150,
+        "wine_club": 150,
+        "currency": "AUD"
+      },
+      "volume": "1500ml",
+      "product_url": "https://maxwellwines.com.au/products/eocene-ancient-earth-shiraz-2022-magnum",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/Eocenebottle200x1200_3e86baad-80a5-4f47-9d96-40ba8fe382a7.png?v=1754441026&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "fortified-white",
+      "name": "Fortified White",
+      "vintage": "NV",
+      "variety": "Fortified White",
+      "region": "McLaren Vale",
+      "description": "Premium fortified white wine.",
+      "tasting_notes": "A premium fortified white wine with complex characteristics.",
+      "price": {
+        "regular": 100,
+        "wine_club": 80,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/fortified-white",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/WhiteFortified1200x1200.png?v=1758687371&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "lbv-vintage-port",
+      "name": "Late Bottle Vintage Port",
+      "vintage": "NV",
+      "variety": "Port",
+      "region": "McLaren Vale",
+      "description": "Rich and complex late bottle vintage port.",
+      "tasting_notes": "Rich and complex fortified wine in the port style, with deep flavors and excellent aging potential.",
+      "price": {
+        "regular": 75,
+        "wine_club": 60,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/lbv-vintage-port",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/LateBottleShiraz1200x1200.png?v=1758687291&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "cleanskin-shiraz-2022-dozen",
+      "name": "Cleanskin Dozen | Shiraz 2022",
+      "vintage": "2022",
+      "variety": "Shiraz",
+      "region": "McLaren Vale",
+      "description": "Exclusively available to members.",
+      "tasting_notes": "Premium Shiraz available exclusively to wine club members in a dozen pack format.",
+      "price": {
+        "regular": 180,
+        "wine_club": 144,
+        "currency": "AUD"
+      },
+      "volume": "12 x 750ml",
+      "product_url": "https://maxwellwines.com.au/products/cleanskin-shiraz-2022-dozen",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/Maxwelllogo.jpg?v=1759267694&width=200",
+      "stock_status": "Members Only"
+    },
+    {
+      "id": "old-rare-tawny",
+      "name": "Old + Rare Tawny",
+      "vintage": "NV",
+      "variety": "Tawny",
+      "region": "McLaren Vale",
+      "description": "Aged tawny with complex oxidative characteristics.",
+      "tasting_notes": "Old and rare tawny with complex oxidative characteristics developed through extended aging.",
+      "price": {
+        "regular": 100,
+        "wine_club": 80,
+        "currency": "AUD"
+      },
+      "volume": "750ml",
+      "product_url": "https://maxwellwines.com.au/products/old-rare-tawny",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/RareOldTawny1200x1200.png?v=1758687247&width=1100",
+      "stock_status": "In Stock"
+    },
+    {
+      "id": "cleanskin-sparkling-shiraz-nv",
+      "name": "Cleanskin Dozen | Sparkling Shiraz NV",
+      "vintage": "NV",
+      "variety": "Sparkling Shiraz",
+      "region": "McLaren Vale",
+      "description": "Exclusively available to members.",
+      "tasting_notes": "Sparkling Shiraz available exclusively to wine club members in a dozen pack format.",
+      "price": {
+        "regular": 240,
+        "wine_club": 192,
+        "currency": "AUD"
+      },
+      "volume": "12 x 750ml",
+      "product_url": "https://maxwellwines.com.au/products/cleanskin-sparkling-shiraz-nv",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/Maxwelllogo.jpg?v=1759267694&width=200",
+      "stock_status": "Members Only"
+    },
+    {
+      "id": "cleanskin-2022-tempranillo",
+      "name": "Cleanskin Dozen | 2022 Tempranillo",
+      "vintage": "2022",
+      "variety": "Tempranillo",
+      "region": "McLaren Vale",
+      "description": "Exclusively available to members.",
+      "tasting_notes": "Tempranillo available exclusively to wine club members in a dozen pack format.",
+      "price": {
+        "regular": 180,
+        "wine_club": 144,
+        "currency": "AUD"
+      },
+      "volume": "12 x 750ml",
+      "product_url": "https://maxwellwines.com.au/products/cleanskin-2022-tempranillo",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/Maxwelllogo.jpg?v=1759267694&width=200",
+      "stock_status": "Members Only"
+    },
+    {
+      "id": "cleanskin-2021-gsm",
+      "name": "Cleanskin Dozen| 2021 GSM",
+      "vintage": "2021",
+      "variety": "Grenache Shiraz Mataro",
+      "region": "McLaren Vale",
+      "description": "Exclusively available to members.",
+      "tasting_notes": "GSM blend available exclusively to wine club members in a dozen pack format.",
+      "price": {
+        "regular": 180,
+        "wine_club": 144,
+        "currency": "AUD"
+      },
+      "volume": "12 x 750ml",
+      "product_url": "https://maxwellwines.com.au/products/cleanskin-2021-gsm",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/Maxwelllogo.jpg?v=1759267694&width=200",
+      "stock_status": "Members Only"
+    },
+    {
+      "id": "cleanskin-2022-cabernet-sauvignon",
+      "name": "Cleanskin Dozen | 2021 Cabernet",
+      "vintage": "2021",
+      "variety": "Cabernet Sauvignon",
+      "region": "McLaren Vale",
+      "description": "Exclusively available to members.",
+      "tasting_notes": "Cabernet Sauvignon available exclusively to wine club members in a dozen pack format.",
+      "price": {
+        "regular": 180,
+        "wine_club": 144,
+        "currency": "AUD"
+      },
+      "volume": "12 x 750ml",
+      "product_url": "https://maxwellwines.com.au/products/cleanskin-2022-cabernet-sauvignon",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/Maxwelllogo.jpg?v=1759267694&width=200",
+      "stock_status": "Members Only"
+    }
+  ],
+  "metadata": {
+    "total_products": 35,
+    "source": "https://maxwellwines.com.au/collections/all-products",
+    "winery": "Maxwell Wines",
+    "location": "McLaren Vale, South Australia",
+    "date_extracted": "2025-10-17",
+    "notes": "Prices are estimates based on similar products. Wine club prices typically offer 20% discount. Product images are placeholder URLs and should be verified. Some products are exclusive to wine club members."
+  }
+}

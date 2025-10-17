@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import "../css/Navbar.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import productsData from "../data/maxwellwines.json"; // ✅ đọc sản phẩm
+import productsData from "../data/maxwell_wines_products.json"; // ✅ đọc sản phẩm
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -34,7 +34,7 @@ export default function Navbar() {
           i.id === item.id ? { ...i, qty: i.qty + 1 } : i
         );
       } else {
-        return [...prev, { ...item, qty: 1 }];
+        return [...prev, { ...item, price: item.price.regular, image_url: item.image_url, qty: 1 }];
       }
     });
   };
@@ -212,7 +212,7 @@ export default function Navbar() {
                   {cartItems.map((item) => (
                     <div className="cart-item" key={item.id}>
                       <i className="bi bi-x" onClick={() => removeItem(item.id)}></i>
-                      <img src={item.image} alt={item.name} className="cart-thumb" />
+                      <img src={item.image_url} alt={item.name} className="cart-thumb" />
 
                       <div className="cart-info">
                         <h5>{item.name}</h5>
@@ -246,10 +246,10 @@ export default function Navbar() {
                 <div className="recommend-list" ref={recRef}>
                   {recommended.map((rec) => (
                     <div className="recommend-card" key={rec.id}>
-                      <img src={rec.image} alt={rec.name} />
+                      <img src={rec.image_url} alt={rec.name} />
                       <div className="recommend-content">
                         <h5>{rec.name}</h5>
-                        <p>${rec.price.toFixed(2)}</p>
+                        <p>${rec.price.regular.toFixed(2)}</p>
                         <button className="add-btn" onClick={() => addItem(rec)}>+</button>
                       </div>
                     </div>
