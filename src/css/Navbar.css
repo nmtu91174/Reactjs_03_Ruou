@@ -811,12 +811,14 @@
 /* Khi header có class .scrolled hoặc .hovered → đổi toàn bộ sang màu đen */
 .maxwell-header.scrolled ~ .search-overlay .search-bar input,
 .maxwell-header:hover ~ .search-overlay .search-bar input {
-  color: #111 !important;
+  color: rgba(0, 0, 0, 0.66) !important;
+  font-family: 'Font1';
 }
 
 .maxwell-header.scrolled ~ .search-overlay .search-bar input::placeholder,
 .maxwell-header:hover ~ .search-overlay .search-bar input::placeholder {
   color: rgba(0, 0, 0, 0.55) !important;
+  font-family: 'Font1';
 }
 
 
