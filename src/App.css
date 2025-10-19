@@ -1,0 +1,4 @@
+html {
+  scrollbar-width: thin; /* mảnh */
+  scrollbar-color: #555 #e5e3e3; /* thumb + track */
+}
