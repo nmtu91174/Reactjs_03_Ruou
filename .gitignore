@@ -77,7 +77,7 @@ temp/
 .serverless/
 
 # Keep only project assets — ignore build exports
-# public/*.mp4
+public/*.mp4
 public/*.webm
 public/*.mov
 public/*.zip
