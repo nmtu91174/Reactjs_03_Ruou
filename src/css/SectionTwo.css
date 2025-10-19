@@ -188,7 +188,7 @@
   align-items: stretch;
   position: relative;
   margin-top: 1.2rem;
-  gap: 20px; /* khoảng giữa 2 khối */
+  gap: 1.288rem; /* khoảng giữa 2 khối */
   padding: 0 1.1rem; /* cách lề ngoài 20px */
 }
 

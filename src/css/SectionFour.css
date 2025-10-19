@@ -114,7 +114,7 @@
 .section-four.section-four-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem; /* khoảng cách giữa 2 cột */
+  gap: 1.288rem; /* khoảng cách giữa 2 cột */
 }
 
 

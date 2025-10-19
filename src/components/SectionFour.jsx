@@ -65,9 +65,9 @@ export default function SectionFour() {
 
       {/* ==== PHẦN 2: ARTICLE STICKY SCROLL 50/50 ==== */}
       <section className="section-four section-four-grid">
-        {/* LEFT STICKY IMAGE */}
+      
         <div className="sf-left">
-          <div className="sf-left-media">
+          <div className="sf-left-media"> 
             <img
               src="/assets/hp-sec4/left.webp"
               alt="Maxwell Wines"
@@ -75,12 +75,14 @@ export default function SectionFour() {
             />
           <div className="sf-left-overlay">
             <div className="content-overlay journal-overlay">
+              <FadeInBlock>
               <div className="text-block">
                 <p>
                   Stay updated with events, winery news, wine releases and restaurant happenings at Maxwell Wines.
                 </p>
                 <button className="btn-hoverline">MAXWELL JOURNAL →</button>
               </div>
+              </FadeInBlock>
             </div>
           </div>
           </div>
@@ -108,6 +110,7 @@ export default function SectionFour() {
           ))}
         </div>
       </section>
+      
     </>
   );
 }
