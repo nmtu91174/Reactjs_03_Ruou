@@ -4,7 +4,7 @@ import "../css/Footer.css";
 
 export default function Footer() {
   return (
-    <footer className="footer bg-light text-dark pt-5">
+    <footer className="footer bg-light text-dark pt-4">
       {/* ===== PHẦN 1 ===== */}
       <div className="container-fluid px-5 pb-5 part1">
         <div className="row align-items-start justify-content-between g-4">
