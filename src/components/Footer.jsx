@@ -23,7 +23,7 @@ export default function Footer() {
             {/* Subscribe */}
             <div className="subscribe-block">
               <h5 className="fw-semibold mb-3">Subscribe to our list</h5>
-              <div className="d-flex border-bottom pb-1">
+              <div className="d-flex pb-1 mail">
                 <input
                   type="email"
                   className="form-control border-0 bg-transparent text-dark shadow-none p-0"
