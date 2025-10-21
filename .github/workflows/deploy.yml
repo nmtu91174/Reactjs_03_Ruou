@@ -24,7 +24,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18' # Bạn có thể đổi phiên bản Node nếu cần
+          node-version: '20' # Bạn có thể đổi phiên bản Node nếu cần
 
       # 3. Cài đặt các gói npm
       - name: Install dependencies
