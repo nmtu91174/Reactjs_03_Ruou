@@ -1,0 +1,267 @@
+/* ============================
+   GLOBAL STYLE
+============================ */
+.shop-page {
+    font-family: "Poppins", "Roboto", sans-serif;
+    background-color: #fafafa;
+    color: #333;
+    padding: 20px;
+}
+
+h2,
+h3,
+h5 {
+    font-weight: 600;
+    color: #222;
+}
+
+button,
+.btn {
+    font-family: inherit;
+}
+
+/* ============================
+   SIDEBAR FILTER
+============================ */
+.shop-filter-sidebar {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 15px;
+    height: fit-content;
+}
+
+.shop-filter-container h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.shop-clear-btn {
+    font-size: 0.9rem;
+    color: #777;
+    text-decoration: underline;
+}
+
+.shop-clear-btn:hover {
+    color: #000;
+}
+
+.shop-filter-section {
+    margin-bottom: 20px;
+}
+
+.shop-filter-section h5 {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.shop-price-inputs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.shop-filter-results {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    text-align: right;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* ============================
+   PRODUCTS GRID
+============================ */
+.shop-products-header {
+    margin-bottom: 20px;
+}
+
+.shop-products-header h2 {
+    border-bottom: 3px solid #000;
+    display: inline-block;
+    padding-bottom: 4px;
+}
+
+.shop-product-card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    background: #fff;
+}
+
+.shop-product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.12);
+}
+
+.shop-product-image-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.shop-product-image-wrapper img {
+    width: 100%;
+    /* aspect-ratio: 5 / 5; */
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.shop-product-card:hover .shop-product-image-wrapper img {
+    transform: scale(1.05);
+}
+
+.shop-stock-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #28a745;
+    color: white;
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 8px;
+}
+
+/* ============================
+   PRODUCT CONTENT
+============================ */
+.shop-product-info {
+    color: #777;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.shop-product-description {
+    font-size: 0.85rem;
+    color: #555;
+    min-height: 50px;
+}
+
+.shop-product-footer {
+    margin-top: 10px;
+}
+
+.shop-price-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.shop-price-regular {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.shop-price-club {
+    font-size: 0.9rem;
+    color: #b12704;
+    font-weight: 500;
+}
+
+.shop-bottom-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* ============================
+   QUANTITY CONTROL
+============================ */
+.shop-qty-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f1f1f1;
+    border-radius: 8px;
+    padding: 4px 8px;
+}
+
+.shop-qty-control button {
+    border: none;
+    background: transparent;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #555;
+}
+
+.shop-qty-control button:hover {
+    color: #000;
+}
+
+.shop-qty-control span {
+    font-weight: 500;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* ============================
+   ADD TO CART BUTTON
+============================ */
+.shop-btn-add {
+    flex: 1;
+    border: none;
+    background-color: #000;
+    color: #fff;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.shop-btn-add:hover {
+    background-color: #333;
+}
+
+.shop-btn-add.shop-added {
+    background-color: #28a745;
+}
+
+/* ============================
+   NO RESULTS
+============================ */
+.shop-no-results {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.shop-no-results p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* ============================
+   RESPONSIVE DESIGN
+============================ */
+@media (max-width: 992px) {
+    .shop-filter-sidebar {
+        margin-bottom: 30px;
+    }
+
+    .shop-price-inputs {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .shop-product-card {
+        margin-bottom: 20px;
+    }
+
+    .shop-bottom-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .shop-btn-add {
+        width: 100%;
+    }
+}

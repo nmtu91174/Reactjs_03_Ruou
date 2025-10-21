@@ -1,9 +1,15 @@
 import { useEffect, useState, useRef } from "react";
+
+import { Link, useNavigate } from "react-router-dom"; // ✅ thêm routing
+
 import "../css/Navbar.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import productsData from "../data/maxwell_wines_products.json"; // ✅ đọc sản phẩm
 
 export default function Navbar() {
+
+  const navigate = useNavigate(); // ✅ hook để điều hướng
+
   const [scrolled, setScrolled] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -62,16 +68,16 @@ export default function Navbar() {
 
   // === recommend scroll ===
   const handleScroll = (dir) => {
-  if (!recRef.current) return;
-  const card = recRef.current.querySelector(".recommend-card");
-  if (!card) return;
-  const gap = 12; // khớp với CSS
-  const moveBy = card.offsetWidth * 2 + gap;
-  recRef.current.scrollBy({
-    left: dir === "left" ? -moveBy : moveBy,
-    behavior: "smooth",
-  });
-};
+    if (!recRef.current) return;
+    const card = recRef.current.querySelector(".recommend-card");
+    if (!card) return;
+    const gap = 12; // khớp với CSS
+    const moveBy = card.offsetWidth * 2 + gap;
+    recRef.current.scrollBy({
+      left: dir === "left" ? -moveBy : moveBy,
+      behavior: "smooth",
+    });
+  };
 
 
 
@@ -82,6 +88,12 @@ export default function Navbar() {
   }, [menuOpen, cartOpen]);
 
   const iconColor = scrolled || hovered ? "#111" : "#fff";
+
+  // ✅ Function để chuyển trang và đóng menu
+  const handleNavigate = (path) => {
+    navigate(path);
+    setMenuOpen(false);
+  };
 
   return (
     <>
@@ -106,9 +118,11 @@ export default function Navbar() {
           </div>
 
           {/* === LINKS === */}
+          {/* ✅ Thêm onClick vào SHOP */}
           <ul className="nav-links desktop-only">
-            <li>RESTAURANT</li>
-            <li>SHOP</li>
+
+            <li onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>RESTAURANT</li>
+            <li onClick={() => navigate('/shop')} style={{ cursor: 'pointer' }}>SHOP</li>
             <li>VISIT</li>
             <li>CLUB</li>
             <li>EVENTS</li>
@@ -153,7 +167,7 @@ export default function Navbar() {
               onClick={() => setCartOpen(true)}
               style={{ position: "relative" }}
             >
-              <i className="bi bi-bag" style={{ color: iconColor, fontSize:"20px" }}></i>
+              <i className="bi bi-bag" style={{ color: iconColor, fontSize: "20px" }}></i>
               <span className="cart-count">{totalCount}</span> {/* luôn hiển thị */}
             </div>
           </div>
@@ -166,17 +180,17 @@ export default function Navbar() {
             <i className="bi bi-search"></i>
             <input type="text" placeholder="Search our wines..." />
             <i
-        className="bi bi-x-lg"
-        onClick={() => {
-          const overlay = document.querySelector(".search-overlay");
-          if (overlay) {
-            overlay.classList.add("fade-out");
-            setTimeout(() => setSearchOpen(false), 350);
-          } else {
-            setSearchOpen(false);
-          }
-        }}
-      ></i>
+              className="bi bi-x-lg"
+              onClick={() => {
+                const overlay = document.querySelector(".search-overlay");
+                if (overlay) {
+                  overlay.classList.add("fade-out");
+                  setTimeout(() => setSearchOpen(false), 350);
+                } else {
+                  setSearchOpen(false);
+                }
+              }}
+            ></i>
 
           </div>
         </div>
@@ -202,7 +216,10 @@ export default function Navbar() {
 
         <ul className="sidebar-links">
           <li><span>Restaurant</span></li>
-          <li className="has-arrow"><span>Shop</span></li>
+          {/* ✅ Thêm onClick để chuyển trang */}
+          <li className="has-arrow" onClick={() => handleNavigate('/shop')}>
+            <span>Shop</span>
+          </li>
           <li className="has-arrow"><span>Visit</span></li>
           <li><span>Club</span></li>
           <li className="has-arrow"><span>Events</span></li>
@@ -225,95 +242,95 @@ export default function Navbar() {
 
       {/* ===== SIDEBAR CART ===== */}
       <div className={`sidebar right cart-sidebar ${cartOpen ? "open" : ""}`}>
-            {/* HEADER */}
-            <div className="cart-header">
-              <i className="bi bi-x-lg" onClick={() => setCartOpen(false)}></i>
-              <h2>Cart</h2>
-            </div>
+        {/* HEADER */}
+        <div className="cart-header">
+          <i className="bi bi-x-lg" onClick={() => setCartOpen(false)}></i>
+          <h2>Cart</h2>
+        </div>
 
-            {/* BODY */}
-            <div className="cart-body">
-              {cartItems.length === 0 ? (
-                <p className="empty-cart">Your cart is empty</p>
-              ) : (
-                <div className="cart-list">
-                  {cartItems.map((item) => (
-                    <div className="cart-item" key={item.id}>
-                      <i className="bi bi-x" onClick={() => removeItem(item.id)}></i>
-                      <img src={item.image_url} alt={item.name} className="cart-thumb" />
+        {/* BODY */}
+        <div className="cart-body">
+          {cartItems.length === 0 ? (
+            <p className="empty-cart">Your cart is empty</p>
+          ) : (
+            <div className="cart-list">
+              {cartItems.map((item) => (
+                <div className="cart-item" key={item.id}>
+                  <i className="bi bi-x" onClick={() => removeItem(item.id)}></i>
+                  <img src={item.image_url} alt={item.name} className="cart-thumb" />
 
-                      <div className="cart-info">
-                        <h5>{item.name}</h5>
-                      </div>
+                  <div className="cart-info">
+                    <h5>{item.name}</h5>
+                  </div>
 
-                      <div className="cart-right">
-                        <div className="item-price">${item.price.toFixed(2)}</div>
-                        <div className="qty-box">
-                          <button onClick={() => updateQty(item.id, -1)}>-</button>
-                          <span>{item.qty}</span>
-                          <button onClick={() => updateQty(item.id, 1)}>+</button>
-                        </div>
-                      </div>
+                  <div className="cart-right">
+                    <div className="item-price">${item.price.toFixed(2)}</div>
+                    <div className="qty-box">
+                      <button onClick={() => updateQty(item.id, -1)}>-</button>
+                      <span>{item.qty}</span>
+                      <button onClick={() => updateQty(item.id, 1)}>+</button>
                     </div>
-                  ))}
-
-
-                </div>
-              )}
-
-              {/* === RECOMMEND === */}
-              <div className="cart-recommend">
-                <div className="recommend-header">
-                  <h4>We Recommend</h4>
-                  <div className="arrows">
-                    <i className="bi bi-arrow-left" onClick={() => handleScroll("left")}></i>
-                    <i className="bi bi-arrow-right" onClick={() => handleScroll("right")}></i>
                   </div>
                 </div>
+              ))}
 
-                <div className="recommend-list" ref={recRef}>
-                  {recommended.map((rec) => (
-                    <div className="recommend-card" key={rec.id}>
-                      <img src={rec.image_url} alt={rec.name} />
-                      <div className="recommend-content">
-                        <h5>{rec.name}</h5>
-                        <p>${rec.price.regular.toFixed(2)}</p>
-                        <button className="add-btn" onClick={() => addItem(rec)}>+</button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+
+            </div>
+          )}
+
+          {/* === RECOMMEND === */}
+          <div className="cart-recommend">
+            <div className="recommend-header">
+              <h4>We Recommend</h4>
+              <div className="arrows">
+                <i className="bi bi-arrow-left" onClick={() => handleScroll("left")}></i>
+                <i className="bi bi-arrow-right" onClick={() => handleScroll("right")}></i>
               </div>
-
-
             </div>
 
-            {/* FOOTER */}
-            <div className="cart-footer">
-              <div className="subtotal-row">
-                <span>SUBTOTAL</span>
-                <span>${subtotal.toFixed(2)}</span>
-              </div>                 
-              <label className="checkbox-row">
-                <input
-                  type="checkbox"
-                  checked={confirmed}
-                  onChange={(e) => setConfirmed(e.target.checked)}
-                />
-                <span>I confirm that I am over 18 years of age</span>
-              </label>
-
-              <button
-                className="btn-cartcheck"
-                disabled={!confirmed} 
-                style={{
-                  opacity: confirmed ? 1 : 0.8,
-                  cursor: confirmed ? "pointer" : "not-allowed",
-                }}
-              >
-                CHECKOUT
-              </button>
+            <div className="recommend-list" ref={recRef}>
+              {recommended.map((rec) => (
+                <div className="recommend-card" key={rec.id}>
+                  <img src={rec.image_url} alt={rec.name} />
+                  <div className="recommend-content">
+                    <h5>{rec.name}</h5>
+                    <p>${rec.price.regular.toFixed(2)}</p>
+                    <button className="add-btn" onClick={() => addItem(rec)}>+</button>
+                  </div>
+                </div>
+              ))}
             </div>
+          </div>
+
+
+        </div>
+
+        {/* FOOTER */}
+        <div className="cart-footer">
+          <div className="subtotal-row">
+            <span>SUBTOTAL</span>
+            <span>${subtotal.toFixed(2)}</span>
+          </div>
+          <label className="checkbox-row">
+            <input
+              type="checkbox"
+              checked={confirmed}
+              onChange={(e) => setConfirmed(e.target.checked)}
+            />
+            <span>I confirm that I am over 18 years of age</span>
+          </label>
+
+          <button
+            className="btn-cartcheck"
+            disabled={!confirmed}
+            style={{
+              opacity: confirmed ? 1 : 0.8,
+              cursor: confirmed ? "pointer" : "not-allowed",
+            }}
+          >
+            CHECKOUT
+          </button>
+        </div>
       </div>
 
       {/* BACKDROP */}
