@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { createContext, useState } from "react";
 import Navbar from "./components/Navbar";
-import HomePage from "./pages/HomePage";
+import Homepage from "./pages/Homepage";
 import ShopPage from "./pages/ShopPage";
 
 // ✅ Tạo Context để chia sẻ giỏ hàng giữa các component
@@ -68,7 +68,7 @@ function App() {
         <Navbar />
 
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<Homepage />} />
           <Route path="/shop" element={<ShopPage />} />
         </Routes>
       </CartContext.Provider>
