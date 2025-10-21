@@ -1,8 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "../css/FadeInBlock.css";
 
 export default function FadeInBlock({ children, className = "" }) {
   const ref = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const fadeTimeout = useRef(null);
 
   useEffect(() => {
     const el = ref.current;
@@ -10,27 +12,29 @@ export default function FadeInBlock({ children, className = "" }) {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // 🔹 Vào khung nhìn
         if (entry.isIntersecting) {
-          el.classList.add("visible");
-        } 
-        // 🔹 Ra khỏi khung nhìn → reset lại
-        else {
-          el.classList.remove("visible");
+          clearTimeout(fadeTimeout.current);
+          setIsVisible(true); // fade-in ngay khi thấy
+        } else {
+          // chỉ fade-out nếu thực sự ra ngoài > 300ms
+          fadeTimeout.current = setTimeout(() => setIsVisible(false), 300);
         }
       },
-      {
-        threshold: 0.25, // chỉ cần 25% là bắt đầu animation
-        rootMargin: "-80px 0px -80px 0px", // không bị trigger sớm
-      }
+      { threshold: 0.35, rootMargin: "-60px 0px -60px 0px" }
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      clearTimeout(fadeTimeout.current);
+      observer.disconnect();
+    };
   }, []);
 
   return (
-    <div ref={ref} className={`fadeInUp ${className}`}>
+    <div
+      ref={ref}
+      className={`fadeInUp ${isVisible ? "visible" : ""} ${className}`}
+    >
       {children}
     </div>
   );

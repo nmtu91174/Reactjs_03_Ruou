@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import FadeInBlock from "../components/FadeInBlock";
+import ProductGrid from "../components/ProductGrid"; 
+import ProductCarousel from "../components/ProductCarousel"; 
 import "../css/SectionThree.css";
 
 export default function SectionThree() {
@@ -18,7 +20,6 @@ export default function SectionThree() {
     { type: "video", src: "/assets/hp-sec2/8.mp4", title: "Maxwell Maze & Picnic", desc: "This is a unique and intimate opportunity to explore the Maxwell Estate." },
   ];
 
-  // Xác định visibleCount theo kích thước màn hình
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) setVisibleCount(1);
@@ -36,58 +37,61 @@ export default function SectionThree() {
   const next = () => setIndex((prev) => (prev < maxIndex ? prev + step : 0));
   const prev = () => setIndex((prev) => (prev > 0 ? prev - step : maxIndex));
 
-  // 👉 Tính transform chính xác dựa trên chiều rộng thật của item
   const [translate, setTranslate] = useState(0);
   useEffect(() => {
     if (!trackRef.current) return;
     const firstItem = trackRef.current.querySelector(".experience-item");
     if (firstItem) {
-      const itemWidth = firstItem.offsetWidth + 20; // + gap 20px (hoặc 1.3rem)
+      const itemWidth = firstItem.offsetWidth + 20;
       setTranslate(-index * itemWidth);
     }
   }, [index, visibleCount]);
 
   return (
-    <section className="section-three">
-      <FadeInBlock>
-        <div className="experience-header">
-          <h3>EXPERIENCE MAXWELL WINES</h3>
-          <div className="experience-arrows">
-            <button onClick={prev}>&larr;</button>
-            <button onClick={next}>&rarr;</button>
+    <>
+      <section className="section-three">
+        <FadeInBlock>
+          <div className="experience-header">
+            <h3>EXPERIENCE MAXWELL WINES</h3>
+            <div className="experience-arrows">
+              <button onClick={prev}>&larr;</button>
+              <button onClick={next}>&rarr;</button>
+            </div>
           </div>
-        </div>
-      </FadeInBlock>
+        </FadeInBlock>
 
-      <FadeInBlock>
-        <div className="experience-container">
-          <div
-            ref={trackRef}
-            className="experience-track"
-            style={{
-              transform: `translateX(${translate}px)`,
-              transition: "transform 0.6s cubic-bezier(0.33, 1, 0.68, 1)",
-            }}
-          >
-            {items.map((item, i) => (
-              <div key={i} className="experience-item">
-                {item.type === "video" ? (
-                  <video src={item.src} autoPlay muted loop playsInline preload="auto" className="media" />
-                ) : (
-                  <img src={item.src} alt={item.title} className="media" />
-                )}
-                <div className="item-overlay">
-                  <div className="item-text">
-                    <h4>{item.title}</h4>
-                    <p>{item.desc}</p>
-                    <button className="btn-lightline">MAKE A RESERVATION →</button>
+        <FadeInBlock>
+          <div className="experience-container">
+            <div
+              ref={trackRef}
+              className="experience-track"
+              style={{
+                transform: `translateX(${translate}px)`,
+                transition: "transform 0.6s cubic-bezier(0.33, 1, 0.68, 1)",
+              }}
+            >
+              {items.map((item, i) => (
+                <div key={i} className="experience-item">
+                  {item.type === "video" ? (
+                    <video src={item.src} autoPlay muted loop playsInline preload="auto" className="media" />
+                  ) : (
+                    <img src={item.src} alt={item.title} className="media" />
+                  )}
+                  <div className="item-overlay">
+                    <div className="item-text">
+                      <h4>{item.title}</h4>
+                      <p>{item.desc}</p>
+                      <button className="btn-lightline">MAKE A RESERVATION →</button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </FadeInBlock>
-    </section>
+        </FadeInBlock>
+        <ProductCarousel/>
+        <ProductGrid/>
+      </section>
+    </>
   );
 }

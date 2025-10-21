@@ -887,17 +887,6 @@
 
 /* ============ RESPONSIVE TABLET ============ */
 @media (max-width: 1024px) {
-  .maxwell-nav {
-    padding: 0 32px;
-    height: 80px;
-  }
-
-  .search-bar {
-  margin-top: -0.5rem;
-  padding: 1rem 1.3rem 1rem 2.2rem;
-  }
-
-
   .nav-logo .logo {
     height: 2.8rem;
   }
@@ -934,14 +923,11 @@
 @media (max-width: 768px) {
 
   /* ====== NAVBAR ====== */
-  .maxwell-nav {
-    padding: 0 20px;
-    height: 70px;
-  }
+
 
   .search-bar {
      margin-top: -1.2rem;
-     padding: 1rem 0.6rem 1rem 1.5rem;
+     padding: 1rem 2.3rem 1rem 3.2rem;
   }
 
   .nav-logo .logo {
@@ -956,15 +942,7 @@
     display: block !important;
   }
 
-  /* Hamburger & cart icon spacing */
-  .nav-actions {
-    gap: 12px;
-  }
 
-  .nav-left.mobile-only img {
-    width: 26px;
-    height: 26px;
-  }
 
   /* ====== SIDEBAR MENU ====== */
   .sidebar {
@@ -1099,10 +1077,6 @@
 
 /* ============ SMALL MOBILE (≤480px) ============ */
 @media (max-width: 480px) {
-  .maxwell-nav {
-    padding: 0 14px;
-    height: 64px;
-  }
 
   .nav-logo .logo {
     height: 2.2rem;

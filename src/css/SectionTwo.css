@@ -170,7 +170,7 @@
   .section-top {
     flex-direction: column;
     align-items: flex-start;
-    padding: 80px 6%;
+    padding: 0px 2rem !important;
   }
   .overlay {
     padding: 40px 6%;
@@ -178,6 +178,30 @@
   .overlay-bottom-right {
     text-align: left;
     align-self: flex-start;
+  }
+
+  .text-right{
+    margin-top: 0px;
+  }
+  .section-image {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;   
+  margin: 0 auto;
+  height: 60vh;  
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+  }
+
+  .section-top{
+    padding: 0rem 1rem;
+    gap:20px;
+  }
+  
+  .btn-darkline{
+    padding:0px;
+    margin-top: 0px;
+    margin-bottom: 40px;
   }
 }
 

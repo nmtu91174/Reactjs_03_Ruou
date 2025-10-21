@@ -1,6 +1,5 @@
 import { useState } from "react";
 import FadeInBlock from "../components/FadeInBlock";
-import Carousel from "../components/Carousel";
 import "../css/SectionTwo.css";
 
 export default function SectionTwo() {
