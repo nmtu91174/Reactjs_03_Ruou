@@ -1,0 +1,48 @@
+# Tên của workflow
+name: Deploy React App to GitHub Pages
+
+# Kích hoạt workflow khi bạn push lên branch 'nhatduong2132'
+on:
+  push:
+    branches: [ "nhatduong2132" ]
+
+# Cho phép workflow này ghi vào repository
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Lấy mã nguồn của bạn về
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Cài đặt Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18' # Bạn có thể đổi phiên bản Node nếu cần
+
+      # 3. Cài đặt các gói npm
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Build dự án của bạn
+      # QUAN TRỌNG: Nếu bạn dùng Vite, thư mục output là 'dist'
+      # Nếu bạn dùng Create React App, đổi 'dist' thành 'build' ở bước 5
+      - name: Build
+        run: npm run build
+
+      # 5. Tải kết quả build (từ thư mục 'dist') lên
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist' # <-- Đổi thành './build' nếu dùng CRA
+
+      # 6. Deploy lên GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
