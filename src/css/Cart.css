@@ -1,0 +1,403 @@
+/* ==============================
+   Global & Body
+============================== */
+
+
+/* ==============================
+   Cart Page Layout
+============================== */
+.cart-page {
+  display: flex;
+  max-width: 1200px;
+  margin: 2rem auto;
+  gap: 2rem;
+  flex-wrap: wrap;
+    margin-top: 7rem; /* 👈 Thêm dòng này */
+
+}
+
+/* ------------------------------
+   LEFT: Cart Items
+------------------------------ */
+.cart-left {
+  flex: 2;
+  min-width: 300px;
+}
+
+.cart-left h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #111;
+}
+
+.empty {
+  color: #555;
+  font-size: 1rem;
+  margin-top: 2rem;
+}
+
+.item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ------------------------------
+   Item Card
+------------------------------ */
+.item-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 12px;
+  position: relative;
+  border-bottom: 2px solid transparent;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  /* Mới: background gradient */
+  background: linear-gradient(to bottom, rgba(245,245,245,0), #fff 80%);
+  /* rgba(245,245,245,0) = trong suốt top, #fff = trắng dưới */
+}
+
+.item-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Animated border-bottom gradient on hover */
+.item-card::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 4px;
+  background: linear-gradient(90deg, #111, #b22222);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.item-card:hover::after {
+  width: 100%;
+}
+
+.item-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.item-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Item text */
+.item-details h5 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #111;
+}
+
+.item-details .price {
+  color: #b22222;
+  font-weight: 600;
+}
+
+/* Quantity control */
+.qty-control1 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;       /* loại bỏ viền */
+  background: none;   /* loại bỏ nền */
+  padding: 0;         /* loại bỏ khoảng đệm */
+}
+
+/* Nút tăng/giảm số lượng */
+.qty-control1 button {
+  background: #fff;           /* nền trắng */
+  color: #111;                /* màu chữ */
+  border: none;     /* thêm viền nhẹ cho nhìn rõ */
+  border-radius: 999px;       /* tròn */
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;    /* padding vừa đủ */
+  transition: all 0.25s ease;
+}
+
+.qty-control1 button:hover {
+  background: #ffecec;        /* nền hồng nhạt khi hover */
+  color: #b22222;             /* chữ đỏ khi hover */
+  border-color: #b22222;      /* viền đỏ khi hover */
+}
+
+
+.qty-control1 .quantity {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Remove button */
+.remove-btn {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.remove-btn:hover {
+  color: #b22222;
+  transform: scale(1.2);
+}
+
+/* ------------------------------
+   Buttons
+------------------------------ */
+.checkout-btn, .shop-btn, .gpay-btn, .wine-club-btn {
+  border: none;
+  border-radius: 50px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.checkout-btn {
+  background: linear-gradient(90deg, #b22222, #ff4d4f);
+  color: #fff;
+}
+
+.checkout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(178,34,34,0.4);
+}
+
+.shop-btn {
+  background: #ddd;
+  color: #111;
+}
+
+.shop-btn:hover {
+  background: #bbb;
+}
+
+.gpay-btn {
+  background: #000;
+  color: #fff;
+}
+
+.gpay-btn:hover {
+  background: #333;
+}
+
+.wine-club-btn {
+  background: linear-gradient(90deg, #b22222, #ff4d4f);
+  color: #fff;
+}
+
+.wine-club-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(178,34,34,0.4);
+}
+
+/* Cart summary */
+.cart-summary {
+  margin-top: 2rem;
+  border-top: 1px solid #ccc;
+  padding-top: 1rem;
+}
+
+.subtotal {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #111;
+}
+
+/* ==============================
+   Responsive
+============================== */
+@media (max-width: 900px) {
+  .cart-page {
+    flex-direction: column;
+  }
+  .cart-right1 {
+    width: 100%;
+  }
+  .banner-slide img {
+    width: 100%;
+  }
+  .banner-text {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==============================
+   Cart Page Layout
+============================== */
+
+/* LEFT SIDE */
+.cart-left {
+  flex: 2;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* RIGHT SIDE */
+.cart-right1 {
+  flex: 1;
+  min-width: 380px;
+  display: flex;
+  justify-content: center;
+  align-items: stretch; /* 🔥 cho chiều cao bằng bên trái */
+}
+
+/* ==============================
+   SLIDER (Promo Section)
+============================== */
+.promo-slider {
+  position: relative;
+  width: 100%;
+  height: 100%; /* 🔥 full chiều cao bên phải */
+  max-width: 420px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+/* MỖI SLIDE */
+.promo-slide {
+    position: absolute;
+    inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+  display: none;
+  flex: 1;
+  text-align: center;
+  background: #fff;
+  height: 100%;
+}
+
+.promo-slide.active {
+     opacity: 1;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  animation: fadeIn 0.8s ease;
+}
+
+/* ẢNH CỐ ĐỊNH KÍCH THƯỚC */
+.promo-slide img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+/* TEXT */
+.promo-text {
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.promo-text h3 {
+  font-family: 'Playfair Display', serif;
+  color: #111;
+  margin-bottom: 0.5rem;
+}
+
+.promo-text p {
+  color: #555;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+/* BUTTON */
+.wine-club-btn {
+  background: #b22222;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  align-self: center;
+}
+
+.wine-club-btn:hover {
+  background: #7a1818;
+}
+
+/* SLIDE CONTROLS */
+.slide-btn {
+    display: none !important;
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.7);
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+
+.slide-btn:hover {
+  background: #fff;
+}
+
+.slide-btn.prev { left: 10px; }
+.slide-btn.next { right: 10px; }
+
+/* ANIMATION */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
