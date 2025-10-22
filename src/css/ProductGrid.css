@@ -1,3 +1,4 @@
+minh can chinh css cua title thoi
 /* === SECTION WRAPPER === */
 .productgrid-section {
   background: #e3e1e1;
@@ -42,7 +43,7 @@
   align-items: flex-start;
   width: 100%;
   transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
-  gap:1.288rem;
+  gap:1.288rem !important;
 }
 
 /* Khi ở mode carousel thì không wrap */
@@ -50,6 +51,7 @@
   flex-wrap: nowrap;
   justify-content: flex-start;
 }
+
 
 /* === CARD BASE === */
 .product-card {
@@ -241,14 +243,14 @@
 /* 🖥️ Desktop (>=1081px): 4 cột */
 @media (min-width: 1081px) {
   .product-card {
-    flex: 0 0 calc(25% - 1.288rem);
+    flex: 0 0 calc(25% - 1rem);
   }
 }
 
 /* 💻 Tablet (769px–1080px): 3 cột */
 @media (max-width: 1080px) and (min-width: 769px) {
   .product-card {
-    flex: 0 0 calc(33.333% - 1.288rem); /* ✅ 3 cột đều */
+    flex: 0 0 calc(33.333% - 0.8rem); /* ✅ 3 cột đều */
   }
   .product-img {
     height: 100%;
@@ -258,7 +260,7 @@
 /* 📱 Mobile (<=768px): 2 cột */
 @media (max-width: 768px) {
   .product-card {
-    flex: 0 0 calc(50% - 1.288rem); /* ✅ 2 cột đều */
+    flex: 0 0 calc(50% - 1.1rem); /* ✅ 2 cột đều */
   }
   .product-img {
     height: 100%;
@@ -280,7 +282,44 @@
   align-items: stretch;
 }
 
+/* === RECOMMENDATION MODE === */
+.mode-recommendation {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: clamp(2rem, 5vw, 3.5rem);
+  background: #e3e1e1; /* đồng bộ nền */
+}
+
+.mode-recommendation .productgrid-container {
+  flex-wrap: nowrap;           /* giống carousel */
+  justify-content: flex-start;
+}
+
+.mode-recommendation .product-card {
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
 
 
+/* Giữ tiêu đề nhất quán */
+.mode-recommendation .productgrid-title {
+  color: #4a463a;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  font-size: clamp(0.8rem, 3vw, 1rem);
+}
+
+/* Carousel (Estate) → italic */
+.mode-carousel .productgrid-title em,
+.title-estate em {
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* Recommendation → không italic */
+.mode-recommendation .productgrid-title em,
+.title-recommendation em {
+  font-style: normal;
+  font-weight: 600;
+}
 
 

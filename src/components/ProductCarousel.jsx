@@ -1,20 +1,20 @@
-import { useState, useRef, useEffect } from "react";
 import { useCartStorage } from "../hooks/useCartStorage"; // ✅ dùng chung hook
 import "../css/ProductGrid.css";
 import productsData from "../data/maxwell_wines_products.json";
+import { useState, useRef, useEffect, useMemo } from "react";
+
 
 export default function ProductGrid({ mode = "carousel", title }) {
   const allProducts = productsData.products || [];
-  let products = [];
-
-  // === MODE LOGIC ===
-  if (mode === "carousel") {
-    products = allProducts.filter((p) => p.image2_url?.trim()).slice(0, 7);
-  } else if (mode === "recommendation") {
-    products = allProducts.sort(() => 0.5 - Math.random()).slice(0, 6);
-  } else {
-    products = allProducts;
-  }
+  const products = useMemo(() => {
+    if (mode === "carousel") {
+      return allProducts.filter((p) => p.image2_url?.trim()).slice(0, 7);
+    } else if (mode === "recommendation") {
+      return [...allProducts].sort(() => 0.5 - Math.random()).slice(0, 6);
+    } else {
+      return allProducts;
+    }
+  }, [mode, allProducts]);
 
   // === TITLE ===
   const sectionTitle =
@@ -30,7 +30,7 @@ export default function ProductGrid({ mode = "carousel", title }) {
   const [translate, setTranslate] = useState(0);
 
   useEffect(() => {
-    if (mode !== "carousel") return;
+    if (mode !== "carousel" && mode !== "recommendation") return;
     const handleResize = () => {
       if (window.innerWidth < 768) setVisibleCount(1);
       else if (window.innerWidth < 1024) setVisibleCount(2);
@@ -42,7 +42,7 @@ export default function ProductGrid({ mode = "carousel", title }) {
   }, [mode]);
 
   useEffect(() => {
-    if (mode !== "carousel" || !trackRef.current) return;
+      if ((mode !== "carousel" && mode !== "recommendation") || !trackRef.current) return;
     const firstItem = trackRef.current.querySelector(".product-card");
     if (firstItem) {
       const itemWidth = firstItem.offsetWidth + 20;
@@ -57,7 +57,7 @@ export default function ProductGrid({ mode = "carousel", title }) {
   const prev = () => setIndex((prev) => (prev > 0 ? prev - step : maxIndex));
 
   // === NORMAL GRID ===
-  if (mode !== "carousel") {
+  if (mode !== "carousel" && mode !== "recommendation") {
     return (
       <section className={`productgrid-section mode-${mode}`}>
         <h2 className="productgrid-title">
@@ -67,16 +67,22 @@ export default function ProductGrid({ mode = "carousel", title }) {
 
         <div className="productgrid-container">
           {products.map((p, i) => (
-            <ProductCard key={p.id} product={p} index={i} mode={mode} />
+            <ProductCard key={p.id || i} product={p} index={i} mode={mode} />
           ))}
         </div>
       </section>
     );
   }
 
+
   // === CAROUSEL MODE ===
   return (
-    <section className="productgrid-section mode-carousel">
+    
+    <section
+        className={`productgrid-section ${
+          mode === "recommendation" ? "mode-recommendation" : "mode-carousel"
+        }`}
+      >
       <div className="carousel-header">
         <h2
           className={`productgrid-title ${
@@ -105,9 +111,9 @@ export default function ProductGrid({ mode = "carousel", title }) {
           }}
         >
           <div className="productgrid-container">
-            {products.map((p, i) => (
-              <ProductCard key={p.id} product={p} index={i} mode={mode} />
-            ))}
+          {products.map((p, i) => (
+            <ProductCard product={p} index={i} mode={mode} />
+          ))}
           </div>
         </div>
       </div>
