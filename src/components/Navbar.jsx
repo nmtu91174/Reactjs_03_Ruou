@@ -281,9 +281,9 @@ export default function Navbar() {
                   <div className="cart-right">
                     <div className="item-price">${item.price.toFixed(2)}</div>
                     <div className="qty-box">
-                      <button onClick={() => updateQty(item.id, -1)}>-</button>
+                      <button onClick={() => updateQty(item.id, item.qty - 1)}>-</button>
                       <span>{item.qty}</span>
-                      <button onClick={() => updateQty(item.id, 1)}>+</button>
+                      <button onClick={() => updateQty(item.id, item.qty + 1)}>+</button>
                     </div>
                   </div>
                 </div>
