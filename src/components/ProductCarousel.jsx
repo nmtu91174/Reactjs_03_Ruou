@@ -112,7 +112,7 @@ export default function ProductGrid({ mode = "carousel", title }) {
         >
           <div className="productgrid-container">
           {products.map((p, i) => (
-            <ProductCard product={p} index={i} mode={mode} />
+            <ProductCard key={p.id || i} product={p} index={i} mode={mode} />
           ))}
           </div>
         </div>
