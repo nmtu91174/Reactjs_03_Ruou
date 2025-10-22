@@ -747,7 +747,7 @@
   top: 88px; /* nằm ngay dưới header */
   left: 0;
   width: 100%;
-  z-index: 450;
+  z-index: 100;
   background: transparent; /* để nền của .search-bar quyết định */
   display: flex;
   justify-content: center;

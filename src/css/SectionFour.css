@@ -149,7 +149,7 @@
 
 /* RIGHT list scrolls */
 .sf-right {
-   min-height: 192.83vh; /* cột phải dài -> tạo hiệu ứng cuộn độc lập */ display: flex;
+   min-height: 192.823vh; /* cột phải dài -> tạo hiệu ứng cuộn độc lập */ display: flex;
   flex-direction: column;
   gap: 1rem;
 
