@@ -89,7 +89,7 @@ export default function SectionThree() {
             </div>
           </div>
         </FadeInBlock>
-        <ProductCarousel/>
+        <ProductCarousel mode="carousel"/>
       </section>
     </>
   );

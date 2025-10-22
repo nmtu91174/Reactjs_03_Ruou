@@ -330,9 +330,12 @@
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
-
 }
 
+.text-block  h2{
+  color: #fff;
+  font-weight: 400;
+}
 
 
 
