@@ -1,0 +1,533 @@
+.section-two {
+  background: #E3E1E1;
+  font-family: "Font2", serif;
+  color: #000;
+}
+
+/* === TOP AREA === */
+.section-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 48px 3rem;
+  gap: 60px;
+  min-height: 400px; /* tạo khoảng đứng giữa hai khối */
+  position: relative;
+}
+
+/* Cột trái luôn trên */
+.text-left {
+  flex: 1;
+  align-self: flex-start;
+}
+
+.text-left h2 {
+  font-size: clamp(40px, 5vw, 80px);
+  line-height: 1.15;
+  font-weight: 300;
+  margin-top:40px;
+}
+
+.text-left em {
+  font-style: italic;
+}
+
+/* Cột phải nằm thấp xuống */
+.text-right {
+  flex: 1;
+  align-self: flex-end;
+  max-width: 430px;
+  font-size: 16px;
+  line-height: 1.8;
+  text-align: left;
+  margin-top: 240px;
+}
+
+.btn-darkline {
+  margin-top: 24px;
+  background: none;
+  border: none;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  position: relative;
+  padding-bottom: 5px;
+  cursor: pointer;
+}
+.btn-darkline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1.1px;
+  background: #000;
+  transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+  transform-origin: right;
+}
+.btn-darkline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 1.1px;
+  background: #000;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.btn-darkline:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* === IMAGE OVERLAY === */
+.section-image {
+  position: relative;
+  overflow: hidden;
+  max-width: 97.8%;   
+  margin: 0 auto;  
+ 
+}
+
+
+.section-image img {
+    width:100%;
+    height: 800px;
+    object-fit: cover;
+    display: block;
+}
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+  padding: 3rem;
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+.overlay-top-left {
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  font-family: 'Font1';
+  font-size: 22px;
+}
+.overlay-bottom-right {
+  max-width: 460px;
+  align-self: flex-end;
+  text-align: right;
+}
+.btn-lightline {
+  margin-top: 16px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  position: relative;
+  cursor: pointer;
+  padding: 5px 0;
+}
+.btn-lightline::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1.1px;
+  background: #fff;
+}
+.btn-lightline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1.1px;
+  background: #fff;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.btn-lightline:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* === FADE IN UP === */
+.fadeInUp {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.fadeInUp.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .section-top {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px 2rem !important;
+  }
+  .overlay {
+    padding: 40px 6%;
+  }
+  .overlay-bottom-right {
+    text-align: left;
+    align-self: flex-start;
+  }
+
+  .text-right{
+    margin-top: 0px;
+  }
+  .section-image {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;   
+  margin: 0 auto;
+  height: 60vh;  
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+  }
+
+  .section-top{
+    padding: 0rem 1rem;
+    gap:20px;
+  }
+  
+  .btn-darkline{
+    padding:0px;
+    margin-top: 0px;
+    margin-bottom: 40px;
+  }
+}
+
+/* ===== TWO COLS CONTAINER ===== */
+.two-cols {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  position: relative;
+  margin-top: 1.2rem;
+  gap: 1.288rem; /* khoảng giữa 2 khối */
+  padding: 0 1.1rem; /* cách lề ngoài 20px */
+}
+
+.full-border {
+  position: relative;
+  width: calc(100% - 2.28rem); /* cách lề 20px mỗi bên */
+  height: 0.11rem;
+  margin: 1.1rem auto 0;
+  background: #c4c3c3;
+  opacity: 1; /* luôn hiện, không bị fade */
+}
+
+
+
+/* ===== CỘT CHUNG ===== */
+.col {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1; /* giữ tỷ lệ vuông */
+  margin: 0; /* tránh đẩy lệch so với padding container */
+}
+
+.col img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* ===== LEFT: CAROUSEL ===== */
+.carousel-track {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-inner {
+  display: flex;
+  height: 100%;
+  transition: transform 0.88s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.carousel-inner img {
+  flex: 0 0 50%; /* ✅ mỗi ảnh chiếm nửa chiều rộng container (vì tổng width = 200%) */
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+
+
+/* ===== OVERLAY DÙNG CHUNG CHO 2 BÊN ===== */
+.content-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #fff;
+  padding: 3rem;
+  overflow: hidden;
+}
+
+/* Hai lớp gradient (before/after) */
+.content-overlay::before,
+.content-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.48s ease-in-out;
+  z-index: 0;
+}
+
+/* Lớp dưới (bình thường) */
+.content-overlay::before {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.0) 35%,
+    rgba(0, 0, 0, 0.0) 65%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+  opacity: 1;
+}
+
+/* Lớp trên (hover — đậm hơn, fade-in mượt) */
+.content-overlay::after {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.38) 0%,
+    rgba(0, 0, 0, 0.0) 35%,
+    rgba(0, 0, 0, 0.0) 65%,
+    rgba(0, 0, 0, 0.18) 100%
+  );
+  opacity: 0;
+}
+
+/* Khi hover — lớp tối hiện dần */
+.content-overlay:hover::after {
+  opacity: 1;
+}
+
+/* Chữ nằm trên overlay */
+.content-overlay > * {
+  position: relative;
+  z-index: 1;
+}
+
+.text-block {
+  max-width: 28.8rem;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.text-block  h2{
+  color: #fff;
+  font-weight: 400;
+}
+
+
+
+
+/* ===== BOTTOM ROW: BUTTON + DOTS ===== */
+.overlay-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 20px;
+  width:41rem;
+}
+
+/* DOTS */
+.carousel-dots-inline {
+  display: flex;
+  gap: 6px;
+}
+.dot {
+  width: 26px;
+  height: 26px;
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.dot.active,
+.dot:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* ===== BUTTON LINE EFFECT ===== */
+.btn-hoverline {
+  position: relative;
+  background: transparent;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  padding-bottom: 4px;
+  color:#fff !important;
+}
+.btn-hoverline {
+  position: relative;
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+/* === LINE DƯỚI === */
+.btn-hoverline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1.1px;
+  background: #fff;
+  transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+  transform-origin: right;
+  transform: scaleX(1);
+}
+
+/* === LINE TRÊN === */
+.btn-hoverline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 1.5px;
+  background: #fff;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* Hover vào: hiện line từ trái qua phải */
+.btn-hoverline:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+
+
+/* ===== RIGHT SIDE ===== */
+.col.right {
+  position: relative;
+}
+/* ===== RIGHT OVERLAY FADE GRADIENT ===== */
+.col.right .content-overlay {
+  position: absolute;
+  inset: 0;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 3rem;
+  overflow: hidden;
+}
+
+/* lớp dưới — gradient bình thường */
+.col.right .content-overlay::before,
+.col.right .content-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.48s ease-in-out;
+  z-index: 0;
+}
+
+/* lớp dưới: trạng thái bình thường */
+.col.right .content-overlay::before {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.0) 35%,
+    rgba(0, 0, 0, 0.0) 65%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+  opacity: 1;
+}
+
+/* lớp trên: gradient tối hơn khi hover */
+.col.right .content-overlay::after {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.38) 0%,
+    rgba(0, 0, 0, 0.12) 35%,
+    rgba(0, 0, 0, 0.0) 65%,
+    rgba(0, 0, 0, 0.12) 100%
+  );
+  opacity: 0;
+}
+
+/* Hover → lớp trên mờ dần hiện ra */
+.col.right .content-overlay:hover::after {
+  opacity: 0.8;
+}
+
+/* đảm bảo chữ ở trên overlay */
+.col.right .content-overlay > * {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+  .two-cols {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .content-overlay {
+    padding: 40px;
+  }
+  .text-block {
+    max-width: 100%;
+  }
+}
+
+/* Dots cố định */
+.static-dots {
+  position: absolute;
+  bottom: 3rem;
+  right: 3rem;
+  display: flex;
+  gap: 6px;
+  z-index: 10;
+}
+
+.static-dots .dot {
+  width: 26px;
+  height: 26px;
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.static-dots .dot.active,
+.static-dots .dot:hover {
+  background: #fff;
+  color: #000;
+}
+

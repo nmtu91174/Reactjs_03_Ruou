@@ -1,0 +1,325 @@
+minh can chinh css cua title thoi
+/* === SECTION WRAPPER === */
+.productgrid-section {
+  background: #e3e1e1;
+  font-family: "Font2";
+  margin-top: 4rem;
+}
+
+/* === TITLE BASE === */
+.productgrid-title {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+  font-family: "Font1";
+  transition: all 0.3s ease;
+}
+.productgrid-title em {
+  font-style: italic;
+}
+
+/* === TITLE VARIANTS === */
+.title-estate {
+  color: #000;
+  text-transform: none;
+  font-family: 'Font2';
+  font-size: clamp(1.8rem, 5vw, 10rem);
+}
+
+.title-recommendation {
+  color: #4a463a;
+  text-transform: uppercase;
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+
+/* === CONTAINER === */
+.productgrid-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  width: 100%;
+  transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
+  gap:1.288rem !important;
+}
+
+/* Khi ở mode carousel thì không wrap */
+.mode-carousel .productgrid-container {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+
+
+/* === CARD BASE === */
+.product-card {
+  flex: 0 0 24%; /* 🟢 4 ô đều nhau, trừ hao 0.8% cho khoảng spacing giữa */
+  text-align: left;
+  font-family: "Font2";
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 100%;              /* tránh collapse */
+  box-sizing: border-box;
+  width:20%;
+}
+
+/* === IMAGE === */
+.product-img {
+  width: 100%;
+  aspect-ratio: 5/5;
+  overflow: hidden;
+  background: #e3e1e1;
+  position: relative;
+}
+.product-img img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: opacity 0.45s ease-in-out;
+}
+
+/* Ảnh base & hover chồng nhau */
+.product-img .base-img {
+  opacity: 1;
+  z-index: 1;
+}
+.product-img .hover-img {
+  opacity: 0;
+  z-index: 2;
+}
+.product-card:hover .base-img {
+  opacity: 0;
+}
+.product-card:hover .hover-img {
+  opacity: 1;
+}
+
+/* === INFO === */
+.product-info {
+  margin-top: clamp(0.6rem, 1vw, 1rem);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.product-info h4 {
+  font-weight: 500;
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  letter-spacing: -0.01em;
+  margin-bottom: clamp(0.2rem, 0.5vw, 0.6rem);
+}
+.product-info p {
+  font-size: clamp(0.75rem, 1vw, 0.9rem);
+  font-family: "Font1";
+  color: #333;
+  line-height: 1.4;
+  margin-bottom: clamp(0.5rem, 1vw, 0.52rem);
+}
+.price-row {
+  font-size: clamp(0.75rem, 1vw, 0.9rem);
+  color: #000;
+  font-family: "Font1";
+}
+.price-row .club {
+  color: #555;
+  margin-left: clamp(0.3rem, 0.6vw, 0.6rem);
+}
+
+/* === BOTTOM ACTIONS === */
+.bottom-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: clamp(0.5rem, 1vw, 0.8rem);
+  margin-top: auto;
+  padding-top: 1rem;
+  width: 100%;
+  font-family: "Font1";
+  flex-wrap: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* Hover → fade-in (desktop only) */
+@media (min-width: 1024px) {
+  .product-card:hover .bottom-actions,
+  .product-card:focus-within .bottom-actions {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+}
+
+/* Tablet & mobile → luôn hiện */
+@media (max-width: 1023px) {
+  .bottom-actions {
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+  }
+}
+
+/* === QTY CONTROL === */
+.qty-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgb(100, 100, 100);
+  border-radius: 999px;
+  overflow: hidden;
+  background: transparent;
+}
+.qty-control button {
+  border: none;
+  background: transparent;
+  padding: clamp(0.3rem, 0.6vw, 0.46rem) clamp(0.6rem, 1vw, 0.8rem);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  cursor: pointer;
+}
+.qty-control span {
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  width: clamp(18px, 2vw, 24px);
+  text-align: center;
+}
+
+/* === ADD BUTTON === */
+.btn-add {
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+  background: #71715a;
+  color: #fff;
+  font-weight: 600;
+  padding: clamp(0.5rem, 1vw, 0.7rem) clamp(1rem, 2vw, 2.5rem);
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: clamp(0.75rem, 1vw, 0.9rem);
+}
+.btn-add:hover {
+  background: #2d2d2d;
+}
+
+/* === RESPONSIVE FLEX === */
+@media (max-width: 1080px) {
+  .product-card {
+    flex: 0 0 48%; /* 2 ô / hàng */
+  }
+}
+@media (max-width: 768px) {
+  .product-card {
+    flex: 0 0 100%; /* 1 ô / hàng */
+  }
+  .product-img {
+    height: 300px;
+  }
+}
+
+/* === CAROUSEL HEADER === */
+.carousel-header {
+  display: flex;
+  justify-content: space-between;   
+  align-items: center;             
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+/* Nút mũi tên đồng bộ với Experience */
+.carousel-header .experience-arrows {
+  display: flex;
+  padding-right: 0.3rem;
+}
+
+/* === RESPONSIVE FLEX === */
+
+/* 🖥️ Desktop (>=1081px): 4 cột */
+@media (min-width: 1081px) {
+  .product-card {
+    flex: 0 0 calc(25% - 1rem);
+  }
+}
+
+/* 💻 Tablet (769px–1080px): 3 cột */
+@media (max-width: 1080px) and (min-width: 769px) {
+  .product-card {
+    flex: 0 0 calc(33.333% - 0.8rem); /* ✅ 3 cột đều */
+  }
+  .product-img {
+    height: 100%;
+  }
+}
+
+/* 📱 Mobile (<=768px): 2 cột */
+@media (max-width: 768px) {
+  .product-card {
+    flex: 0 0 calc(50% - 1.1rem); /* ✅ 2 cột đều */
+  }
+  .product-img {
+    height: 100%;
+  }
+}
+
+/* 📱 Extra small (<=480px): 1 cột full width */
+@media (max-width: 480px) {
+  .product-card {
+    flex: 0 0 100%;
+  }
+  .product-img {
+    aspect-ratio: 3/4;
+  }
+}
+/* ==== FIX FOR FLEX + CAROUSEL ==== */
+.productgrid-container {
+  display: flex;
+  align-items: stretch;
+}
+
+/* === RECOMMENDATION MODE === */
+.mode-recommendation {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: clamp(2rem, 5vw, 3.5rem);
+  background: #e3e1e1; /* đồng bộ nền */
+}
+
+.mode-recommendation .productgrid-container {
+  flex-wrap: nowrap;           /* giống carousel */
+  justify-content: flex-start;
+}
+
+.mode-recommendation .product-card {
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+
+/* Giữ tiêu đề nhất quán */
+.mode-recommendation .productgrid-title {
+  color: #4a463a;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  font-size: clamp(0.8rem, 3vw, 1rem);
+}
+
+/* Carousel (Estate) → italic */
+.mode-carousel .productgrid-title em,
+.title-estate em {
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* Recommendation → không italic */
+.mode-recommendation .productgrid-title em,
+.title-recommendation em {
+  font-style: normal;
+  font-weight: 600;
+}
+
+
