@@ -130,9 +130,23 @@ function ProductCard({ product }) {
 
   // ✅ kiểm tra xem sản phẩm đã có trong cart chưa
   useEffect(() => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || {};
-    if (cart[product.id]) setAdded(true);
+    const checkCart = () => {
+      const cart = JSON.parse(localStorage.getItem("cart")) || {};
+      setAdded(!!cart[product.id]);
+    };
+
+    checkCart();
+
+    // ✅ nghe cả hai event để sync toàn app
+    window.addEventListener("storage", checkCart);
+    window.addEventListener("cartUpdated", checkCart);
+
+    return () => {
+      window.removeEventListener("storage", checkCart);
+      window.removeEventListener("cartUpdated", checkCart);
+    };
   }, [product.id]);
+
 
   const handleAdd = () => {
     addItem(product, qty);
