@@ -1,21 +1,29 @@
 import { useEffect, useState, useRef } from "react";
-import { useCartStorage } from "../hooks/useCartStorage"; // ✅ dùng hook thống nhất
+import { useCartStorage } from "../hooks/useCartStorage";
+import { Link, useNavigate } from "react-router-dom";
 import "../css/Navbar.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import productsData from "../data/maxwell_wines_products.json"; // ✅ đọc sản phẩm
+import productsData from "../data/maxwell_wines_products.json";
+import { useLocation } from "react-router-dom";
+
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHome = location.pathname === "/"; 
+
   const [scrolled, setScrolled] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [recommended, setRecommended] = useState([]);
-  const recRef = useRef(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
 
+  const recRef = useRef(null);
+
   // ✅ Hook giỏ hàng thống nhất
-  const { cartItems, subtotal, totalCount, addItem, updateQty, removeItem } =
+  const { cartItems, addItem, updateQty, removeItem, subtotal, totalCount } =
     useCartStorage();
 
   // === scroll logic ===
@@ -49,13 +57,25 @@ export default function Navbar() {
     document.body.style.overflow = menuOpen || cartOpen ? "hidden" : "auto";
   }, [menuOpen, cartOpen]);
 
-  const iconColor = scrolled || hovered ? "#111" : "#fff";
+  const iconColor = isHome
+  ? scrolled || hovered
+    ? "#111" 
+    : "#fff" 
+  : "#111";  
+
+  // ✅ Điều hướng và đóng menu
+  const handleNavigate = (path) => {
+    navigate(path);
+    setMenuOpen(false);
+  };
 
   return (
     <>
       {/* ===== HEADER ===== */}
       <header
-        className={`maxwell-header ${scrolled || hovered ? "scrolled" : ""}`}
+        className={`maxwell-header ${
+          isHome ? (scrolled || hovered ? "scrolled" : "") : "scrolled"
+        }`}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
@@ -75,8 +95,12 @@ export default function Navbar() {
 
           {/* === LINKS === */}
           <ul className="nav-links desktop-only">
-            <li>RESTAURANT</li>
-            <li>SHOP</li>
+            <li onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
+              RESTAURANT
+            </li>
+            <li onClick={() => navigate("/shop")} style={{ cursor: "pointer" }}>
+              SHOP
+            </li>
             <li>VISIT</li>
             <li>CLUB</li>
             <li>EVENTS</li>
@@ -85,16 +109,29 @@ export default function Navbar() {
 
           {/* === LOGO === */}
           <div className="nav-logo">
-            <img
-              src={
-                scrolled || hovered
-                  ? "/assets/logo-black.webp"
-                  : "/assets/logo-white.webp"
-              }
-              alt="Maxwell Logo"
-              className="logo"
-            />
+            <Link
+              to="/"
+              onClick={(e) => {
+                if (isHome) {
+                  e.preventDefault(); // 🔸 chặn reload lại route
+                  window.scrollTo({ top: 0, behavior: "smooth" }); // 🔸 cuộn lên đầu trang
+                }
+              }}
+            >
+              <img
+                src={
+                  isHome
+                    ? scrolled || hovered
+                      ? "/assets/logo-black.webp"  // home + scroll/hover
+                      : "/assets/logo-white.webp"  // home + transparent
+                    : "/assets/logo-black.webp"   // các trang khác → logo đen
+                }
+                alt="Maxwell Logo"
+                className="logo"
+              />
+            </Link>
           </div>
+
 
           {/* === ACTIONS === */}
           <div className="nav-actions">
@@ -115,7 +152,7 @@ export default function Navbar() {
             <div
               className="bag-icon"
               onClick={() => setCartOpen(true)}
-              style={{ position: "relative" }}
+              style={{ position: "relative", cursor: "pointer" }}
             >
               <i
                 className="bi bi-bag"
@@ -166,7 +203,9 @@ export default function Navbar() {
 
         <ul className="sidebar-links">
           <li><span>Restaurant</span></li>
-          <li className="has-arrow"><span>Shop</span></li>
+          <li className="has-arrow" onClick={() => handleNavigate("/shop")}>
+            <span>Shop</span>
+          </li>
           <li className="has-arrow"><span>Visit</span></li>
           <li><span>Club</span></li>
           <li className="has-arrow"><span>Events</span></li>
@@ -192,6 +231,11 @@ export default function Navbar() {
         <div className="cart-header">
           <i className="bi bi-x-lg" onClick={() => setCartOpen(false)}></i>
           <h2>Cart</h2>
+          <i
+            className="bi bi-bag"
+            onClick={() => navigate("/cart")}  
+            style={{ cursor: "pointer" }}
+          ></i>
         </div>
 
         <div className="cart-body">
@@ -213,19 +257,12 @@ export default function Navbar() {
                   <div className="cart-info">
                     <h5>{item.name}</h5>
                   </div>
-
                   <div className="cart-right">
-                    <div className="item-price">
-                      ${item.price.toFixed(2)}
-                    </div>
+                    <div className="item-price">${item.price.toFixed(2)}</div>
                     <div className="qty-box">
-                      <button onClick={() => updateQty(item.id, item.qty - 1)}>
-                        -
-                      </button>
+                      <button onClick={() => updateQty(item.id, -1)}>-</button>
                       <span>{item.qty}</span>
-                      <button onClick={() => updateQty(item.id, item.qty + 1)}>
-                        +
-                      </button>
+                      <button onClick={() => updateQty(item.id, 1)}>+</button>
                     </div>
                   </div>
                 </div>
