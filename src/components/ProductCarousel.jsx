@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useCartStorage } from "../hooks/useCartStorage"; // ✅ dùng chung hook
 import "../css/ProductGrid.css";
 import productsData from "../data/maxwell_wines_products.json";
 
@@ -73,50 +74,64 @@ export default function ProductGrid({ mode = "carousel", title }) {
     );
   }
 
- // === CAROUSEL MODE ===
-return (
-  <section className="productgrid-section mode-carousel">
-    <div className="carousel-header">
+  // === CAROUSEL MODE ===
+  return (
+    <section className="productgrid-section mode-carousel">
+      <div className="carousel-header">
         <h2
-        className={`productgrid-title ${
+          className={`productgrid-title ${
             mode === "recommendation"
-            ? "title-recommendation"
-            : "title-estate"
-        }`}
+              ? "title-recommendation"
+              : "title-estate"
+          }`}
         >
-        {sectionTitle.split(" ")[0]}{" "}
-        <em>{sectionTitle.split(" ").slice(1).join(" ")}</em>
+          {sectionTitle.split(" ")[0]}{" "}
+          <em>{sectionTitle.split(" ").slice(1).join(" ")}</em>
         </h2>
 
-      <div className="experience-arrows">
-        <button onClick={prev}>&larr;</button>
-        <button onClick={next}>&rarr;</button>
-      </div>
-    </div>
-
-    {/* wrapper mới để giữ grid bên trong */}
-    <div className="carousel-viewport" style={{ overflow: "hidden" }}>
-      <div
-        ref={trackRef}
-        style={{
-          transform: `translateX(${translate}px)`,
-          transition: "transform 0.6s cubic-bezier(0.33, 1, 0.68, 1)",
-        }}
-      >
-        <div className="productgrid-container">
-          {products.map((p, i) => (
-            <ProductCard key={p.id} product={p} index={i} mode={mode} />
-          ))}
+        <div className="experience-arrows">
+          <button onClick={prev}>&larr;</button>
+          <button onClick={next}>&rarr;</button>
         </div>
       </div>
-    </div>
-  </section>
-);
+
+      {/* wrapper giữ grid bên trong */}
+      <div className="carousel-viewport" style={{ overflow: "hidden" }}>
+        <div
+          ref={trackRef}
+          style={{
+            transform: `translateX(${translate}px)`,
+            transition: "transform 0.6s cubic-bezier(0.33, 1, 0.68, 1)",
+          }}
+        >
+          <div className="productgrid-container">
+            {products.map((p, i) => (
+              <ProductCard key={p.id} product={p} index={i} mode={mode} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
 
+// === COMPONENT CON PRODUCT CARD ===
 function ProductCard({ product }) {
   const [hovered, setHovered] = useState(false);
   const [qty, setQty] = useState(1);
+  const { addItem } = useCartStorage(); // ✅ gọi hook dùng chung
+  const [added, setAdded] = useState(false);
+
+  // ✅ kiểm tra xem sản phẩm đã có trong cart chưa
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || {};
+    if (cart[product.id]) setAdded(true);
+  }, [product.id]);
+
+  const handleAdd = () => {
+    addItem(product, qty);
+    setAdded(true);
+  };
 
   return (
     <div
@@ -147,7 +162,9 @@ function ProductCard({ product }) {
           <p>{product.description}</p>
           <div className="price-row">
             <span>${product.price.regular}</span>
-            <span className="club">| ${product.price.wine_club} Wine Club</span>
+            <span className="club">
+              | ${product.price.wine_club} Wine Club
+            </span>
           </div>
         </div>
 
@@ -158,7 +175,12 @@ function ProductCard({ product }) {
             <span>{qty}</span>
             <button onClick={() => setQty(qty + 1)}>+</button>
           </div>
-          <button className="btn-add">ADD TO CART</button>
+          <button
+            className={`btn-add ${added ? "added" : ""}`}
+            onClick={handleAdd}
+          >
+            {added ? "ADDED" : "ADD TO CART"}
+          </button>
         </div>
       </div>
     </div>

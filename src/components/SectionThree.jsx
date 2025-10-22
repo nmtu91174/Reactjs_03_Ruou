@@ -90,7 +90,6 @@ export default function SectionThree() {
           </div>
         </FadeInBlock>
         <ProductCarousel/>
-        <ProductGrid/>
       </section>
     </>
   );

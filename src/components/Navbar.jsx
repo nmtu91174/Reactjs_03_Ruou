@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { useCartStorage } from "../hooks/useCartStorage"; // ✅ dùng hook thống nhất
 import "../css/Navbar.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import productsData from "../data/maxwell_wines_products.json"; // ✅ đọc sản phẩm
@@ -8,11 +9,14 @@ export default function Navbar() {
   const [hovered, setHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
   const [recommended, setRecommended] = useState([]);
   const recRef = useRef(null);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [confirmed, setConfirmed] = useState(false); // 🟢 thêm state
+  const [confirmed, setConfirmed] = useState(false);
+
+  // ✅ Hook giỏ hàng thống nhất
+  const { cartItems, subtotal, totalCount, addItem, updateQty, removeItem } =
+    useCartStorage();
 
   // === scroll logic ===
   useEffect(() => {
@@ -27,58 +31,22 @@ export default function Navbar() {
     setRecommended(shuffled.slice(0, 10));
   }, []);
 
-  // === cart logic ===
-  const addItem = (item) => {
-    setCartItems((prev) => {
-      const exist = prev.find((i) => i.id === item.id);
-      if (exist) {
-        return prev.map((i) =>
-          i.id === item.id ? { ...i, qty: i.qty + 1 } : i
-        );
-      } else {
-        return [...prev, { ...item, price: item.price.regular, image_url: item.image_url, qty: 1 }];
-      }
+  // === recommend scroll ===
+  const handleScroll = (dir) => {
+    if (!recRef.current) return;
+    const card = recRef.current.querySelector(".recommend-card");
+    if (!card) return;
+    const gap = 12;
+    const moveBy = card.offsetWidth * 2 + gap;
+    recRef.current.scrollBy({
+      left: dir === "left" ? -moveBy : moveBy,
+      behavior: "smooth",
     });
   };
 
-  const updateQty = (id, delta) => {
-    setCartItems((prev) =>
-      prev.map((i) =>
-        i.id === id ? { ...i, qty: Math.max(1, i.qty + delta) } : i
-      )
-    );
-  };
-
-  const removeItem = (id) =>
-    setCartItems((prev) => prev.filter((i) => i.id !== id));
-
-  const subtotal = cartItems.reduce(
-    (sum, i) => sum + i.price * i.qty,
-    0
-  );
-
-  // === total count (đếm tất cả số lượng sp) ===
-  const totalCount = cartItems.reduce((sum, i) => sum + i.qty, 0);
-
-  // === recommend scroll ===
-  const handleScroll = (dir) => {
-  if (!recRef.current) return;
-  const card = recRef.current.querySelector(".recommend-card");
-  if (!card) return;
-  const gap = 12; // khớp với CSS
-  const moveBy = card.offsetWidth * 2 + gap;
-  recRef.current.scrollBy({
-    left: dir === "left" ? -moveBy : moveBy,
-    behavior: "smooth",
-  });
-};
-
-
-
   // === disable body scroll khi sidebar mở ===
   useEffect(() => {
-    document.body.style.overflow =
-      menuOpen || cartOpen ? "hidden" : "auto";
+    document.body.style.overflow = menuOpen || cartOpen ? "hidden" : "auto";
   }, [menuOpen, cartOpen]);
 
   const iconColor = scrolled || hovered ? "#111" : "#fff";
@@ -130,14 +98,10 @@ export default function Navbar() {
 
           {/* === ACTIONS === */}
           <div className="nav-actions">
-            <button
-              className="btn-reserve desktop-only"
-            >
-              RESERVATIONS
-            </button>
+            <button className="btn-reserve desktop-only">RESERVATIONS</button>
 
             <i
-              className="bi bi-person desktop-only "
+              className="bi bi-person desktop-only"
               style={{ color: iconColor, fontSize: "24px" }}
             ></i>
 
@@ -153,37 +117,37 @@ export default function Navbar() {
               onClick={() => setCartOpen(true)}
               style={{ position: "relative" }}
             >
-              <i className="bi bi-bag" style={{ color: iconColor, fontSize:"20px" }}></i>
-              <span className="cart-count">{totalCount}</span> {/* luôn hiển thị */}
+              <i
+                className="bi bi-bag"
+                style={{ color: iconColor, fontSize: "20px" }}
+              ></i>
+              <span className="cart-count">{totalCount}</span>
             </div>
           </div>
         </nav>
       </header>
 
+      {/* ===== SEARCH BAR ===== */}
       {searchOpen && (
         <div className={`search-overlay ${scrolled ? "scrolled" : ""}`}>
           <div className="search-bar">
             <i className="bi bi-search"></i>
             <input type="text" placeholder="Search our wines..." />
             <i
-        className="bi bi-x-lg"
-        onClick={() => {
-          const overlay = document.querySelector(".search-overlay");
-          if (overlay) {
-            overlay.classList.add("fade-out");
-            setTimeout(() => setSearchOpen(false), 350);
-          } else {
-            setSearchOpen(false);
-          }
-        }}
-      ></i>
-
+              className="bi bi-x-lg"
+              onClick={() => {
+                const overlay = document.querySelector(".search-overlay");
+                if (overlay) {
+                  overlay.classList.add("fade-out");
+                  setTimeout(() => setSearchOpen(false), 350);
+                } else {
+                  setSearchOpen(false);
+                }
+              }}
+            ></i>
           </div>
         </div>
       )}
-
-
-
 
       {/* ===== SIDEBAR MENU ===== */}
       <div className={`sidebar left ${menuOpen ? "open" : ""}`}>
@@ -225,95 +189,109 @@ export default function Navbar() {
 
       {/* ===== SIDEBAR CART ===== */}
       <div className={`sidebar right cart-sidebar ${cartOpen ? "open" : ""}`}>
-            {/* HEADER */}
-            <div className="cart-header">
-              <i className="bi bi-x-lg" onClick={() => setCartOpen(false)}></i>
-              <h2>Cart</h2>
-            </div>
+        <div className="cart-header">
+          <i className="bi bi-x-lg" onClick={() => setCartOpen(false)}></i>
+          <h2>Cart</h2>
+        </div>
 
-            {/* BODY */}
-            <div className="cart-body">
-              {cartItems.length === 0 ? (
-                <p className="empty-cart">Your cart is empty</p>
-              ) : (
-                <div className="cart-list">
-                  {cartItems.map((item) => (
-                    <div className="cart-item" key={item.id}>
-                      <i className="bi bi-x" onClick={() => removeItem(item.id)}></i>
-                      <img src={item.image_url} alt={item.name} className="cart-thumb" />
+        <div className="cart-body">
+          {cartItems.length === 0 ? (
+            <p className="empty-cart">Your cart is empty</p>
+          ) : (
+            <div className="cart-list">
+              {cartItems.map((item) => (
+                <div className="cart-item" key={item.id}>
+                  <i
+                    className="bi bi-x"
+                    onClick={() => removeItem(item.id)}
+                  ></i>
+                  <img
+                    src={item.image_url}
+                    alt={item.name}
+                    className="cart-thumb"
+                  />
+                  <div className="cart-info">
+                    <h5>{item.name}</h5>
+                  </div>
 
-                      <div className="cart-info">
-                        <h5>{item.name}</h5>
-                      </div>
-
-                      <div className="cart-right">
-                        <div className="item-price">${item.price.toFixed(2)}</div>
-                        <div className="qty-box">
-                          <button onClick={() => updateQty(item.id, -1)}>-</button>
-                          <span>{item.qty}</span>
-                          <button onClick={() => updateQty(item.id, 1)}>+</button>
-                        </div>
-                      </div>
+                  <div className="cart-right">
+                    <div className="item-price">
+                      ${item.price.toFixed(2)}
                     </div>
-                  ))}
-
-
-                </div>
-              )}
-
-              {/* === RECOMMEND === */}
-              <div className="cart-recommend">
-                <div className="recommend-header">
-                  <h4>We Recommend</h4>
-                  <div className="arrows">
-                    <i className="bi bi-arrow-left" onClick={() => handleScroll("left")}></i>
-                    <i className="bi bi-arrow-right" onClick={() => handleScroll("right")}></i>
+                    <div className="qty-box">
+                      <button onClick={() => updateQty(item.id, item.qty - 1)}>
+                        -
+                      </button>
+                      <span>{item.qty}</span>
+                      <button onClick={() => updateQty(item.id, item.qty + 1)}>
+                        +
+                      </button>
+                    </div>
                   </div>
                 </div>
+              ))}
+            </div>
+          )}
 
-                <div className="recommend-list" ref={recRef}>
-                  {recommended.map((rec) => (
-                    <div className="recommend-card" key={rec.id}>
-                      <img src={rec.image_url} alt={rec.name} />
-                      <div className="recommend-content">
-                        <h5>{rec.name}</h5>
-                        <p>${rec.price.regular.toFixed(2)}</p>
-                        <button className="add-btn" onClick={() => addItem(rec)}>+</button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+          {/* === RECOMMEND === */}
+          <div className="cart-recommend">
+            <div className="recommend-header">
+              <h4>We Recommend</h4>
+              <div className="arrows">
+                <i
+                  className="bi bi-arrow-left"
+                  onClick={() => handleScroll("left")}
+                ></i>
+                <i
+                  className="bi bi-arrow-right"
+                  onClick={() => handleScroll("right")}
+                ></i>
               </div>
-
-
             </div>
 
-            {/* FOOTER */}
-            <div className="cart-footer">
-              <div className="subtotal-row">
-                <span>SUBTOTAL</span>
-                <span>${subtotal.toFixed(2)}</span>
-              </div>                 
-              <label className="checkbox-row">
-                <input
-                  type="checkbox"
-                  checked={confirmed}
-                  onChange={(e) => setConfirmed(e.target.checked)}
-                />
-                <span>I confirm that I am over 18 years of age</span>
-              </label>
-
-              <button
-                className="btn-cartcheck"
-                disabled={!confirmed} 
-                style={{
-                  opacity: confirmed ? 1 : 0.8,
-                  cursor: confirmed ? "pointer" : "not-allowed",
-                }}
-              >
-                CHECKOUT
-              </button>
+            <div className="recommend-list" ref={recRef}>
+              {recommended.map((rec) => (
+                <div className="recommend-card" key={rec.id}>
+                  <img src={rec.image_url} alt={rec.name} />
+                  <div className="recommend-content">
+                    <h5>{rec.name}</h5>
+                    <p>${rec.price.regular.toFixed(2)}</p>
+                    <button className="add-btn" onClick={() => addItem(rec)}>
+                      +
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
+          </div>
+        </div>
+
+        {/* FOOTER */}
+        <div className="cart-footer">
+          <div className="subtotal-row">
+            <span>SUBTOTAL</span>
+            <span>${subtotal.toFixed(2)}</span>
+          </div>
+          <label className="checkbox-row">
+            <input
+              type="checkbox"
+              checked={confirmed}
+              onChange={(e) => setConfirmed(e.target.checked)}
+            />
+            <span>I confirm that I am over 18 years of age</span>
+          </label>
+
+          <button
+            className="btn-cartcheck"
+            disabled={!confirmed}
+            style={{
+              opacity: confirmed ? 1 : 0.8,
+              cursor: confirmed ? "pointer" : "not-allowed",
+            }}
+          >
+            CHECKOUT
+          </button>
+        </div>
       </div>
 
       {/* BACKDROP */}
