@@ -1,178 +1,299 @@
 import React, { useState } from "react";
-import { useCartStorage } from "../hooks/useCartStorage"; // ✅ dùng hook chung
+import { useCartStorage } from "../hooks/useCartStorage";
+import { useNavigate } from "react-router-dom";
+import {
+  CreditCard,
+  Truck,
+  Mail,
+  Gift,
+  ShoppingBag,
+  Lock,
+  ShieldCheck,
+} from "lucide-react";
 import "../css/Checkout.css";
 
 function CheckOut() {
-  const {
-    cartItems,
-    subtotal,
-    updateQty,
-    removeItem,
-  } = useCartStorage();
+  const { cartItems, subtotal } = useCartStorage();
+  const [discount, setDiscount] = useState("");
+  const navigate = useNavigate();
 
-  const [expandedItems, setExpandedItems] = useState({});
+  const [formData, setFormData] = useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+    address: "",
+    apartment: "",
+    city: "",
+    district: "",
+    ward: "",
+    postcode: "",
+    phone: "",
+  });
 
-  const toggleExpand = (id) => {
-    setExpandedItems((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
-
-  const getTotal = () => subtotal.toFixed(2);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("✅ Order placed successfully!");
+
+    // ✅ Lưu thông tin khách hàng và đơn hàng vào localStorage
+    const orderData = {
+      customer: formData,
+      items: cartItems,
+      subtotal: subtotal.toFixed(2),
+      total: getTotal(),
+      discount,
+      date: new Date().toLocaleString(),
+    };
+    localStorage.setItem("lastOrder", JSON.stringify(orderData));
+
+    // 👉 Chuyển sang trang ChucMung.jsx
+    navigate("/chucmung");
+  };
+
+  const getTotal = () => {
+    const shipping = subtotal > 0 ? 5 : 0;
+    const tax = subtotal * 0.1;
+    return (subtotal + shipping + tax).toFixed(2);
   };
 
   return (
-    <section className="section-checkout">
-      <div className="checkout-page">
-        {/* LEFT: Billing & Order Summary */}
-        <div className="checkout-left">
-          <h2>Complete your order</h2>
+    <section className="checkout-container two-column">
+      {/* LEFT SIDE - CUSTOMER INFO */}
+      <div className="checkout-left checkout-fade">
+        <h2>
+          <ShoppingBag size={22} /> Checkout
+        </h2>
 
-          <div className="returning-customer">
-            <p>
-              Returning customer? <a href="#">Click here to login</a>
-            </p>
+        {/* CONTACT + DELIVERY FORM */}
+        <form className="checkout-form" onSubmit={handleSubmit}>
+          <h3>
+            <Mail size={18} /> Contact Information
+          </h3>
+
+          <div className="express-checkout">
+            <button type="button" className="express-btn express-apple">
+              <span>Apple Pay</span>
+            </button>
+            <button type="button" className="express-btn express-google">
+              <span>Google Pay</span>
+            </button>
+            <button type="button" className="express-btn express-paypal">
+              <span>PayPal</span>
+            </button>
           </div>
 
-          <div className="coupon">
-            <p>
-              Have a coupon? <a href="#">Click here to enter your code</a>
-            </p>
-          </div>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email address"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <label className="checkbox">
+            <input type="checkbox" /> Keep me up to date on news and offers
+          </label>
 
-          <h3>Billing Details</h3>
-          <form className="billing-form">
-            <input type="text" placeholder="First Name *" required />
-            <input type="text" placeholder="Last Name *" required />
-            <input type="email" placeholder="Email Address *" required />
-            <input type="tel" placeholder="Phone" />
+          <h3>
+            <Truck size={18} /> Delivery Details
+          </h3>
+          <div className="flex-row">
             <input
               type="text"
-              placeholder="House number and street name *"
+              name="firstName"
+              placeholder="First name"
+              value={formData.firstName}
+              onChange={handleChange}
               required
             />
             <input
               type="text"
-              placeholder="Apartment, suite, unit, etc. (optional)"
+              name="lastName"
+              placeholder="Last name"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
             />
-            <input type="text" placeholder="Town / City *" required />
-            <input type="text" placeholder="State / County" />
-            <input type="text" placeholder="Postcode *" required />
-            <div>
-              <label>
-                <input type="checkbox" /> Sign me up to receive email updates and
-                news
-              </label>
-            </div>
-            <div>
-              <label>
-                <input type="checkbox" /> Create an account?
-              </label>
-            </div>
-          </form>
+          </div>
+          <input
+            type="text"
+            name="address"
+            placeholder="Address"
+            value={formData.address}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="text"
+            name="apartment"
+            placeholder="Apartment, suite, etc. (optional)"
+            value={formData.apartment}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="city"
+            placeholder="City"
+            value={formData.city}
+            onChange={handleChange}
+            required
+          />
+          <div className="flex-row">
+            <input
+              type="text"
+              name="district"
+              placeholder="District"
+              value={formData.district}
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              name="ward"
+              placeholder="Ward"
+              value={formData.ward}
+              onChange={handleChange}
+            />
+          </div>
+          <input
+            type="text"
+            name="postcode"
+            placeholder="Postcode"
+            value={formData.postcode}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Phone"
+            value={formData.phone}
+            onChange={handleChange}
+          />
 
-          <h3>Your Order</h3>
-          <div className="order-summary">
-            {cartItems.length === 0 ? (
-              <p>No items in your cart.</p>
-            ) : (
-              cartItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="checkout-item"
-                  onClick={() => toggleExpand(item.id)}
-                >
-                  <div className="item-summary">
-                    <img src={item.image_url} alt={item.name} />
-                    <div>
-                      <p>
-                        {item.name} × {item.qty}
-                      </p>
-                      <p>
-                        {item.currency} {item.price.toFixed(2)}
-                      </p>
-                    </div>
-                  </div>
-
-                  {expandedItems[item.id] && (
-                    <div className="item-details">
-                      <div className="qty-control1">
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            updateQty(item.id, item.qty - 1);
-                          }}
-                        >
-                          −
-                        </button>
-                        <span className="quantity">{item.qty}</span>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            updateQty(item.id, item.qty + 1);
-                          }}
-                        >
-                          +
-                        </button>
-                        <button
-                          className="remove-btn"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            removeItem(item.id);
-                          }}
-                        >
-                          ×
-                        </button>
-                      </div>
-                      <p>
-                        Subtotal: {(item.price * item.qty).toFixed(2)}{" "}
-                        {item.currency}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              ))
-            )}
-            <hr />
+          {/* 🛡️ Privacy & Refund Policy Section */}
+          <div className="policy-info">
+            <h4>
+              <ShieldCheck size={18} style={{ color: "#7b1e26" }} /> Privacy &
+              Refund Policy
+            </h4>
             <p>
-              <strong>Total:</strong> {getTotal()} €
+              We value your privacy — your personal information is securely
+              stored and never shared with third parties. All transactions are
+              encrypted to ensure your data remains safe. Refunds and exchanges
+              are available within <strong>14 days</strong> of purchase,
+              provided the items remain unopened, unused, and in their original
+              packaging.
+            </p>
+            <p>
+              If you receive a damaged or incorrect item, please contact our
+              support team within <strong>7 days</strong> of delivery, and we’ll
+              arrange a prompt replacement or full refund. Our goal is to make
+              sure every purchase meets your expectations.
             </p>
           </div>
-        </div>
+        </form>
+      </div>
 
-        {/* RIGHT: Shipping & Payment */}
+      {/* RIGHT SIDE - ORDER SUMMARY + PAYMENT */}
+      <div className="checkout-right-wrapper">
         <div className="checkout-right">
-          <h2>Payment & Shipping</h2>
-          <form className="checkout-form" onSubmit={handleSubmit}>
-            <h4>Shipping Method</h4>
-            <label>
-              <input type="radio" name="shipping" defaultChecked /> Royal Mail
-              (Free)
-            </label>
+          <h3>
+            <Gift size={20} /> Order Summary
+          </h3>
 
-            <h4>Payment</h4>
-            <label>
-              <input type="radio" name="payment" defaultChecked /> Credit /
-              Debit Card
-            </label>
-            <div>
-              <input type="text" placeholder="Card Number" />
-              <input type="text" placeholder="MM / YY" />
-              <input type="text" placeholder="CVC" />
+          {cartItems.length === 0 ? (
+            <p>Your cart is empty.</p>
+          ) : (
+            cartItems.map((item) => (
+              <div key={item.id} className="summary-item">
+                <div className="summary-main">
+                  <img src={item.image_url} alt={item.name} />
+                  <div>
+                    <p>{item.name}</p>
+                    <small>× {item.qty}</small>
+                  </div>
+                  <span>
+                    {item.currency} {(item.price * item.qty).toFixed(2)}
+                  </span>
+                </div>
+              </div>
+            ))
+          )}
+
+          <div className="order-totals">
+            <div className="line">
+              <span>Subtotal</span>
+              <span>{subtotal.toFixed(2)} €</span>
             </div>
-            <label>
-              <input type="radio" name="payment" /> PayPal
-            </label>
+            <div className="line">
+              <span>Shipping</span>
+              <span>5.00 €</span>
+            </div>
+            <div className="line">
+              <span>Taxes (10%)</span>
+              <span>{(subtotal * 0.1).toFixed(2)} €</span>
+            </div>
+            <hr />
+            <div className="line total">
+              <strong>Total</strong>
+              <strong>{getTotal()} €</strong>
+            </div>
 
-            <button type="submit" className="place-order-btn">
-              Place Order
+            <div className="discount">
+              <Gift size={16} style={{ color: "#7b1e26" }} />
+              <input
+                type="text"
+                placeholder="Discount code"
+                value={discount}
+                onChange={(e) => setDiscount(e.target.value)}
+              />
+              <button type="button">Apply</button>
+            </div>
+          </div>
+
+          {/* PAYMENT METHOD SECTION */}
+          <div className="payment-section">
+            <h3>
+              <CreditCard size={18} /> Payment Method
+            </h3>
+
+            <div className="payment-options">
+              <label className="radio">
+                <input type="radio" name="payment" defaultChecked />
+                Credit / Debit Card
+              </label>
+              <label className="radio">
+                <input type="radio" name="payment" />
+                PayPal
+              </label>
+              <label className="radio">
+                <input type="radio" name="payment" />
+                Cash on Delivery
+              </label>
+            </div>
+
+            <div className="card-form">
+              <input type="text" placeholder="Cardholder Name" required />
+              <input
+                type="text"
+                placeholder="Card Number"
+                maxLength="19"
+                required
+              />
+              <div className="flex-row">
+                <input type="text" placeholder="MM/YY" maxLength="5" required />
+                <input type="text" placeholder="CVV" maxLength="3" required />
+              </div>
+            </div>
+
+            {/* 👉 CHỈNH NÚT PAY NOW GỌI SUBMIT FORM */}
+            <button type="submit" className="pay-now-btn" onClick={handleSubmit}>
+              <Lock size={18} /> Pay Now
             </button>
-          </form>
+          </div>
         </div>
       </div>
     </section>
