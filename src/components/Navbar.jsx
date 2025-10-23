@@ -253,8 +253,9 @@ export default function Navbar() {
           <h2>Cart</h2>
           <i
             className="bi bi-bag"
-            onClick={() => navigate("/cart")}
+            onClick={() => { navigate("/cart"); setCartOpen(false) }}
             style={{ cursor: "pointer" }}
+
           ></i>
         </div>
 

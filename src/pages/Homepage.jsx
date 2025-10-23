@@ -11,7 +11,7 @@ export default function Homepage() {
       <SectionTwo />
       <SectionThree />
       <SectionFour />
-      <Cart />
+
     </>
   );
 }
