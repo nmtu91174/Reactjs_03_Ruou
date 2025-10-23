@@ -346,6 +346,10 @@ export default function Navbar() {
               opacity: confirmed ? 1 : 0.8,
               cursor: confirmed ? "pointer" : "not-allowed",
             }}
+            onClick={() => {
+              navigate("/checkout");
+              setCartOpen(false);
+            }}
           >
             CHECKOUT
           </button>
