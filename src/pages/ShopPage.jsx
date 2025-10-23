@@ -3,6 +3,7 @@ import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 import { useCartStorage } from "../hooks/useCartStorage";
 import productsData from "../data/maxwell_wines_products.json";
 import "../css/ShopPage.css";
+import Navbar from "../components/Navbar";
 
 export default function ShopPage() {
   const { addItem } = useCartStorage(); // ✅ addItem = thêm sản phẩm vào localStorage
@@ -17,12 +18,12 @@ export default function ShopPage() {
   const [selectedRegion, setSelectedRegion] = useState("");
   const [priceRange, setPriceRange] = useState({ min: 0, max: 1000 });
   const [selectedVintage, setSelectedVintage] = useState("");
-  
+
   // === SEARCH ===
   useEffect(() => {
-  const params = new URLSearchParams(location.search);
-  const keyword = params.get("search") || "";
-  setSearchTerm(keyword);
+    const params = new URLSearchParams(location.search);
+    const keyword = params.get("search") || "";
+    setSearchTerm(keyword);
   }, [location.search]);
 
   // === INIT DATA ===
@@ -298,9 +299,8 @@ export default function ShopPage() {
                             </div>
 
                             <button
-                              className={`shop-btn-add ${
-                                addedProducts[product.id] ? "shop-added" : ""
-                              }`}
+                              className={`shop-btn-add ${addedProducts[product.id] ? "shop-added" : ""
+                                }`}
                               onClick={() => handleAddToCart(product)}
                             >
                               {addedProducts[product.id] ? "Added ✓" : "Add to Cart"}
