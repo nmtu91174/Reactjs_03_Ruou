@@ -1,5 +1,5 @@
 /* ==============================
-   Global & Body
+   Cart-Page
 ============================== */
 
 .cart-page {
@@ -8,8 +8,7 @@
   margin: 2rem auto;
   gap: 2rem;
   flex-wrap: wrap;
-    margin-top: 7rem; /* 👈 Thêm dòng này */
-
+  margin-top: 7rem; /* 👈 Thêm dòng này */
 }
 
 /* ------------------------------

@@ -5,6 +5,7 @@
   margin-top: 4rem;
 }
 
+
 /* === TITLE BASE === */
 .productgrid-title {
   font-size: clamp(2rem, 4vw, 3.25rem);
@@ -286,6 +287,7 @@
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding-top: clamp(2rem, 5vw, 3.5rem);
   background: #e3e1e1; /* đồng bộ nền */
+  padding-bottom: 2rem;
 }
 
 
@@ -348,6 +350,5 @@
 .mode-recommendation .bottom-actions {
   margin-top: auto;
 }
-
 
 
