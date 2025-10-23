@@ -1,4 +1,3 @@
-minh can chinh css cua title thoi
 /* === SECTION WRAPPER === */
 .productgrid-section {
   background: #e3e1e1;
@@ -318,7 +317,9 @@ minh can chinh css cua title thoi
   font-style: normal;
   font-weight: 600;
 }
-
+.mode-recommendation .carousel-header{
+  padding: 0rem 1rem;
+}
 
 /* === FIX: make recommendation behave exactly like carousel === */
 .mode-recommendation .productgrid-container {
@@ -328,6 +329,7 @@ minh can chinh css cua title thoi
   align-items: stretch;
   gap: 1.288rem;
   transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
+  padding: 0rem 1rem;
 }
 
 /* === Card style === */
