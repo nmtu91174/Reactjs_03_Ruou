@@ -52,7 +52,7 @@
       "volume": "750ml",
       "product_url": "https://maxwellwines.com.au/products/ellen-street-shiraz-2022",
       "image_url": "https://maxwellwines.com.au/cdn/shop/files/EllenStreetShirazbottle1200x1200.png?v=1754440689&width=1100",
-      "image2_url": "/assets/json_img/EllenStShiraz.webp",
+      "image2_url": "Reactjs_03_Ruou/assets/json_img/EllenStShiraz.webp",
       "stock_status": "In Stock"
     },
     {
@@ -88,8 +88,8 @@
       },
       "volume": "750ml",
       "product_url": "https://maxwellwines.com.au/products/grenache-rose-2024",
-      "image_url": "/assets/json_imgcore/GrenacheRose.webp",
-      "image2_url": "/assets/json_img/Grenache-Rose.webp",
+      "image_url": "Reactjs_03_Ruou/assets/json_imgcore/GrenacheRose.webp",
+      "image2_url": "Reactjs_03_Ruou/assets/json_img/Grenache-Rose.webp",
       "stock_status": "In Stock"
     },
     {
@@ -126,7 +126,7 @@
       "volume": "750ml",
       "product_url": "https://maxwellwines.com.au/products/honey-mead-750ml",
       "image_url": "https://maxwellwines.com.au/cdn/shop/files/HoneyMeadbottle1200x1200.png?v=1754442572&width=1100",
-      "image2_url": "/assets/json_img/HoneyMead.webp",
+      "image2_url": "Reactjs_03_Ruou/assets/json_img/HoneyMead.webp",
       "stock_status": "In Stock"
     },
     {
@@ -217,8 +217,7 @@
       "volume": "750ml",
       "product_url": "https://maxwellwines.com.au/products/fresca-grenache-2024",
       "image_url": "https://maxwellwines.com.au/cdn/shop/files/FrescaGrenachebottle1200x1200.png?v=1754441893&width=1100",
-      "image2_url": "/assets/json_img/Fresca-Grenache.webp",
-      
+      "image2_url": "Reactjs_03_Ruou/assets/json_img/Fresca-Grenache.webp",
       "stock_status": "In Stock"
     },
     {
@@ -327,7 +326,7 @@
       "volume": "750ml",
       "product_url": "https://maxwellwines.com.au/products/tiers-of-wisdom-grenache-2024",
       "image_url": "https://maxwellwines.com.au/cdn/shop/files/TiersWisdombottle1200x1200.png?v=1754444695&width=1100",
-      "image2_url": "/assets/json_img/TiersofWisdom.webp",
+      "image2_url": "Reactjs_03_Ruou/assets/json_img/TiersofWisdom.webp",
       "stock_status": "In Stock"
     },
     {
@@ -382,7 +381,7 @@
       "volume": "750ml",
       "product_url": "https://maxwellwines.com.au/products/gsm-2023",
       "image_url": "https://maxwellwines.com.au/cdn/shop/files/GSMbottle1200x1200.png?v=1754442473&width=1100",
-      "image2_url": "/assets/json_img/GSM.webp",
+      "image2_url": "Reactjs_03_Ruou/assets/json_img/GSM.webp",
       "stock_status": "In Stock"
     },
     {
@@ -401,7 +400,7 @@
       "volume": "750ml",
       "product_url": "https://maxwellwines.com.au/products/chardonnay-2024",
       "image_url": "https://maxwellwines.com.au/cdn/shop/files/Chardonnaybottle1200x1200_a30caee2-8a24-4df0-ad8d-3ecb4fbbcc7b.png?v=1754440390&width=1100",
-      "image2_url": "/assets/json_img/Adelaide-Hills.webp",
+      "image2_url": "Reactjs_03_Ruou/assets/json_img/Adelaide-Hills.webp",
       "stock_status": "In Stock"
     },
     {

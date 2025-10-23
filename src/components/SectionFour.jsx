@@ -6,14 +6,14 @@ export default function SectionFour() {
   const articles = [
     {
       id: "a1",
-      img: "/assets/hp-sec4/right-1.webp",
+      img: "Reactjs_03_Ruou/assets/hp-sec4/right-1.webp",
       tag: "NEWS",
       title: "Maxwell Restaurant Wins Two Chef Hats",
       url: ""
     },
     {
       id: "a2",
-      img: "/assets/hp-sec4/right-2.webp",
+      img: "Reactjs_03_Ruou/assets/hp-sec4/right-2.webp",
       tag: "NEWS",
       title: "Gourmet Traveller Restaurant of the Year, SA",
       url: ""
@@ -26,7 +26,7 @@ export default function SectionFour() {
       <section className="section-four">
         <div className="section-image">
           <img
-            src="/assets/hp-sec4/sec4.webp"
+            src="Reactjs_03_Ruou/assets/hp-sec4/sec4.webp"
             alt="Join the Maxwell Clan Wine Club"
             draggable="false"
           />
@@ -65,26 +65,26 @@ export default function SectionFour() {
 
       {/* ==== PHẦN 2: ARTICLE STICKY SCROLL 50/50 ==== */}
       <section className="section-four section-four-grid">
-      
+
         <div className="sf-left">
-          <div className="sf-left-media"> 
+          <div className="sf-left-media">
             <img
-              src="/assets/hp-sec4/left.webp"
+              src="Reactjs_03_Ruou/assets/hp-sec4/left.webp"
               alt="Maxwell Wines"
               draggable="false"
             />
-          <div className="sf-left-overlay">
-            <div className="content-overlay journal-overlay">
-              <FadeInBlock>
-              <div className="text-block">
-                <p>
-                  Stay updated with events, winery news, wine releases and restaurant happenings at Maxwell Wines.
-                </p>
-                <button className="btn-hoverline">MAXWELL JOURNAL →</button>
+            <div className="sf-left-overlay">
+              <div className="content-overlay journal-overlay">
+                <FadeInBlock>
+                  <div className="text-block">
+                    <p>
+                      Stay updated with events, winery news, wine releases and restaurant happenings at Maxwell Wines.
+                    </p>
+                    <button className="btn-hoverline">MAXWELL JOURNAL →</button>
+                  </div>
+                </FadeInBlock>
               </div>
-              </FadeInBlock>
             </div>
-          </div>
           </div>
         </div>
 
@@ -110,7 +110,7 @@ export default function SectionFour() {
           ))}
         </div>
       </section>
-      
+
     </>
   );
 }

@@ -10,7 +10,7 @@ import { useLocation } from "react-router-dom";
 export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
-  const isHome = location.pathname === "/"; 
+  const isHome = location.pathname === "/";
 
   const [scrolled, setScrolled] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -59,10 +59,10 @@ export default function Navbar() {
   }, [menuOpen, cartOpen]);
 
   const iconColor = isHome
-  ? scrolled || hovered
-    ? "#111" 
-    : "#fff" 
-  : "#111";  
+    ? scrolled || hovered
+      ? "#111"
+      : "#fff"
+    : "#111";
 
   // ✅ Điều hướng và đóng menu
   const handleNavigate = (path) => {
@@ -86,9 +86,8 @@ export default function Navbar() {
     <>
       {/* ===== HEADER ===== */}
       <header
-        className={`maxwell-header ${
-          isHome ? (scrolled || hovered ? "scrolled" : "") : "scrolled"
-        }`}
+        className={`maxwell-header ${isHome ? (scrolled || hovered ? "scrolled" : "") : "scrolled"
+          }`}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
@@ -98,8 +97,8 @@ export default function Navbar() {
             <img
               src={
                 scrolled || hovered
-                  ? "/assets/icon-menu.png"
-                  : "/assets/icon-menu2.png"
+                  ? "Reactjs_03_Ruou/assets/icon-menu.png"
+                  : "Reactjs_03_Ruou/assets/icon-menu2.png"
               }
               alt="menu"
               onClick={() => setMenuOpen(true)}
@@ -135,9 +134,9 @@ export default function Navbar() {
                 src={
                   isHome
                     ? scrolled || hovered
-                      ? "/assets/logo-black.webp"  // home + scroll/hover
-                      : "/assets/logo-white.webp"  // home + transparent
-                    : "/assets/logo-black.webp"   // các trang khác → logo đen
+                      ? "Reactjs_03_Ruou/assets/logo-black.webp"  // home + scroll/hover
+                      : "Reactjs_03_Ruou/assets/logo-white.webp"  // home + transparent
+                    : "Reactjs_03_Ruou/assets/logo-black.webp"   // các trang khác → logo đen
                 }
                 alt="Maxwell Logo"
                 className="logo"
@@ -239,7 +238,7 @@ export default function Navbar() {
         </div>
 
         <div className="sidebar-book">
-          <img src="/assets/sitebar.webp" alt="Book a Table" />
+          <img src="Reactjs_03_Ruou/assets/sitebar.webp" alt="Book a Table" />
           <div className="book-info">
             <h4>Book a Table</h4>
             <button>Learn More →</button>
@@ -254,7 +253,7 @@ export default function Navbar() {
           <h2>Cart</h2>
           <i
             className="bi bi-bag"
-            onClick={() => navigate("/cart")}  
+            onClick={() => navigate("/cart")}
             style={{ cursor: "pointer" }}
           ></i>
         </div>
