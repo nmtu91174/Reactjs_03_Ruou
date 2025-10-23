@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import FadeInBlock from "../components/FadeInBlock";
-import ProductGrid from "../components/ProductGrid"; 
 import ProductCarousel from "../components/ProductCarousel"; 
 import "../css/SectionThree.css";
 
@@ -89,7 +88,7 @@ export default function SectionThree() {
             </div>
           </div>
         </FadeInBlock>
-        <ProductCarousel mode="carousel"/>
+        <ProductCarousel mode="recommendation"/>
       </section>
     </>
   );

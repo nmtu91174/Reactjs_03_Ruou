@@ -279,7 +279,7 @@ minh can chinh css cua title thoi
 /* ==== FIX FOR FLEX + CAROUSEL ==== */
 .productgrid-container {
   display: flex;
-  align-items: stretch;
+  align-items: stretch !important;
 }
 
 /* === RECOMMENDATION MODE === */
