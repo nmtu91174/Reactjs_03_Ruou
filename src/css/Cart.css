@@ -1,17 +1,7 @@
 /* ==============================
    Global & Body
 ============================== */
-body {
-  font-family: 'Inter', sans-serif;
-  background: #f5f5f5; /* trắng sáng */
-  color: #111; /* chữ chính màu đen */
-  margin: 0;
-  padding: 0;
-}
 
-/* ==============================
-   Cart Page Layout
-============================== */
 .cart-page {
   display: flex;
   max-width: 1200px;
@@ -114,7 +104,7 @@ body {
 }
 
 /* Quantity control */
-.qty-control {
+.qty-control1 {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -123,24 +113,27 @@ body {
   padding: 0;         /* loại bỏ khoảng đệm */
 }
 
-.qty-control button {
-  background: #fff;
-  color: #111;
-  padding: 0.25rem 0.75rem;
-  border-radius: 999px;
+/* Nút tăng/giảm số lượng */
+.qty-control1 button {
+  background: #fff;           /* nền trắng */
+  color: #111;                /* màu chữ */
+  border: none;     /* thêm viền nhẹ cho nhìn rõ */
+  border-radius: 999px;       /* tròn */
   cursor: pointer;
   font-weight: 600;
   font-size: 1rem;
+  padding: 0.25rem 0.5rem;    /* padding vừa đủ */
   transition: all 0.25s ease;
 }
 
-.qty-control button:hover {
-  background: #ffecec;
-  color: #b22222;
-  border-color: #b22222;
+.qty-control1 button:hover {
+  background: #ffecec;        /* nền hồng nhạt khi hover */
+  color: #b22222;             /* chữ đỏ khi hover */
+  border-color: #b22222;      /* viền đỏ khi hover */
 }
 
-.qty-control .quantity {
+
+.qty-control1 .quantity {
   min-width: 24px;
   text-align: center;
   font-weight: 600;
@@ -160,7 +153,7 @@ body {
 }
 
 .remove-btn:hover {
-    color: #b22222;
+  color: #b22222;
   transform: scale(1.2);
 }
 
@@ -236,7 +229,7 @@ body {
   .cart-page {
     flex-direction: column;
   }
-  .cart-right {
+  .cart-right1 {
     width: 100%;
   }
   .banner-slide img {
@@ -280,7 +273,7 @@ body {
 }
 
 /* RIGHT SIDE */
-.cart-right {
+.cart-right1 {
   flex: 1;
   min-width: 380px;
   display: flex;
@@ -309,7 +302,7 @@ body {
     position: absolute;
     inset: 0;
   opacity: 0;
-  transition: opacity 1s ease; /* 🔥 mượt hơn */
+  transition: opacity 1s ease;
   display: none;
   flex: 1;
   text-align: center;
@@ -331,7 +324,7 @@ body {
 /* ẢNH CỐ ĐỊNH KÍCH THƯỚC */
 .promo-slide img {
   width: 100%;
-  height: 250px; /* 🔥 Chiều cao cố định */
+  height: 250px;
   object-fit: cover;
 }
 

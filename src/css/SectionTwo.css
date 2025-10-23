@@ -1,6 +1,6 @@
 .section-two {
   background: #E3E1E1;
-  font-family: "Font2", serif;
+  font-family: "Font2", serif !important;
   color: #000;
 }
 
