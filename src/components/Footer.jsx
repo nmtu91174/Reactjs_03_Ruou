@@ -11,7 +11,7 @@ export default function Footer() {
           {/* Cột trái (logo) */}
           <div className="col-md-3">
             <img
-              src="/assets/logo-footer.webp"
+              src="Reactjs_03_Ruou/assets/logo-footer.webp"
               alt="Maxwell Logo"
               className="footer-logo mb-3"
               style={{ width: "70px" }}
@@ -100,11 +100,11 @@ export default function Footer() {
         <div className="row justify-content-between align-items-center text-center text-md-start ">
           <div className="col-md-9 text">
             <p className="mb-0">
-              © Maxwell Wines 2025 &nbsp; 
+              © Maxwell Wines 2025 &nbsp;
             </p>
             <p className="mb-0">
-                SA Liquor Licensing Act 1997, Section 113. 
-              Liquor Licence Number: 57005946 Producer’s Licence 57600699. 
+              SA Liquor Licensing Act 1997, Section 113.
+              Liquor Licence Number: 57005946 Producer’s Licence 57600699.
               Liquor Must Not Be Supplied To Persons Under 18.
             </p>
           </div>
