@@ -89,6 +89,7 @@ export default function SectionThree() {
           </div>
         </FadeInBlock>
         <ProductCarousel mode="recommendation"/>
+        <ProductCarousel mode="carousel"/>
       </section>
     </>
   );

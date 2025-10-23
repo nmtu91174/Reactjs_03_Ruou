@@ -279,7 +279,7 @@ minh can chinh css cua title thoi
 /* ==== FIX FOR FLEX + CAROUSEL ==== */
 .productgrid-container {
   display: flex;
-  align-items: stretch !important;
+  align-items: stretch;
 }
 
 /* === RECOMMENDATION MODE === */
@@ -289,10 +289,7 @@ minh can chinh css cua title thoi
   background: #e3e1e1; /* đồng bộ nền */
 }
 
-.mode-recommendation .productgrid-container {
-  flex-wrap: nowrap;           /* giống carousel */
-  justify-content: flex-start;
-}
+
 
 .mode-recommendation .product-card {
   transition: transform 0.35s ease, opacity 0.35s ease;
@@ -321,5 +318,34 @@ minh can chinh css cua title thoi
   font-style: normal;
   font-weight: 600;
 }
+
+
+/* === FIX: make recommendation behave exactly like carousel === */
+.mode-recommendation .productgrid-container {
+  display: flex;
+  flex-wrap: nowrap;          /* ✅ không xuống hàng */
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 1.288rem;
+  transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* === Card style === */
+.mode-recommendation .product-card {
+  flex: 0 0 24%;              /* ✅ 4 card / hàng (giống carousel visibleCount=4) */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Giữ nút ADD TO CART căn đáy */
+.mode-recommendation .product-info {
+  flex-grow: 1;
+}
+.mode-recommendation .bottom-actions {
+  margin-top: auto;
+}
+
 
 
