@@ -6,3 +6,4 @@ export default defineConfig({
   base: '/Reactjs_03_Ruou/',
   plugins: [react()],
 })
+
