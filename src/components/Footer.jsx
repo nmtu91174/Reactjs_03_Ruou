@@ -11,7 +11,7 @@ export default function Footer() {
           {/* Cột trái (logo) */}
           <div className="col-md-3">
             <img
-              src="Reactjs_03_Ruou/assets/logo-footer.webp"
+              src="/assets/logo-footer.webp"
               alt="Maxwell Logo"
               className="footer-logo mb-3"
               style={{ width: "70px" }}
