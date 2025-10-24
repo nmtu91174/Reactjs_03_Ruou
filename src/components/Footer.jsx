@@ -1,6 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "../css/Footer.css";
+import logo from "../assets/logo-footer.webp";
+
 
 export default function Footer() {
   return (
@@ -11,8 +13,7 @@ export default function Footer() {
           {/* Cột trái (logo) */}
           <div className="col-md-3">
             <img
-              src="Reactjs_03_Ruou/assets/logo-footer.webp"
-              alt="Maxwell Logo"
+              src={logo} alt="logo"
               className="footer-logo mb-3"
               style={{ width: "70px" }}
             />

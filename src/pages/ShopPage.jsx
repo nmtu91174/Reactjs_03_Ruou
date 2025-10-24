@@ -1,12 +1,20 @@
 import { useState, useEffect } from "react";
-import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Card,
+  Offcanvas, // <-- 1. Import Offcanvas
+} from "react-bootstrap";
 import { useCartStorage } from "../hooks/useCartStorage";
 import productsData from "../data/maxwell_wines_products.json";
 import "../css/ShopPage.css";
-import Navbar from "../components/Navbar";
+// import Navbar from "../components/Navbar"; // Navbar đã được gọi ở App.jsx, không cần ở đây
 
 export default function ShopPage() {
-  const { addItem } = useCartStorage(); // ✅ addItem = thêm sản phẩm vào localStorage
+  const { addItem } = useCartStorage();
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [quantities, setQuantities] = useState({});
@@ -18,6 +26,9 @@ export default function ShopPage() {
   const [selectedRegion, setSelectedRegion] = useState("");
   const [priceRange, setPriceRange] = useState({ min: 0, max: 1000 });
   const [selectedVintage, setSelectedVintage] = useState("");
+
+  // --- 2. Thêm state để quản lý việc bật/tắt Offcanvas ---
+  const [showFilters, setShowFilters] = useState(false);
 
   // === SEARCH ===
   useEffect(() => {
@@ -77,16 +88,27 @@ export default function ShopPage() {
       );
     }
 
-    if (selectedVariety) result = result.filter((p) => p.variety === selectedVariety);
-    if (selectedRegion) result = result.filter((p) => p.region === selectedRegion);
-    if (selectedVintage) result = result.filter((p) => p.vintage === selectedVintage);
+    if (selectedVariety)
+      result = result.filter((p) => p.variety === selectedVariety);
+    if (selectedRegion)
+      result = result.filter((p) => p.region === selectedRegion);
+    if (selectedVintage)
+      result = result.filter((p) => p.vintage === selectedVintage);
 
     result = result.filter(
-      (p) => p.price.regular >= priceRange.min && p.price.regular <= priceRange.max
+      (p) =>
+        p.price.regular >= priceRange.min && p.price.regular <= priceRange.max
     );
 
     setFilteredProducts(result);
-  }, [searchTerm, selectedVariety, selectedRegion, priceRange, selectedVintage, products]);
+  }, [
+    searchTerm,
+    selectedVariety,
+    selectedRegion,
+    priceRange,
+    selectedVintage,
+    products,
+  ]);
 
   // === FILTER RESET ===
   const clearFilters = () => {
@@ -108,129 +130,157 @@ export default function ShopPage() {
   // === ADD TO CART ===
   const handleAddToCart = (product) => {
     const qty = quantities[product.id] || 1;
-    addItem(product, qty); // ✅ lưu vào localStorage
+    addItem(product, qty);
 
     setAddedProducts((prev) => ({
       ...prev,
       [product.id]: true,
     }));
 
-    // reset quantity
     setQuantities((prev) => ({
       ...prev,
       [product.id]: 1,
     }));
   };
 
+  // --- 3. Tạo nội dung cho Sidebar để tái sử dụng ---
+  const filterContent = (
+    <div className="shop-filter-container">
+      <div className="shop-filter-header">
+        <h3>Filter</h3>
+        <Button
+          variant="link"
+          onClick={clearFilters}
+          className="shop-clear-btn"
+        >
+          Clear all
+        </Button>
+      </div>
+
+      {/* SEARCH */}
+      <div className="shop-filter-section">
+        <h5>Search</h5>
+        <Form.Control
+          type="text"
+          placeholder="Search wines..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+
+      {/* VARIETY */}
+      <div className="shop-filter-section">
+        <h5>Variety</h5>
+        <Form.Select
+          value={selectedVariety}
+          onChange={(e) => setSelectedVariety(e.target.value)}
+        >
+          <option value="">All varieties</option>
+          {[...new Set(products.map((p) => p.variety))].sort().map((v) => (
+            <option key={v}>{v}</option>
+          ))}
+        </Form.Select>
+      </div>
+
+      {/* REGION */}
+      <div className="shop-filter-section">
+        <h5>Region</h5>
+        <Form.Select
+          value={selectedRegion}
+          onChange={(e) => setSelectedRegion(e.target.value)}
+        >
+          <option value="">All regions</option>
+          {[...new Set(products.map((p) => p.region))].sort().map((r) => (
+            <option key={r}>{r}</option>
+          ))}
+        </Form.Select>
+      </div>
+
+      {/* VINTAGE */}
+      <div className="shop-filter-section">
+        <h5>Vintage</h5>
+        <Form.Select
+          value={selectedVintage}
+          onChange={(e) => setSelectedVintage(e.target.value)}
+        >
+          <option value="">All vintages</option>
+          {[...new Set(products.map((p) => p.vintage))].sort().map((v) => (
+            <option key={v}>{v}</option>
+          ))}
+        </Form.Select>
+      </div>
+
+      {/* PRICE RANGE */}
+      <div className="shop-filter-section">
+        <h5>Price Range</h5>
+        <div className="shop-price-inputs">
+          <Form.Control
+            type="number"
+            placeholder="Min"
+            value={priceRange.min}
+            onChange={(e) =>
+              setPriceRange({ ...priceRange, min: Number(e.target.value) })
+            }
+          />
+          <span>—</span>
+          <Form.Control
+            type="number"
+            placeholder="Max"
+            value={priceRange.max}
+            onChange={(e) =>
+              setPriceRange({ ...priceRange, max: Number(e.target.value) })
+            }
+          />
+        </div>
+      </div>
+
+      <div className="shop-filter-results">
+        <p>
+          {filteredProducts.length}{" "}
+          {filteredProducts.length === 1 ? "product" : "products"}
+        </p>
+      </div>
+    </div>
+  );
+
   // === UI ===
   return (
     <div className="shop-page">
       <Container fluid>
         <Row>
-          {/* SIDEBAR FILTER */}
-          <Col lg={3} md={4} className="shop-filter-sidebar">
-            <div className="shop-filter-container">
-              <div className="shop-filter-header">
-                <h3>Filter</h3>
-                <Button
-                  variant="link"
-                  onClick={clearFilters}
-                  className="shop-clear-btn"
-                >
-                  Clear all
-                </Button>
-              </div>
-
-              {/* SEARCH */}
-              <div className="shop-filter-section">
-                <h5>Search</h5>
-                <Form.Control
-                  type="text"
-                  placeholder="Search wines..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
-
-              {/* VARIETY */}
-              <div className="shop-filter-section">
-                <h5>Variety</h5>
-                <Form.Select
-                  value={selectedVariety}
-                  onChange={(e) => setSelectedVariety(e.target.value)}
-                >
-                  <option value="">All varieties</option>
-                  {[...new Set(products.map((p) => p.variety))].sort().map((v) => (
-                    <option key={v}>{v}</option>
-                  ))}
-                </Form.Select>
-              </div>
-
-              {/* REGION */}
-              <div className="shop-filter-section">
-                <h5>Region</h5>
-                <Form.Select
-                  value={selectedRegion}
-                  onChange={(e) => setSelectedRegion(e.target.value)}
-                >
-                  <option value="">All regions</option>
-                  {[...new Set(products.map((p) => p.region))].sort().map((r) => (
-                    <option key={r}>{r}</option>
-                  ))}
-                </Form.Select>
-              </div>
-
-              {/* VINTAGE */}
-              <div className="shop-filter-section">
-                <h5>Vintage</h5>
-                <Form.Select
-                  value={selectedVintage}
-                  onChange={(e) => setSelectedVintage(e.target.value)}
-                >
-                  <option value="">All vintages</option>
-                  {[...new Set(products.map((p) => p.vintage))].sort().map((v) => (
-                    <option key={v}>{v}</option>
-                  ))}
-                </Form.Select>
-              </div>
-
-              {/* PRICE RANGE */}
-              <div className="shop-filter-section">
-                <h5>Price Range</h5>
-                <div className="shop-price-inputs">
-                  <Form.Control
-                    type="number"
-                    placeholder="Min"
-                    value={priceRange.min}
-                    onChange={(e) =>
-                      setPriceRange({ ...priceRange, min: Number(e.target.value) })
-                    }
-                  />
-                  <span>—</span>
-                  <Form.Control
-                    type="number"
-                    placeholder="Max"
-                    value={priceRange.max}
-                    onChange={(e) =>
-                      setPriceRange({ ...priceRange, max: Number(e.target.value) })
-                    }
-                  />
-                </div>
-              </div>
-
-              <div className="shop-filter-results">
-                <p>
-                  {filteredProducts.length}{" "}
-                  {filteredProducts.length === 1 ? "product" : "products"}
-                </p>
-              </div>
-            </div>
+          {/* --- 4. Thay thế Sidebar cũ bằng Offcanvas ---
+              Nó sẽ tự động:
+              - Hiển thị (static) trên desktop (md, lg, xl)
+              - Ẩn (off-canvas) trên mobile (sm, xs)
+          */}
+          <Col lg={3} md={4}>
+            <Offcanvas
+              show={showFilters}
+              onHide={() => setShowFilters(false)}
+              responsive="md" // <-- Đây là key
+              placement="start"
+              className="shop-filter-sidebar" // Giữ class cũ để áp dụng style
+            >
+              <Offcanvas.Header closeButton className="d-md-none">
+                <Offcanvas.Title>Filter Products</Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body>{filterContent}</Offcanvas.Body>
+            </Offcanvas>
           </Col>
 
           {/* PRODUCT GRID */}
           <Col lg={9} md={8}>
             <div className="shop-products-header">
               <h2>All Products</h2>
+
+              {/* --- 5. Thêm nút bật Filter (chỉ hiển thị trên mobile) --- */}
+              <Button
+                variant="outline-dark"
+                className="d-md-none" // <-- Ẩn trên desktop (md trở lên)
+                onClick={() => setShowFilters(true)}
+              >
+                Filters
+              </Button>
             </div>
 
             {filteredProducts.length === 0 ? (
@@ -240,8 +290,23 @@ export default function ShopPage() {
               </div>
             ) : (
               <Row>
+                {/* 6. Cập nhật Col sản phẩm:
+                  - `lg={4}`: 3 cột/hàng (Desktop lớn)
+                  - `md={6}`: 2 cột/hàng (Tablet/Desktop nhỏ)
+                  - `sm={6}`: 2 cột/hàng (Mobile ngang)
+                  - `xs={12}` hoặc không ghi gì: 1 cột/hàng (Mobile dọc)
+                  
+                  Tôi sẽ dùng sm={6} để hiển thị 2 cột trên mobile cho đẹp hơn.
+                  Nếu bạn muốn 1 cột, hãy dùng `sm={12}`.
+                */}
                 {filteredProducts.map((product) => (
-                  <Col lg={4} md={6} sm={12} key={product.id} className="shop-mb-4">
+                  <Col
+                    lg={4}
+                    md={6}
+                    sm={6} // <-- Hiển thị 2 cột trên mobile
+                    key={product.id}
+                    className="shop-mb-4"
+                  >
                     <Card
                       className="shop-product-card"
                       onMouseEnter={() => setHoveredProduct(product.id)}
@@ -261,7 +326,8 @@ export default function ShopPage() {
                       <Card.Body>
                         <Card.Title>{product.name}</Card.Title>
                         <Card.Text className="shop-product-info">
-                          {product.variety} • {product.region} • {product.vintage}
+                          {product.variety} • {product.region} •{" "}
+                          {product.vintage}
                         </Card.Text>
                         <Card.Text className="shop-product-description">
                           {product.description}
@@ -283,7 +349,10 @@ export default function ShopPage() {
                             <div className="shop-qty-control">
                               <button
                                 onClick={() =>
-                                  updateQuantity(product.id, (quantities[product.id] || 1) - 1)
+                                  updateQuantity(
+                                    product.id,
+                                    (quantities[product.id] || 1) - 1
+                                  )
                                 }
                               >
                                 −
@@ -291,7 +360,10 @@ export default function ShopPage() {
                               <span>{quantities[product.id] || 1}</span>
                               <button
                                 onClick={() =>
-                                  updateQuantity(product.id, (quantities[product.id] || 1) + 1)
+                                  updateQuantity(
+                                    product.id,
+                                    (quantities[product.id] || 1) + 1
+                                  )
                                 }
                               >
                                 +
@@ -303,7 +375,9 @@ export default function ShopPage() {
                                 }`}
                               onClick={() => handleAddToCart(product)}
                             >
-                              {addedProducts[product.id] ? "Added ✓" : "Add to Cart"}
+                              {addedProducts[product.id]
+                                ? "Added ✓"
+                                : "Add to Cart"}
                             </button>
                           </div>
                         </div>
