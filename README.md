@@ -81,6 +81,8 @@ maxwell-wines/
 ├── src/
 │   ├── components/          # Navbar, Footer, ProductGrid, FadeInBlock, v.v.
 │   ├── css/                 # Các file CSS tùy chỉnh
+│   ├── assets/              
+│   │   ├── font             # Font dùng trong dự án
 │   ├── data/
 │   │   └── maxwell_wines_products.json  # Dữ liệu sản phẩm chính
 │   ├── hooks/
@@ -153,19 +155,10 @@ maxwell-wines/
 
 ---
 
-## 💡 Tips cho Dev khác khi clone project
-
-- Nếu trang bị **trắng khi clone về**, kiểm tra:
-  - ✅ File `maxwell_wines_products.json` có tồn tại trong `/src/data`
-  - ✅ Import đúng đường dẫn hình ảnh (đặt trong `/public/assets`)
-  - ✅ Chạy đúng lệnh `npm install` trước `npm run dev`
-  - ✅ Không sửa `useCartStorage.js` — đây là hook trung tâm để sync dữ liệu realtime
-
----
 
 ## ❤️ Lời cảm ơn
 
 Dự án **Maxwell Wines** là kết quả của sự phối hợp ăn ý và tinh thần trách nhiệm cao giữa các thành viên.  
 Cảm ơn cả nhóm đã cùng nhau hoàn thiện dự án với tinh thần học hỏi và niềm đam mê sáng tạo trong lập trình.
 
-> *Made with 🍷 passion and teamwork — Group 3 Maxwell Wines Team, 2025.*
+> *Made with 🍷 passion and teamwork — Group 3 - Maxwell Wines Team, 2025.*
