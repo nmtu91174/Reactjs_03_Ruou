@@ -4,26 +4,22 @@ import productsData from "../data/maxwell_wines_products.json";
 /**
  * Hook quản lý giỏ hàng dùng LocalStorage
  * -----------------------------------------
- * - Lưu dữ liệu dạng gọn: { id: quantity }
- * - Tự động đồng bộ realtime toàn app (Navbar, Cart, Checkout,...)
- * - Có clearCart() và hỗ trợ ghi thời gian đặt hàng khi checkout
+ * - Lưu dữ liệu gọn: { id: quantity }
+ * - Đồng bộ realtime toàn app (Navbar, Cart, Checkout,…)
+ * - Tính sẵn subtotal, tax, shipping, total
  */
-
 export function useCartStorage() {
   const [cart, setCart] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem("cart")) || {};
     } catch {
-      // ✅ Phòng khi dữ liệu localStorage bị lỗi JSON
       localStorage.removeItem("cart");
       return {};
     }
   });
 
-  // === Dữ liệu sản phẩm từ JSON ===
   const allProducts = productsData.products || [];
 
-  // === Chuyển từ {id: qty} sang mảng chi tiết ===
   const cartItems = Object.entries(cart)
     .map(([id, qty]) => {
       const product = allProducts.find((p) => p.id === id);
@@ -39,18 +35,21 @@ export function useCartStorage() {
     })
     .filter(Boolean);
 
-  // === Tính tổng tiền và số lượng ===
   const subtotal = cartItems.reduce((sum, i) => sum + i.price * i.qty, 0);
   const totalCount = cartItems.reduce((sum, i) => sum + i.qty, 0);
 
-  // === Lưu lại vào LocalStorage + phát event sync ===
+  // === Tính thuế & phí vận chuyển ===
+  const shipping = subtotal > 0 ? 5 : 0;
+  const tax = subtotal * 0.1;
+  const total = (subtotal + shipping + tax).toFixed(2);
+
+  // === Lưu vào LocalStorage & phát event ===
   const saveCart = (updated) => {
     setCart(updated);
     localStorage.setItem("cart", JSON.stringify(updated));
     window.dispatchEvent(new Event("cartUpdated"));
   };
 
-  // === Các hành động ===
   const addItem = (product, qty = 1) => {
     const updated = { ...cart };
     updated[product.id] = (updated[product.id] || 0) + qty;
@@ -70,14 +69,12 @@ export function useCartStorage() {
     saveCart(updated);
   };
 
-  // ✅ Xóa toàn bộ giỏ hàng (dùng khi thanh toán thành công)
   const clearCart = () => {
     localStorage.removeItem("cart");
     setCart({});
     window.dispatchEvent(new Event("cartUpdated"));
   };
 
-  // === Lắng nghe cập nhật realtime ===
   useEffect(() => {
     const syncCart = () => {
       try {
@@ -91,16 +88,18 @@ export function useCartStorage() {
     return () => window.removeEventListener("cartUpdated", syncCart);
   }, []);
 
-  // === Xuất ra để Checkout dùng ghi order có ngày giờ ===
-  const createOrderData = (formData, discount, getTotal) => {
+  // ✅ Helper: tạo dữ liệu order
+  const createOrderData = (formData, discount) => {
     return {
       customer: formData,
       items: cartItems,
       subtotal: subtotal.toFixed(2),
-      total: getTotal(),
+      shipping,
+      tax: tax.toFixed(2),
+      total,
       discount,
-      date: new Date().toLocaleString(), // 🕒 thời gian đọc dễ hiểu
-      timestamp: Date.now(), // 🔢 dùng sort / thống kê
+      date: new Date().toLocaleString(),
+      timestamp: Date.now(),
     };
   };
 
@@ -109,10 +108,13 @@ export function useCartStorage() {
     cartItems,
     subtotal,
     totalCount,
+    shipping,
+    tax,
+    total,
     addItem,
     updateQty,
     removeItem,
     clearCart,
-    createOrderData, // ✅ thêm hàm helper cho Checkout
+    createOrderData,
   };
 }

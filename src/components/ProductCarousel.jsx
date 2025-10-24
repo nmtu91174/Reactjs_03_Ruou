@@ -183,10 +183,10 @@ function ProductCard({ product }) {
           className="bottom-actions"
           onClick={(e) => e.stopPropagation()} // ✅ không trigger click toàn card
         >
-          <div className="qty-control">
-            <button onClick={() => setQty(qty > 1 ? qty - 1 : 1)}>-</button>
+          <div className="qty-control-grid">
+            <button>-</button>
             <span>{qty}</span>
-            <button onClick={() => setQty(qty + 1)}>+</button>
+            <button>+</button>
           </div>
           <button
             className={`btn-add ${added ? "added" : ""}`}

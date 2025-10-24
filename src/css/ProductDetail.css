@@ -14,7 +14,7 @@
   align-items: center;
   gap: 0.5rem;
   margin: 0 3rem;
-  margin-top: clamp(5rem, 3vw, 5rem); /* ✅ thẳng hàng với Restaurant navbar */
+  margin-top: clamp(5rem, 3vw, 5rem); 
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -62,14 +62,14 @@
 
 /* === INFO === */
 .productdetail-info {
-  display: flex;                /* ✅ cần có để gap hoạt động */
-  flex-direction: column;       /* ✅ sắp xếp dọc */
+  display: flex;                
+  flex-direction: column;       
   position: sticky;
   top: 8rem;
   height: fit-content;
   align-self: start;
   border-radius: 12px;
-  gap: 1rem;                    /* ✅ giờ sẽ hoạt động */
+  gap: 1rem;                    
 }
 
 

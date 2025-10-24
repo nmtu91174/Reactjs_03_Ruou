@@ -166,7 +166,7 @@
 }
 
 /* === QTY CONTROL === */
-.qty-control {
+.qty-control-grid {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -176,14 +176,14 @@
   overflow: hidden;
   background: transparent;
 }
-.qty-control button {
+.qty-control-grid button {
   border: none;
   background: transparent;
   padding: clamp(0.3rem, 0.6vw, 0.46rem) clamp(0.6rem, 1vw, 0.8rem);
   font-size: clamp(1rem, 1.6vw, 1.2rem);
   cursor: pointer;
 }
-.qty-control span {
+.qty-control-grid span {
   font-size: clamp(0.9rem, 1vw, 1rem);
   width: clamp(18px, 2vw, 24px);
   text-align: center;
@@ -379,3 +379,4 @@
     flex: 0 0 100%;
   }
 }
+
