@@ -174,80 +174,80 @@ const closeSidebar = () => {
       {isSidebarOpen && <div className="sidebar-overlay" onClick={closeSidebar}></div>}
 
       {/* === SIDEBAR OVERLAY + PANEL === */}
-<div
-  className={`sidebar-overlay ${isSidebarOpen ? "open" : ""}`}
-  onClick={() => {
-    setIsSidebarOpen(false);
-    setTimeout(() => setActiveTab(null), 400);
-  }}
-></div>
+      <div
+        className={`sidebar-overlay ${isSidebarOpen ? "open" : ""}`}
+        onClick={() => {
+          setIsSidebarOpen(false);
+          setTimeout(() => setActiveTab(null), 400);
+        }}
+      ></div>
 
-<div className={`sidebar-panel ${isSidebarOpen ? "open" : ""}`}>
-  <button className="sidebar-close" onClick={() => {
-    setIsSidebarOpen(false);
-    setTimeout(() => setActiveTab(null), 400);
-  }}>
-    CLOSE ✕
-  </button>
+      <div className={`sidebar-panel ${isSidebarOpen ? "open" : ""}`}>
+        <button className="sidebar-close" onClick={() => {
+          setIsSidebarOpen(false);
+          setTimeout(() => setActiveTab(null), 400);
+        }}>
+          CLOSE ✕
+        </button>
 
-  {activeTab === "tasting" && (
-    <div className="sidebar-content">
-      <h2>Tasting Notes</h2>
-      <table>
-        <tbody>
-          <tr><td>Color & Aroma</td><td>Vibrant red fruits, rose petal and cherry</td></tr>
-          <tr><td>Palate</td><td>Medium bodied, fresh raspberry, cherry and orange peel</td></tr>
-          <tr><td>Pairing</td><td>Korean fried chicken with pickled vegetables</td></tr>
-          <tr><td>Cellar</td><td>Drink young (and chilled)</td></tr>
-        </tbody>
-      </table>
-      <h3>About</h3>
-      <p>Bright, delicious & limited Grenache — light & juicy, early-drinking style.</p>
-      <a href="/pdfs/Maxwell_CDX_Fresca_2024_Tasting_Note.pdf" target="_blank">
-        Maxwell_CDX_Fresca_2024_Tasting_Note.pdf ↗
-      </a>
-    </div>
-  )}
+        {activeTab === "tasting" && (
+          <div className="sidebar-content">
+            <h2>Tasting Notes</h2>
+            <table>
+              <tbody>
+                <tr><td>Color & Aroma</td><td>Vibrant red fruits, rose petal and cherry</td></tr>
+                <tr><td>Palate</td><td>Medium bodied, fresh raspberry, cherry and orange peel</td></tr>
+                <tr><td>Pairing</td><td>Korean fried chicken with pickled vegetables</td></tr>
+                <tr><td>Cellar</td><td>Drink young (and chilled)</td></tr>
+              </tbody>
+            </table>
+            <h3>About</h3>
+            <p>Bright, delicious & limited Grenache — light & juicy, early-drinking style.</p>
+            <a href="/pdfs/Maxwell_CDX_Fresca_2024_Tasting_Note.pdf" target="_blank">
+              Maxwell_CDX_Fresca_2024_Tasting_Note.pdf ↗
+            </a>
+          </div>
+        )}
 
-  {activeTab === "technical" && (
-    <div className="sidebar-content">
-      <h2>Technical</h2>
-      <table>
-        <tbody>
-          <tr><td>Varietal</td><td>Grenache</td></tr>
-          <tr><td>Region</td><td>McLaren Vale</td></tr>
-          <tr><td>Alcohol</td><td>12.5%</td></tr>
-          <tr><td>pH</td><td>3.41</td></tr>
-          <tr><td>TA</td><td>6.0 g/L</td></tr>
-          <tr><td>Residual Sugar</td><td>3.1 g/L</td></tr>
-        </tbody>
-      </table>
-    </div>
-  )}
+        {activeTab === "technical" && (
+          <div className="sidebar-content">
+            <h2>Technical</h2>
+            <table>
+              <tbody>
+                <tr><td>Varietal</td><td>Grenache</td></tr>
+                <tr><td>Region</td><td>McLaren Vale</td></tr>
+                <tr><td>Alcohol</td><td>12.5%</td></tr>
+                <tr><td>pH</td><td>3.41</td></tr>
+                <tr><td>TA</td><td>6.0 g/L</td></tr>
+                <tr><td>Residual Sugar</td><td>3.1 g/L</td></tr>
+              </tbody>
+            </table>
+          </div>
+        )}
 
-  {activeTab === "winemaking" && (
-    <div className="sidebar-content">
-      <h2>Winemaking</h2>
-      <h3>Vintage Conditions</h3>
-      <p>
-        The 2023/2024 season began wet & windy; February–March were mild,
-        producing beautifully ripe fruit with below-average yields.
-      </p>
-      <h3>Maker Notes</h3>
-      <p>
-        Picked early for brightness, matured in stainless steel, bottled early
-        for freshness — Joven style wine.
-      </p>
-    </div>
-  )}
+        {activeTab === "winemaking" && (
+          <div className="sidebar-content">
+            <h2>Winemaking</h2>
+            <h3>Vintage Conditions</h3>
+            <p>
+              The 2023/2024 season began wet & windy; February–March were mild,
+              producing beautifully ripe fruit with below-average yields.
+            </p>
+            <h3>Maker Notes</h3>
+            <p>
+              Picked early for brightness, matured in stainless steel, bottled early
+              for freshness — Joven style wine.
+            </p>
+          </div>
+        )}
 
-  {activeTab === "reviews" && (
-    <div className="sidebar-content">
-      <h2>Reviews</h2>
-      <p>No reviews yet. Be the first to share your experience!</p>
-    </div>
-  )}
-</div>
+        {activeTab === "reviews" && (
+          <div className="sidebar-content">
+            <h2>Reviews</h2>
+            <p>No reviews yet. Be the first to share your experience!</p>
+          </div>
+        )}
+      </div>
 
     </>
   );

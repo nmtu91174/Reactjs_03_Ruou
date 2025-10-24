@@ -13,7 +13,7 @@ import {
 import "../css/Checkout.css";
 
 function CheckOut() {
-  const { cartItems, subtotal } = useCartStorage();
+  const { cartItems, subtotal, clearCart, createOrderData } = useCartStorage();
   const [discount, setDiscount] = useState("");
   const navigate = useNavigate();
 
@@ -38,19 +38,14 @@ function CheckOut() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // ✅ Lưu thông tin khách hàng và đơn hàng vào localStorage
-    const orderData = {
-      customer: formData,
-      items: cartItems,
-      subtotal: subtotal.toFixed(2),
-      total: getTotal(),
-      discount,
-      date: new Date().toLocaleString(),
-    };
-    localStorage.setItem("lastOrder", JSON.stringify(orderData));
+  // ✅ Lưu thông tin khách hàng và đơn hàng vào localStorage
+  const orderData = createOrderData(formData, discount, getTotal);
 
-    // 👉 Chuyển sang trang ChucMung.jsx
-    navigate("/chucmung");
+  // ✅ Lưu đơn hàng và xóa giỏ
+  localStorage.setItem("lastOrder", JSON.stringify(orderData));
+  clearCart();
+  // 👉 Chuyển sang trang ChucMung.jsx
+  navigate("/chucmung");
   };
 
   const getTotal = () => {
