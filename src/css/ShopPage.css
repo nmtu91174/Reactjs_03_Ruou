@@ -322,3 +322,20 @@ button,
         /* Cho phép cuộn bên trong sidebar nếu nó quá dài */
     }
 }
+
+.shop-product-link {
+    text-decoration: none;
+    color: inherit;
+    /* Kế thừa màu chữ (đen) */
+}
+
+.shop-product-link:hover .shop-product-card {
+    /* (Bạn đã có hiệu ứng hover trên card rồi) */
+    color: #b12704;
+    /* Ví dụ: đổi màu chữ khi hover */
+}
+
+.shop-product-link:hover .card-title {
+    color: #b12704;
+    /* Đổi màu tiêu đề khi hover */
+}

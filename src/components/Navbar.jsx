@@ -11,6 +11,10 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const isHome = location.pathname === "/";
+  const isShop = location.pathname === "/shop";
+  const isProduct = location.pathname.startsWith("/product/"); // Kiểm tra nếu là trang sản phẩm
+
+  const hasTransparentHeader = isHome || isShop;
 
   const [scrolled, setScrolled] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -58,7 +62,7 @@ export default function Navbar() {
     document.body.style.overflow = menuOpen || cartOpen ? "hidden" : "auto";
   }, [menuOpen, cartOpen]);
 
-  const iconColor = isHome
+  const iconColor = hasTransparentHeader
     ? scrolled || hovered
       ? "#111"
       : "#fff"
@@ -86,7 +90,7 @@ export default function Navbar() {
     <>
       {/* ===== HEADER ===== */}
       <header
-        className={`maxwell-header ${isHome ? (scrolled || hovered ? "scrolled" : "") : "scrolled"
+        className={`maxwell-header ${hasTransparentHeader ? (scrolled || hovered ? "scrolled" : "") : "scrolled"
           }`}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -132,7 +136,7 @@ export default function Navbar() {
             >
               <img
                 src={
-                  isHome
+                  hasTransparentHeader
                     ? scrolled || hovered
                       ? "Reactjs_03_Ruou/assets/logo-black.webp"  // home + scroll/hover
                       : "Reactjs_03_Ruou/assets/logo-white.webp"  // home + transparent

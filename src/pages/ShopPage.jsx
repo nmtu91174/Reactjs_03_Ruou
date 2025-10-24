@@ -12,6 +12,7 @@ import { useCartStorage } from "../hooks/useCartStorage";
 import productsData from "../data/maxwell_wines_products.json";
 import "../css/ShopPage.css";
 import "../css/HeroSection.css";
+import { Link } from "react-router-dom";
 
 
 export default function ShopPage() {
@@ -335,24 +336,32 @@ export default function ShopPage() {
                       key={product.id}
                       className="shop-mb-4"
                     >
-                      <Card
-                        className="shop-product-card"
-                        onMouseEnter={() => setHoveredProduct(product.id)}
-                        onMouseLeave={() => setHoveredProduct(null)}
-                      >
-                        <div className="shop-product-image-wrapper">
-                          <Card.Img
-                            variant="top"
-                            src={product.image_url}
-                            alt={product.name}
-                          />
-                          {product.stock_status === "In Stock" && (
-                            <span className="shop-stock-badge">In Stock</span>
-                          )}
-                        </div>
+                      <Card className="shop-product-card">
+                        {/* 2. BỌC LINK VÀO ẢNH */}
+                        <Link
+                          to={`/product/${product.id}`}
+                          className="shop-product-link"
+                        >
+                          <div className="shop-product-image-wrapper">
+                            <Card.Img
+                              variant="top"
+                              src={product.image_url}
+                              alt={product.name}
+                            />
+                            {product.stock_status === "In Stock" && (
+                              <span className="shop-stock-badge">In Stock</span>
+                            )}
+                          </div>
+                        </Link>
 
                         <Card.Body>
-                          <Card.Title>{product.name}</Card.Title>
+                          {/* 3. BỌC LINK VÀO TIÊU ĐỀ */}
+                          <Link
+                            to={`/product/${product.id}`}
+                            className="shop-product-link"
+                          >
+                            <Card.Title>{product.name}</Card.Title>
+                          </Link>
                           <Card.Text className="shop-product-info">
                             {product.variety} • {product.region} •{" "}
                             {product.vintage}

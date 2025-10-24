@@ -1,0 +1,275 @@
+/* src/css/ProductDetailPage.css */
+
+.product-detail-page {
+    background-color: #fafafa;
+    padding-top: 120px;
+    /* Không gian cho Navbar */
+    padding-bottom: 60px;
+    color: #333;
+    font-family: "Poppins", "Roboto", sans-serif;
+    overflow: hidden;
+    /* Ngăn carousel tràn */
+}
+
+/* === CỘT TRÁI: GALLERY ẢNH === */
+.product-gallery {
+    position: sticky;
+    top: 120px;
+    /* Dính khi cuộn, cách navbar */
+}
+
+.main-image-wrapper {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    margin-bottom: 16px;
+}
+
+.main-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    /* Dùng contain để thấy rõ chai rượu */
+    padding: 20px;
+    transition: transform 0.4s ease;
+}
+
+.main-image:hover {
+    transform: scale(1.05);
+}
+
+.thumbnail-images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 cột đều nhau */
+    gap: 16px;
+}
+
+.thumb-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    padding: 10px;
+    background: #fff;
+    border-radius: 12px;
+    cursor: pointer;
+    border: 2px solid #eee;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.thumb-img:hover {
+    border-color: #b12704;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.thumb-img.active {
+    border-color: #b12704;
+    box-shadow: 0 0 10px rgba(177, 39, 4, 0.3);
+}
+
+/* === CỘT PHẢI: THÔNG TIN SẢN PHẨM === */
+.product-info {
+    animation: fadeInRight 0.6s ease-out;
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.back-to-shop {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #555;
+    text-decoration: none;
+    margin-bottom: 15px;
+    transition: color 0.3s ease;
+}
+
+.back-to-shop:hover {
+    color: #000;
+}
+
+.product-info h1 {
+    font-family: "Font1", serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.product-meta {
+    font-size: 1rem;
+    color: #777;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.product-price-row {
+    margin-bottom: 20px;
+}
+
+.price-regular {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #222;
+}
+
+.price-club {
+    font-size: 1.1rem;
+    color: #b12704;
+    font-weight: 500;
+    margin-left: 15px;
+}
+
+.product-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #444;
+}
+
+/* === MUA HÀNG === */
+.add-to-cart-section {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+/* (Tái sử dụng style từ ShopPage.css) */
+.dt-qty-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f1f1f1;
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+.dt-qty-control button {
+    border: none;
+    background: transparent;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #555;
+}
+
+.dt-qty-control button:hover {
+    color: #000;
+}
+
+.dt-qty-control span {
+    font-weight: 600;
+    font-size: 1.2rem;
+    min-width: 30px;
+    text-align: center;
+}
+
+.btn-add-detail {
+    flex: 1;
+    border: none;
+    background-color: #455a51;
+    color: #fff;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-add-detail:hover {
+    background-color: #333;
+}
+
+.btn-add-detail.added {
+    background-color: #28a745;
+}
+
+.btn-add-detail:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* === ACCORDION === */
+.product-details-accordion .accordion-item {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px !important;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.product-details-accordion .accordion-header button {
+    background-color: #fff;
+    color: #333;
+    font-weight: 600;
+    box-shadow: none;
+}
+
+.product-details-accordion .accordion-header button:not(.collapsed) {
+    background-color: #fdfdfd;
+    color: #b12704;
+}
+
+.product-details-accordion .accordion-body {
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.product-details-accordion .accordion-body ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.product-details-accordion .accordion-body li {
+    padding: 5px 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.product-details-accordion .accordion-body li strong {
+    color: #222;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 991px) {
+    .product-gallery {
+        position: relative;
+        /* Bỏ sticky trên tablet/mobile */
+        top: 0;
+    }
+
+    .product-info h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .product-detail-page {
+        padding-top: 100px;
+    }
+
+    .thumbnail-images {
+        gap: 10px;
+    }
+
+    .add-to-cart-section {
+        flex-direction: column;
+    }
+
+    .dt-dt-qty-control {
+        justify-content: center;
+    }
+}
