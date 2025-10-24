@@ -25,7 +25,7 @@ button,
    SIDEBAR FILTER
 ============================ */
 .shop-filter-sidebar {
-    margin-top: 4.8rem;
+    margin-top: 1rem;
     background: #fff;
     border-radius: 12px;
     padding: 20px;
@@ -77,7 +77,7 @@ button,
    PRODUCTS GRID
 ============================ */
 .shop-products-header {
-    margin-top: 80px;
+    margin-top: 1rem;
     margin-bottom: 20px;
 }
 
@@ -283,4 +283,19 @@ button,
 /* Thêm khoảng cách cho card (thay vì .shop-mb-4) */
 .shop-product-card {
     margin-bottom: 20px;
+}
+
+/* ============================
+   SHOP HERO VIDEO
+============================ */
+.shop-hero {
+    height: 50vh;
+    /* <-- Đặt chiều cao 50% (hoặc 40vh, 300px,...) */
+    min-height: 500px;
+}
+
+/* Đảm bảo nội dung shop bắt đầu ngay dưới hero */
+.shop-page {
+    padding-top: 40px;
+    /* Tạo khoảng cách với video ở trên */
 }
