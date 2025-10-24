@@ -201,11 +201,20 @@ const closeSidebar = () => {
                 <tr><td>Cellar</td><td>Drink young (and chilled)</td></tr>
               </tbody>
             </table>
+            {/* === About / Main note === */}
             <h3>About</h3>
-            <p>Bright, delicious & limited Grenache — light & juicy, early-drinking style.</p>
-            <a href="/pdfs/Maxwell_CDX_Fresca_2024_Tasting_Note.pdf" target="_blank">
-              Maxwell_CDX_Fresca_2024_Tasting_Note.pdf ↗
-            </a>
+            <p>{product.tasting_notes || "No tasting note available."}</p>
+
+            {/* === PDF Link (tự sinh theo tên sản phẩm) === */}
+            {product.name && (
+              <a
+                href={`/pdfs/Maxwell_${product.name.replace(/[^a-zA-Z0-9]/g, "_")}_Tasting_Note.pdf`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Maxwell_{product.name.replace(/[^a-zA-Z0-9]/g, "_")}_Tasting_Note.pdf ↗
+              </a>
+            )}
           </div>
         )}
 
