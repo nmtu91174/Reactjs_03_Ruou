@@ -1,8 +1,8 @@
-import { useCartStorage } from "../hooks/useCartStorage"; // ✅ dùng chung hook
+import { useCartStorage } from "../hooks/useCartStorage";
 import "../css/ProductGrid.css";
 import productsData from "../data/maxwell_wines_products.json";
 import { useState, useRef, useEffect, useMemo } from "react";
-
+import { useNavigate } from "react-router-dom"; // ✅ thêm dòng này
 
 export default function ProductGrid({ mode = "carousel", title }) {
   const allProducts = productsData.products || [];
@@ -16,14 +16,12 @@ export default function ProductGrid({ mode = "carousel", title }) {
     }
   }, [mode, allProducts]);
 
-  // === TITLE ===
   const sectionTitle =
     title ||
     (mode === "recommendation"
       ? "CELLAR DOOR RECOMMENDATIONS"
       : "Estate Favourites");
 
-  // === CAROUSEL STATE ===
   const [index, setIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(4);
   const trackRef = useRef(null);
@@ -42,7 +40,8 @@ export default function ProductGrid({ mode = "carousel", title }) {
   }, [mode]);
 
   useEffect(() => {
-      if ((mode !== "carousel" && mode !== "recommendation") || !trackRef.current) return;
+    if ((mode !== "carousel" && mode !== "recommendation") || !trackRef.current)
+      return;
     const firstItem = trackRef.current.querySelector(".product-card");
     if (firstItem) {
       const itemWidth = firstItem.offsetWidth + 20;
@@ -52,7 +51,6 @@ export default function ProductGrid({ mode = "carousel", title }) {
 
   const step = 1;
   const maxIndex = Math.max(products.length - visibleCount, 0);
-
   const next = () => setIndex((prev) => (prev < maxIndex ? prev + step : 0));
   const prev = () => setIndex((prev) => (prev > 0 ? prev - step : maxIndex));
 
@@ -61,8 +59,7 @@ export default function ProductGrid({ mode = "carousel", title }) {
     return (
       <section className={`productgrid-section mode-${mode}`}>
         <h2 className="productgrid-title">
-          {sectionTitle.split(" ")[0]}{" "}
-          <em>{sectionTitle.split(" ").slice(1).join(" ")}</em>
+          {sectionTitle.split(" ")[0]} <em>{sectionTitle.split(" ").slice(1).join(" ")}</em>
         </h2>
 
         <div className="productgrid-container">
@@ -74,21 +71,17 @@ export default function ProductGrid({ mode = "carousel", title }) {
     );
   }
 
-
   // === CAROUSEL MODE ===
   return (
-    
     <section
-        className={`productgrid-section ${
-          mode === "recommendation" ? "mode-recommendation" : "mode-carousel"
-        }`}
-      >
+      className={`productgrid-section ${
+        mode === "recommendation" ? "mode-recommendation" : "mode-carousel"
+      }`}
+    >
       <div className="carousel-header">
         <h2
           className={`productgrid-title ${
-            mode === "recommendation"
-              ? "title-recommendation"
-              : "title-estate"
+            mode === "recommendation" ? "title-recommendation" : "title-estate"
           }`}
         >
           {sectionTitle.split(" ")[0]}{" "}
@@ -101,7 +94,6 @@ export default function ProductGrid({ mode = "carousel", title }) {
         </div>
       </div>
 
-      {/* wrapper giữ grid bên trong */}
       <div className="carousel-viewport" style={{ overflow: "hidden" }}>
         <div
           ref={trackRef}
@@ -111,9 +103,9 @@ export default function ProductGrid({ mode = "carousel", title }) {
           }}
         >
           <div className="productgrid-container">
-          {products.map((p, i) => (
-            <ProductCard key={p.id || i} product={p} index={i} mode={mode} />
-          ))}
+            {products.map((p, i) => (
+              <ProductCard key={p.id || i} product={p} index={i} mode={mode} />
+            ))}
           </div>
         </div>
       </div>
@@ -121,36 +113,38 @@ export default function ProductGrid({ mode = "carousel", title }) {
   );
 }
 
-// === COMPONENT CON PRODUCT CARD ===
+// === PRODUCT CARD ===
 function ProductCard({ product }) {
+  const navigate = useNavigate(); // ✅ hook điều hướng
   const [hovered, setHovered] = useState(false);
   const [qty, setQty] = useState(1);
-  const { addItem } = useCartStorage(); // ✅ gọi hook dùng chung
+  const { addItem } = useCartStorage();
   const [added, setAdded] = useState(false);
 
-  // ✅ kiểm tra xem sản phẩm đã có trong cart chưa
   useEffect(() => {
     const checkCart = () => {
       const cart = JSON.parse(localStorage.getItem("cart")) || {};
       setAdded(!!cart[product.id]);
     };
-
     checkCart();
-
-    // ✅ nghe cả hai event để sync toàn app
     window.addEventListener("storage", checkCart);
     window.addEventListener("cartUpdated", checkCart);
-
     return () => {
       window.removeEventListener("storage", checkCart);
       window.removeEventListener("cartUpdated", checkCart);
     };
   }, [product.id]);
 
-
-  const handleAdd = () => {
+  const handleAdd = (e) => {
+    e.stopPropagation(); // ✅ tránh trigger điều hướng khi bấm nút
     addItem(product, qty);
     setAdded(true);
+  };
+
+  // ✅ Khi click vào card hoặc ảnh → chuyển sang trang chi tiết
+  const openDetail = () => {
+    navigate(`/product/${product.id}`);
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -158,8 +152,8 @@ function ProductCard({ product }) {
       className="product-card"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={openDetail} // ✅ thêm click mở detail
     >
-      {/* === Hình ảnh === */}
       <div className="product-img">
         <img
           src={product.image_url}
@@ -175,21 +169,20 @@ function ProductCard({ product }) {
         />
       </div>
 
-      {/* === Nội dung + nút === */}
       <div className="product-info-wrapper">
         <div className="product-info">
           <h4>{product.name}</h4>
           <p>{product.description}</p>
           <div className="price-row">
             <span>${product.price.regular}</span>
-            <span className="club">
-              | ${product.price.wine_club} Wine Club
-            </span>
+            <span className="club">| ${product.price.wine_club} Wine Club</span>
           </div>
         </div>
 
-        {/* === Hành động (chạm đáy card) === */}
-        <div className="bottom-actions">
+        <div
+          className="bottom-actions"
+          onClick={(e) => e.stopPropagation()} // ✅ không trigger click toàn card
+        >
           <div className="qty-control">
             <button onClick={() => setQty(qty > 1 ? qty - 1 : 1)}>-</button>
             <span>{qty}</span>

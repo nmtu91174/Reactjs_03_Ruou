@@ -387,24 +387,61 @@
 }
 
 /* === CART SIDEBAR === */
+/* === CART SIDEBAR (MƯỢT MAXWELL STYLE) === */
 .cart-sidebar {
-  font-family: 'Font2' !important;
   position: fixed;
   top: 0;
   right: 0;
   width: 505px;
   height: 100vh;
   background: #fff;
-  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  box-shadow: -6px 0 18px rgba(0, 0, 0, 0.08);
   z-index: 300;
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
-  transition: transform 0.4s ease;
+  opacity: 0;
+  transition:
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.55s ease;
+  will-change: transform, opacity;
+  font-family: "Font2";
 }
 .cart-sidebar.open {
   transform: translateX(0);
+  opacity: 1;
 }
+
+/* === CART SIDEBAR OVERLAY (FADE MỀM) === */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  z-index: 250;
+}
+
+.backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* === CART HEADER TRANSITION === */
+.cart-header {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.cart-sidebar.open .cart-header {
+  opacity: 1;
+  transform: translateY(0);
+}
+.cart-sidebar:not(.open) .cart-header {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
 
 /* Header */
 .cart-header {

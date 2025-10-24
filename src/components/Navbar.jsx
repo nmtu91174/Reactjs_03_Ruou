@@ -81,6 +81,17 @@ export default function Navbar() {
     if (e.key === "Enter") handleSearch();
   };
 
+  const openCart = () => {
+  setIsCartOpen(true);
+  };
+
+  const closeCart = () => {
+    setIsCartOpen(false);
+    setTimeout(() => {
+      setCartVisible(false); 
+    }, 700); 
+  };
+
 
   return (
     <>
@@ -353,15 +364,14 @@ export default function Navbar() {
       </div>
 
       {/* BACKDROP */}
-      {(menuOpen || cartOpen) && (
-        <div
-          className="backdrop"
-          onClick={() => {
-            setMenuOpen(false);
-            setCartOpen(false);
-          }}
-        ></div>
-      )}
+      <div
+        className={`backdrop ${(menuOpen || cartOpen) ? "open" : ""}`}
+        onClick={() => {
+          setMenuOpen(false);
+          setCartOpen(false);
+        }}
+      ></div>
+
     </>
   );
 }

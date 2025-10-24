@@ -2,7 +2,6 @@
 .productgrid-section {
   background: #e3e1e1;
   font-family: "Font2";
-  margin-top: 4rem;
 }
 
 
@@ -351,4 +350,32 @@
   margin-top: auto;
 }
 
+/* === RESPONSIVE (áp dụng chung cho recommendation & carousel) === */
 
+/* 🖥️ Desktop (>=1081px): 4 cột */
+@media (min-width: 1081px) {
+  .mode-recommendation .product-card {
+    flex: 0 0 calc(25% - 1rem);
+  }
+}
+
+/* 💻 Tablet (769px–1080px): 3 cột */
+@media (max-width: 1080px) and (min-width: 769px) {
+  .mode-recommendation .product-card {
+    flex: 0 0 calc(33.333% - 0.8rem); /* ✅ 3 cột đều */
+  }
+}
+
+/* 📱 Mobile (<=768px): 2 cột */
+@media (max-width: 768px) {
+  .mode-recommendation .product-card {
+    flex: 0 0 calc(50% - 0.5rem); /* ✅ 2 cột đều */
+  }
+}
+
+/* 📱 Extra small (<=480px): 1 cột full width */
+@media (max-width: 480px) {
+  .mode-recommendation .product-card {
+    flex: 0 0 100%;
+  }
+}
