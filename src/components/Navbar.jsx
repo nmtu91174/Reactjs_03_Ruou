@@ -353,6 +353,7 @@ export default function Navbar() {
           <button
             className="btn-cartcheck"
             disabled={!confirmed}
+            onClick={() => navigate("/checkout")}  
             style={{
               opacity: confirmed ? 1 : 0.8,
               cursor: confirmed ? "pointer" : "not-allowed",
