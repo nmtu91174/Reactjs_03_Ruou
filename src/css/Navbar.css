@@ -16,7 +16,7 @@
   justify-content: space-between;
   align-items: center;
   height: 88px;
-  padding: 0 60px;
+  padding: 0 3rem;
   pointer-events: auto; 
 }
 
@@ -204,7 +204,7 @@
   bottom: 0;
   width: 500px;
   background: #fff;
-  z-index:51;
+  z-index: 200;
   padding: 24px;
   transition: transform 0.4s ease;
   overflow-y: auto;
@@ -396,7 +396,7 @@
   height: 100vh;
   background: #fff;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
-  z-index: 500;
+  z-index: 300;
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
@@ -415,12 +415,7 @@
   padding: 24px;
   border-bottom: 1px solid #eee;
 }
-.cart-header i {
-  position: absolute;
-  left: 24px;
-  font-size: 20px;
-  cursor: pointer;
-}
+
 .cart-header h2 {
   font-family: "Font1", serif;
   font-size: 26px;
@@ -742,7 +737,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  z-index: 100;
+  z-index: 1;
   animation: fadeIn 0.4s ease;
 }
 
@@ -752,7 +747,7 @@
   top: 88px; /* nằm ngay dưới header */
   left: 0;
   width: 100%;
-  z-index: 450;
+  z-index: 100;
   background: transparent; /* để nền của .search-bar quyết định */
   display: flex;
   justify-content: center;
@@ -766,7 +761,7 @@
   justify-content: space-between;
   width: 100%; /* full width của header */
   max-width: none;
-  padding: 1rem 3rem 1rem 3.7rem; 
+  padding: 1rem 2.3rem 1rem 3rem; 
   border-top: 1px solid rgba(255, 255, 255, 0.25);
   border-bottom: 1px solid rgba(255, 255, 255, 0.25);
   background: transparent;
@@ -887,17 +882,6 @@
 
 /* ============ RESPONSIVE TABLET ============ */
 @media (max-width: 1024px) {
-  .maxwell-nav {
-    padding: 0 32px;
-    height: 80px;
-  }
-
-  .search-bar {
-  margin-top: -0.5rem;
-  padding: 1rem 1.3rem 1rem 2.2rem;
-  }
-
-
   .nav-logo .logo {
     height: 2.8rem;
   }
@@ -934,14 +918,11 @@
 @media (max-width: 768px) {
 
   /* ====== NAVBAR ====== */
-  .maxwell-nav {
-    padding: 0 20px;
-    height: 70px;
-  }
+
 
   .search-bar {
      margin-top: -1.2rem;
-     padding: 1rem 0.6rem 1rem 1.5rem;
+     padding: 1rem 2.3rem 1rem 3.2rem;
   }
 
   .nav-logo .logo {
@@ -956,15 +937,7 @@
     display: block !important;
   }
 
-  /* Hamburger & cart icon spacing */
-  .nav-actions {
-    gap: 12px;
-  }
 
-  .nav-left.mobile-only img {
-    width: 26px;
-    height: 26px;
-  }
 
   /* ====== SIDEBAR MENU ====== */
   .sidebar {
@@ -1099,10 +1072,6 @@
 
 /* ============ SMALL MOBILE (≤480px) ============ */
 @media (max-width: 480px) {
-  .maxwell-nav {
-    padding: 0 14px;
-    height: 64px;
-  }
 
   .nav-logo .logo {
     height: 2.2rem;
@@ -1140,5 +1109,42 @@
   }
 }
 
+/* === CART HEADER FIXED ALIGNMENT === */
+.cart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* hai icon hai bên, Cart giữa */
+  padding: 24px 28px;
+  border-bottom: 1px solid #eee;
+}
 
+.cart-header h2 {
+  font-family: "Font1", serif;
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0;
+  text-align: center;
+  flex: 1;
+}
 
+/* === ICONS === */
+.cart-header i {
+  font-size: 20px;
+  cursor: pointer;
+  color: #000;
+  transition: transform 0.25s ease, opacity 0.3s ease;
+}
+
+.cart-header i:hover {
+  transform: scale(1.08);
+  opacity: 0.7;
+}
+
+/* Cố định trái và phải */
+.cart-header i:first-of-type {
+  margin-right: auto;
+}
+
+.cart-header i:last-of-type {
+  margin-left: auto;
+}

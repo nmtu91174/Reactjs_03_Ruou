@@ -1,15 +1,17 @@
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import HeroSection from "../components/HeroSection";
+import SectionFour from "../components/SectionFour";
+import SectionThree from "../components/SectionThree";
 import SectionTwo from "../components/SectionTwo";
+import Cart from "./Cart";
 
 export default function Homepage() {
   return (
     <>
-      {/* <Navbar /> */}
       <HeroSection />
       <SectionTwo />
-      {/* <Footer /> */}
+      <SectionThree />
+      <SectionFour />
+
     </>
   );
 }

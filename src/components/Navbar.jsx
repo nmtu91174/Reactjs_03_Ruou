@@ -1,18 +1,35 @@
 import { useEffect, useState, useRef } from "react";
+import { useCartStorage } from "../hooks/useCartStorage";
+import { Link, useNavigate } from "react-router-dom";
 import "../css/Navbar.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import productsData from "../data/maxwell_wines_products.json"; // ✅ đọc sản phẩm
+import productsData from "../data/maxwell_wines_products.json";
+import { useLocation } from "react-router-dom";
+
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+  const isShop = location.pathname === "/shop";
+  const isProduct = location.pathname.startsWith("/product/"); // Kiểm tra nếu là trang sản phẩm
+
+  const hasTransparentHeader = isHome || isShop;
+
   const [scrolled, setScrolled] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
   const [recommended, setRecommended] = useState([]);
-  const recRef = useRef(null);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [confirmed, setConfirmed] = useState(false); // 🟢 thêm state
+  const [confirmed, setConfirmed] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const recRef = useRef(null);
+
+  // ✅ Hook giỏ hàng thống nhất
+  const { cartItems, addItem, updateQty, removeItem, subtotal, totalCount } =
+    useCartStorage();
 
   // === scroll logic ===
   useEffect(() => {
@@ -27,67 +44,54 @@ export default function Navbar() {
     setRecommended(shuffled.slice(0, 10));
   }, []);
 
-  // === cart logic ===
-  const addItem = (item) => {
-    setCartItems((prev) => {
-      const exist = prev.find((i) => i.id === item.id);
-      if (exist) {
-        return prev.map((i) =>
-          i.id === item.id ? { ...i, qty: i.qty + 1 } : i
-        );
-      } else {
-        return [...prev, { ...item, price: item.price.regular, image_url: item.image_url, qty: 1 }];
-      }
+  // === recommend scroll ===
+  const handleScroll = (dir) => {
+    if (!recRef.current) return;
+    const card = recRef.current.querySelector(".recommend-card");
+    if (!card) return;
+    const gap = 12;
+    const moveBy = card.offsetWidth * 2 + gap;
+    recRef.current.scrollBy({
+      left: dir === "left" ? -moveBy : moveBy,
+      behavior: "smooth",
     });
   };
 
-  const updateQty = (id, delta) => {
-    setCartItems((prev) =>
-      prev.map((i) =>
-        i.id === id ? { ...i, qty: Math.max(1, i.qty + delta) } : i
-      )
-    );
-  };
-
-  const removeItem = (id) =>
-    setCartItems((prev) => prev.filter((i) => i.id !== id));
-
-  const subtotal = cartItems.reduce(
-    (sum, i) => sum + i.price * i.qty,
-    0
-  );
-
-  // === total count (đếm tất cả số lượng sp) ===
-  const totalCount = cartItems.reduce((sum, i) => sum + i.qty, 0);
-
-  // === recommend scroll ===
-  const handleScroll = (dir) => {
-  if (!recRef.current) return;
-  const card = recRef.current.querySelector(".recommend-card");
-  if (!card) return;
-  const gap = 12; // khớp với CSS
-  const moveBy = card.offsetWidth * 2 + gap;
-  recRef.current.scrollBy({
-    left: dir === "left" ? -moveBy : moveBy,
-    behavior: "smooth",
-  });
-};
-
-
-
   // === disable body scroll khi sidebar mở ===
   useEffect(() => {
-    document.body.style.overflow =
-      menuOpen || cartOpen ? "hidden" : "auto";
+    document.body.style.overflow = menuOpen || cartOpen ? "hidden" : "auto";
   }, [menuOpen, cartOpen]);
 
-  const iconColor = scrolled || hovered ? "#111" : "#fff";
+  const iconColor = hasTransparentHeader
+    ? scrolled || hovered
+      ? "#111"
+      : "#fff"
+    : "#111";
+
+  // ✅ Điều hướng và đóng menu
+  const handleNavigate = (path) => {
+    navigate(path);
+    setMenuOpen(false);
+  };
+
+  // === SEARCH HANDLER ===
+  const handleSearch = () => {
+    if (searchTerm.trim() === "") return;
+    navigate(`/shop?search=${encodeURIComponent(searchTerm.trim())}`);
+    setSearchOpen(false);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") handleSearch();
+  };
+
 
   return (
     <>
       {/* ===== HEADER ===== */}
       <header
-        className={`maxwell-header ${scrolled || hovered ? "scrolled" : ""}`}
+        className={`maxwell-header ${hasTransparentHeader ? (scrolled || hovered ? "scrolled" : "") : "scrolled"
+          }`}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
@@ -97,8 +101,8 @@ export default function Navbar() {
             <img
               src={
                 scrolled || hovered
-                  ? "/assets/icon-menu.png"
-                  : "/assets/icon-menu2.png"
+                  ? "Reactjs_03_Ruou/assets/icon-menu.png"
+                  : "Reactjs_03_Ruou/assets/icon-menu2.png"
               }
               alt="menu"
               onClick={() => setMenuOpen(true)}
@@ -107,8 +111,12 @@ export default function Navbar() {
 
           {/* === LINKS === */}
           <ul className="nav-links desktop-only">
-            <li>RESTAURANT</li>
-            <li>SHOP</li>
+            <li onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
+              RESTAURANT
+            </li>
+            <li onClick={() => navigate("/shop")} style={{ cursor: "pointer" }}>
+              SHOP
+            </li>
             <li>VISIT</li>
             <li>CLUB</li>
             <li>EVENTS</li>
@@ -117,27 +125,36 @@ export default function Navbar() {
 
           {/* === LOGO === */}
           <div className="nav-logo">
-            <img
-              src={
-                scrolled || hovered
-                  ? "/assets/logo-black.webp"
-                  : "/assets/logo-white.webp"
-              }
-              alt="Maxwell Logo"
-              className="logo"
-            />
+            <Link
+              to="/"
+              onClick={(e) => {
+                if (isHome) {
+                  e.preventDefault(); // 🔸 chặn reload lại route
+                  window.scrollTo({ top: 0, behavior: "smooth" }); // 🔸 cuộn lên đầu trang
+                }
+              }}
+            >
+              <img
+                src={
+                  hasTransparentHeader
+                    ? scrolled || hovered
+                      ? "Reactjs_03_Ruou/assets/logo-black.webp"  // home + scroll/hover
+                      : "Reactjs_03_Ruou/assets/logo-white.webp"  // home + transparent
+                    : "Reactjs_03_Ruou/assets/logo-black.webp"   // các trang khác → logo đen
+                }
+                alt="Maxwell Logo"
+                className="logo"
+              />
+            </Link>
           </div>
+
 
           {/* === ACTIONS === */}
           <div className="nav-actions">
-            <button
-              className="btn-reserve desktop-only"
-            >
-              RESERVATIONS
-            </button>
+            <button className="btn-reserve desktop-only">RESERVATIONS</button>
 
             <i
-              className="bi bi-person desktop-only "
+              className="bi bi-person desktop-only"
               style={{ color: iconColor, fontSize: "24px" }}
             ></i>
 
@@ -151,39 +168,47 @@ export default function Navbar() {
             <div
               className="bag-icon"
               onClick={() => setCartOpen(true)}
-              style={{ position: "relative" }}
+              style={{ position: "relative", cursor: "pointer" }}
             >
-              <i className="bi bi-bag" style={{ color: iconColor, fontSize:"20px" }}></i>
-              <span className="cart-count">{totalCount}</span> {/* luôn hiển thị */}
+              <i
+                className="bi bi-bag"
+                style={{ color: iconColor, fontSize: "20px" }}
+              ></i>
+              <span className="cart-count">{totalCount}</span>
             </div>
           </div>
         </nav>
       </header>
 
+      {/* ===== SEARCH BAR ===== */}
       {searchOpen && (
         <div className={`search-overlay ${scrolled ? "scrolled" : ""}`}>
           <div className="search-bar">
-            <i className="bi bi-search"></i>
-            <input type="text" placeholder="Search our wines..." />
+            <i className="bi bi-search" onClick={handleSearch}></i>
+            <input
+              type="text"
+              placeholder="Search our wines..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={handleKeyDown}
+              autoFocus
+            />
             <i
-        className="bi bi-x-lg"
-        onClick={() => {
-          const overlay = document.querySelector(".search-overlay");
-          if (overlay) {
-            overlay.classList.add("fade-out");
-            setTimeout(() => setSearchOpen(false), 350);
-          } else {
-            setSearchOpen(false);
-          }
-        }}
-      ></i>
-
+              className="bi bi-x-lg"
+              onClick={() => {
+                const overlay = document.querySelector(".search-overlay");
+                if (overlay) {
+                  overlay.classList.add("fade-out");
+                  setTimeout(() => setSearchOpen(false), 350);
+                } else {
+                  setSearchOpen(false);
+                }
+              }}
+            ></i>
           </div>
+
         </div>
       )}
-
-
-
 
       {/* ===== SIDEBAR MENU ===== */}
       <div className={`sidebar left ${menuOpen ? "open" : ""}`}>
@@ -202,7 +227,9 @@ export default function Navbar() {
 
         <ul className="sidebar-links">
           <li><span>Restaurant</span></li>
-          <li className="has-arrow"><span>Shop</span></li>
+          <li className="has-arrow" onClick={() => handleNavigate("/shop")}>
+            <span>Shop</span>
+          </li>
           <li className="has-arrow"><span>Visit</span></li>
           <li><span>Club</span></li>
           <li className="has-arrow"><span>Events</span></li>
@@ -215,7 +242,7 @@ export default function Navbar() {
         </div>
 
         <div className="sidebar-book">
-          <img src="/assets/sitebar.webp" alt="Book a Table" />
+          <img src="Reactjs_03_Ruou/assets/sitebar.webp" alt="Book a Table" />
           <div className="book-info">
             <h4>Book a Table</h4>
             <button>Learn More →</button>
@@ -225,95 +252,112 @@ export default function Navbar() {
 
       {/* ===== SIDEBAR CART ===== */}
       <div className={`sidebar right cart-sidebar ${cartOpen ? "open" : ""}`}>
-            {/* HEADER */}
-            <div className="cart-header">
-              <i className="bi bi-x-lg" onClick={() => setCartOpen(false)}></i>
-              <h2>Cart</h2>
-            </div>
+        <div className="cart-header">
+          <i className="bi bi-x-lg" onClick={() => setCartOpen(false)}></i>
+          <h2>Cart</h2>
+          <i
+            className="bi bi-bag"
+            onClick={() => { navigate("/cart"); setCartOpen(false) }}
+            style={{ cursor: "pointer" }}
 
-            {/* BODY */}
-            <div className="cart-body">
-              {cartItems.length === 0 ? (
-                <p className="empty-cart">Your cart is empty</p>
-              ) : (
-                <div className="cart-list">
-                  {cartItems.map((item) => (
-                    <div className="cart-item" key={item.id}>
-                      <i className="bi bi-x" onClick={() => removeItem(item.id)}></i>
-                      <img src={item.image_url} alt={item.name} className="cart-thumb" />
+          ></i>
+        </div>
 
-                      <div className="cart-info">
-                        <h5>{item.name}</h5>
-                      </div>
-
-                      <div className="cart-right">
-                        <div className="item-price">${item.price.toFixed(2)}</div>
-                        <div className="qty-box">
-                          <button onClick={() => updateQty(item.id, -1)}>-</button>
-                          <span>{item.qty}</span>
-                          <button onClick={() => updateQty(item.id, 1)}>+</button>
-                        </div>
-                      </div>
+        <div className="cart-body">
+          {cartItems.length === 0 ? (
+            <p className="empty-cart">Your cart is empty</p>
+          ) : (
+            <div className="cart-list">
+              {cartItems.map((item) => (
+                <div className="cart-item" key={item.id}>
+                  <i
+                    className="bi bi-x"
+                    onClick={() => removeItem(item.id)}
+                  ></i>
+                  <img
+                    src={item.image_url}
+                    alt={item.name}
+                    className="cart-thumb"
+                  />
+                  <div className="cart-info">
+                    <h5>{item.name}</h5>
+                  </div>
+                  <div className="cart-right">
+                    <div className="item-price">${item.price.toFixed(2)}</div>
+                    <div className="qty-box">
+                      <button onClick={() => updateQty(item.id, item.qty - 1)}>-</button>
+                      <span>{item.qty}</span>
+                      <button onClick={() => updateQty(item.id, item.qty + 1)}>+</button>
                     </div>
-                  ))}
-
-
-                </div>
-              )}
-
-              {/* === RECOMMEND === */}
-              <div className="cart-recommend">
-                <div className="recommend-header">
-                  <h4>We Recommend</h4>
-                  <div className="arrows">
-                    <i className="bi bi-arrow-left" onClick={() => handleScroll("left")}></i>
-                    <i className="bi bi-arrow-right" onClick={() => handleScroll("right")}></i>
                   </div>
                 </div>
+              ))}
+            </div>
+          )}
 
-                <div className="recommend-list" ref={recRef}>
-                  {recommended.map((rec) => (
-                    <div className="recommend-card" key={rec.id}>
-                      <img src={rec.image_url} alt={rec.name} />
-                      <div className="recommend-content">
-                        <h5>{rec.name}</h5>
-                        <p>${rec.price.regular.toFixed(2)}</p>
-                        <button className="add-btn" onClick={() => addItem(rec)}>+</button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+          {/* === RECOMMEND === */}
+          <div className="cart-recommend">
+            <div className="recommend-header">
+              <h4>We Recommend</h4>
+              <div className="arrows">
+                <i
+                  className="bi bi-arrow-left"
+                  onClick={() => handleScroll("left")}
+                ></i>
+                <i
+                  className="bi bi-arrow-right"
+                  onClick={() => handleScroll("right")}
+                ></i>
               </div>
-
-
             </div>
 
-            {/* FOOTER */}
-            <div className="cart-footer">
-              <div className="subtotal-row">
-                <span>SUBTOTAL</span>
-                <span>${subtotal.toFixed(2)}</span>
-              </div>                 
-              <label className="checkbox-row">
-                <input
-                  type="checkbox"
-                  checked={confirmed}
-                  onChange={(e) => setConfirmed(e.target.checked)}
-                />
-                <span>I confirm that I am over 18 years of age</span>
-              </label>
-
-              <button
-                className="btn-cartcheck"
-                disabled={!confirmed} 
-                style={{
-                  opacity: confirmed ? 1 : 0.8,
-                  cursor: confirmed ? "pointer" : "not-allowed",
-                }}
-              >
-                CHECKOUT
-              </button>
+            <div className="recommend-list" ref={recRef}>
+              {recommended.map((rec) => (
+                <div className="recommend-card" key={rec.id}>
+                  <img src={rec.image_url} alt={rec.name} />
+                  <div className="recommend-content">
+                    <h5>{rec.name}</h5>
+                    <p>${rec.price.regular.toFixed(2)}</p>
+                    <button className="add-btn" onClick={() => addItem(rec)}>
+                      +
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
+          </div>
+        </div>
+
+        {/* FOOTER */}
+        <div className="cart-footer">
+          <div className="subtotal-row">
+            <span>SUBTOTAL</span>
+            <span>${subtotal.toFixed(2)}</span>
+          </div>
+          <label className="checkbox-row">
+            <input
+              type="checkbox"
+              checked={confirmed}
+              onChange={(e) => setConfirmed(e.target.checked)}
+            />
+            <span>I confirm that I am over 18 years of age</span>
+          </label>
+
+          <button
+            className="btn-cartcheck"
+            disabled={!confirmed}
+            style={{
+              opacity: confirmed ? 1 : 0.8,
+              cursor: confirmed ? "pointer" : "not-allowed",
+            }}
+            onClick={() => {
+              navigate("/checkout");
+              setCartOpen(false);
+            }}
+          >
+            CHECKOUT
+          </button>
+        </div>
       </div>
 
       {/* BACKDROP */}
