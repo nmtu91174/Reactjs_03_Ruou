@@ -1,5 +1,23 @@
 html {
-  scrollbar-width: thin; /* mảnh */
-  scrollbar-color: #888 rgba(255,255,255,0.97); /* thumb + track */
+  scrollbar-width: thin;
+  /* mảnh */
+  scrollbar-color: #888 rgba(255, 255, 255, 0.97);
+  /* thumb + track */
 }
 
+/* === STICKY FOOTER FIX ===
+  Đây là các quy tắc CSS toàn cục để sửa lỗi Footer
+*/
+
+/* 1. Đặt container gốc (#root) là flex-column và cao 100% màn hình */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* 2. Bảo <main> (nơi chứa nội dung trang) co dãn để lấp đầy không gian */
+.main-content-area {
+  flex-grow: 1;
+  /* Đây là chìa khóa: nó sẽ đẩy Footer xuống */
+}

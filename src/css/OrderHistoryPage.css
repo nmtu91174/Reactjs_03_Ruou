@@ -2,29 +2,24 @@
 
 .order-history-page {
     position: relative;
-    /* Needed for video background context */
     padding-top: 120px;
-    /* Space for fixed navbar */
     padding-bottom: 60px;
-    min-height: 100vh;
+    /* min-height: 100vh; */
+    /* <-- LỖI GÂY TRÀN FOOTER: Đã xóa */
     font-family: 'Poppins', sans-serif;
     overflow: hidden;
-    /* Hide video overflow */
 }
 
-/* === Video Background & Overlay === */
+/* === Video Background & Overlay (Không thay đổi) === */
 .video-background {
     position: fixed;
-    /* Fixed position to stay in viewport */
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     object-fit: cover;
     z-index: -2;
-    /* Behind overlay and content */
     filter: blur(4px);
-    /* Optional: blur the video */
 }
 
 .video-overlay {
@@ -34,19 +29,15 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.6);
-    /* Dark overlay for readability */
     z-index: -1;
-    /* Between video and content */
 }
 
 .page-content {
     position: relative;
-    /* Ensure content stays above overlay */
     z-index: 1;
 }
 
-/* === Main Header === */
-/* We make the header background semi-transparent white */
+/* === Main Header (Không thay đổi) === */
 .order-history-header {
     margin-bottom: 1.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -70,14 +61,12 @@
     font-size: 2.25rem;
     margin: 0;
     color: #222;
-    /* Dark text on light bg */
 }
 
 .order-count-badge {
     font-size: 0.9rem;
     font-weight: 600;
     background-color: #f0f0f0;
-    /* Light badge */
     color: #333;
     border: 1px solid #ccc;
     padding: 0.3em 0.65em;
@@ -108,7 +97,6 @@
 
 .order-tabs .nav-link.active {
     border-color: #455a51;
-    /* Project theme color */
     color: #222;
     font-weight: 600;
 }
@@ -122,7 +110,7 @@
     border-radius: 8px;
 }
 
-/* === Order Card List === */
+/* === Order Card List (Không thay đổi) === */
 .order-list-container {
     display: flex;
     flex-direction: column;
@@ -130,13 +118,11 @@
     margin-top: 1.5rem;
 }
 
-/* Make cards opaque white to be readable */
 .order-card-item {
     border-radius: 12px;
     border: none;
     overflow: hidden;
     background-color: #ffffff;
-    /* Opaque white */
 }
 
 .order-card-header {
@@ -172,7 +158,6 @@
     font-size: 0.85rem;
     font-weight: 500;
     color: #455a51;
-    /* Link color */
     text-decoration: none;
     margin-left: 10px;
 }
@@ -180,10 +165,38 @@
 .order-details-link:hover {
     text-decoration: underline;
     color: #b22222;
-    /* Hover color */
 }
 
-/* Yellow Alert Banner */
+/* === NÚT XÓA MỚI === */
+.order-delete-link {
+    font-size: 0.85rem;
+    color: #dc3545;
+    /* Màu đỏ bootstrap */
+    padding: 0.25rem 0.5rem;
+    margin-left: 8px;
+    text-decoration: none;
+}
+
+.order-delete-link:hover {
+    color: #a71d2a;
+    background-color: #f8f9fa;
+}
+
+/* === Modal Body === */
+.delete-modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+}
+
+.delete-modal-body p {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* (Các style còn lại .order-alert-banner, .order-card-body, ... không thay đổi) */
 .order-alert-banner {
     margin: 1.25rem;
     border-radius: 8px;
@@ -199,7 +212,6 @@
     padding: 0.75rem 1rem;
 }
 
-/* Order Body (Items) */
 .order-card-body {
     padding: 1.25rem;
 }
@@ -250,7 +262,6 @@
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
-    /* <-- FIX: Standard property */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -266,7 +277,6 @@
     margin: 0.25rem 0 1rem 0;
 }
 
-/* === NEW BUTTON STYLES (image_95450e.png) === */
 .product-action-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -278,22 +288,17 @@
     font-size: 0.85rem;
     font-weight: 500;
     padding: 0.5rem 1rem;
-    /* Better vertical centering */
     border-radius: 999px;
-    /* Rounded pill */
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.4rem;
     line-height: 1.2;
-    /* Adjusted line-height */
     transition: all 0.2s ease;
 }
 
-/* 1. Buy it again (Filled) */
 .btn-buy-again {
     background-color: #455a51;
-    /* Project theme */
     border-color: #455a51;
     color: #fff;
 }
@@ -304,7 +309,6 @@
     color: #fff;
 }
 
-/* 2. View/Track (Outline) */
 .btn-view-item,
 .btn-track-package {
     background-color: #fff;
@@ -319,7 +323,6 @@
     color: #000;
 }
 
-/* 3. Ellipsis (Icon Only) */
 .btn-icon-only {
     background-color: #fff;
     border: 1px solid #ccc;
@@ -335,22 +338,19 @@
     color: #000;
 }
 
-/* === Sidebar Card === */
+/* === Sidebar Card (Không thay đổi) === */
 .order-sidebar-card {
     border-radius: 12px;
     border: 1px solid #ddd;
     position: sticky;
-    top: 120px;
-    /* Stick below navbar */
+    /* top: 180px; */
     overflow: hidden;
     background: #ffffff;
-    /* Opaque white */
 }
 
 .sidebar-chat-icon {
     font-size: 1.5rem;
     color: #455a51;
-    /* Project theme */
     position: absolute;
     top: 1rem;
     right: 1.25rem;
@@ -374,37 +374,72 @@
     padding: 0.6rem 1rem;
 }
 
-/* === Pagination Styles === */
+/* === Pagination Styles (Không thay đổi) === */
 .pagination-container {
     margin-top: 2rem;
-
     /* Style for page items */
-    .page-item .page-link {
-        color: #455a51;
-        background-color: #fff;
-        border-color: #ddd;
-    }
-
-    /* Style for active page */
-    .page-item.active .page-link {
-        z-index: 3;
-        color: #fff;
-        background-color: #455a51;
-        border-color: #455a51;
-    }
-
-    /* Style for disabled page */
-    .page-item.disabled .page-link {
-        color: #999;
-        background-color: #f8f8f8;
-    }
 }
 
-/* === Responsive === */
+.pagination-container .page-item .page-link {
+    color: #455a51;
+    background-color: #fff;
+    border-color: #ddd;
+}
+
+/* Style for active page */
+.pagination-container .page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #455a51;
+    border-color: #455a51;
+}
+
+/* Style for disabled page */
+.pagination-container .page-item.disabled .page-link {
+    color: #999;
+    background-color: #f8f8f8;
+}
+
+/* === THÊM MỚI: Thank You Header Box === */
+.thank-you-header-box {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.thank-you-header-box h2 {
+    font-family: 'Font1', serif;
+    font-weight: 600;
+    font-size: 2.5rem;
+    color: #b22222;
+    /* Màu đỏ rượu vang */
+}
+
+.thank-you-header-box .lead {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 0;
+}
+
+/* === THÊM MỚI: Confetti Z-index === */
+/* Đảm bảo pháo giấy bay BÊN TRÊN nội dung nhưng DƯỚI Modal */
+.order-history-page canvas {
+    z-index: 1040 !important;
+    /* Dưới z-index 1050 của Modal Bootstrap */
+    position: fixed !important;
+    /* Bắt buộc nó che phủ toàn màn hình */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* === Responsive (Không thay đổi) === */
 @media (max-width: 991px) {
     .order-sidebar-card {
         position: static;
-        /* Un-stick on tablet/mobile */
     }
 }
 

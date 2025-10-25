@@ -88,8 +88,8 @@
       },
       "volume": "750ml",
       "product_url": "https://maxwellwines.com.au/products/grenache-rose-2024",
-      "image_url": "Reactjs_03_Ruou/assets/json_imgcore/GrenacheRose.webp",
-      "image2_url": "Reactjs_03_Ruou/assets/json_img/Grenache-Rose.webp",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/GrenacheRosebottle1200x1200_580e1e19-a6b4-4a57-9f31-ec451a0e4284.png?v=1754442403&width=1100",
+      "image2_url": "https://maxwellwines.com.au/cdn/shop/files/GrenacheRoselifestyleshot2_12267f45-e7cb-4cb1-9770-79100c89ff01.jpg?v=1754442403&width=1350",
       "stock_status": "In Stock"
     },
     {

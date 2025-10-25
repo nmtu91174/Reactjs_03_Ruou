@@ -86,14 +86,14 @@ export default function Navbar() {
   };
 
   const openCart = () => {
-  setIsCartOpen(true);
+    setIsCartOpen(true);
   };
 
   const closeCart = () => {
     setIsCartOpen(false);
     setTimeout(() => {
-      setCartVisible(false); 
-    }, 700); 
+      setCartVisible(false);
+    }, 700);
   };
 
 
@@ -357,15 +357,15 @@ export default function Navbar() {
           <button
             className="btn-cartcheck"
             disabled={!confirmed}
-            onClick={() => navigate("/checkout")}  
+            onClick={() => { navigate("/checkout"); setCartOpen(false); }}
             style={{
               opacity: confirmed ? 1 : 0.8,
               cursor: confirmed ? "pointer" : "not-allowed",
             }}
-            onClick={() => {
-              navigate("/checkout");
-              setCartOpen(false);
-            }}
+          // onClick={() => {
+          //   navigate("/checkout");
+          //   setCartOpen(false);
+          // }}
           >
             CHECKOUT
           </button>

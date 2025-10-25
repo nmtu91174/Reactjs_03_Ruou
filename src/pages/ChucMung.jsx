@@ -7,7 +7,7 @@ function ChucMung() {
   const navigate = useNavigate();
   const order = JSON.parse(localStorage.getItem("lastOrder"));
   const [showConfetti, setShowConfetti] = useState(false);
-  const [countdown, setCountdown] = useState(8); // 8s countdown
+  const [countdown, setCountdown] = useState(20); // 20s countdown
 
   useEffect(() => {
     if (!order) return;
@@ -74,13 +74,17 @@ function ChucMung() {
                 )}
                 <span className="item-name">{item.name} × {item.qty}</span>
               </div>
-              <span className="item-price">{item.currency} {(item.price * item.qty).toFixed(2)}</span>
+              <span className="item-price">
+                {/* {item.currency}  */}$
+                {(item.price * item.qty).toFixed(2)}</span>
             </li>
           ))}
         </ul>
 
         <div className="total-amount">
-          Total: {order.currency} {Number(order.total).toFixed(2)}
+          Total:
+          {/* {order.currency}  */}$
+          {Number(order.total).toFixed(2)}
         </div>
 
         <p className="countdown-text">

@@ -9,9 +9,11 @@ import {
     Nav,
     Dropdown,
     Alert,
-    Pagination
+    Pagination,
+    Modal
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Confetti from "react-confetti"; // <-- 1. IMPORT CONFETTI
 import { useCartStorage } from "../hooks/useCartStorage";
 import productsData from "../data/maxwell_wines_products.json";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -20,14 +22,12 @@ import {
     faStar,
     faTimes,
     faEllipsisH,
-    faCommentDots
+    faCommentDots,
+    faTrash
 } from '@fortawesome/free-solid-svg-icons';
 import "../css/OrderHistoryPage.css";
 
-/**
- * Component Sidebar "Send us a message"
- * This matches the right column in image_89ca21.png
- */
+// (Component MessageSidebar không thay đổi)
 function MessageSidebar() {
     return (
         <Card className="order-sidebar-card shadow-sm border-0">
@@ -47,12 +47,9 @@ function MessageSidebar() {
     );
 }
 
-/**
- * Pagination Component
- */
+// (Component PaginationComponent không thay đổi)
 function PaginationComponent({ totalPages, currentPage, onPageChange }) {
     if (totalPages <= 1) return null;
-
     let items = [];
     for (let number = 1; number <= totalPages; number++) {
         items.push(
@@ -65,7 +62,6 @@ function PaginationComponent({ totalPages, currentPage, onPageChange }) {
             </Pagination.Item>,
         );
     }
-
     return (
         <Pagination className="justify-content-center pagination-container">
             <Pagination.Prev onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1} />
@@ -75,40 +71,50 @@ function PaginationComponent({ totalPages, currentPage, onPageChange }) {
     );
 }
 
-
 /**
  * Main Order History Page Component
  */
 export default function OrderHistoryPage() {
+    // ... (các state cũ: orderHistory, allProducts, activeTab, v.v...)
     const [orderHistory, setOrderHistory] = useState([]);
     const [allProducts, setAllProducts] = useState([]);
     const [activeTab, setActiveTab] = useState("Orders");
     const [timeFilter, setTimeFilter] = useState("Past 3 Months");
     const [bannerVisibility, setBannerVisibility] = useState({});
-
-    // --- Pagination State ---
     const [currentPage, setCurrentPage] = useState(1);
-    const ordersPerPage = 3; // <-- SỐ LƯỢNG ĐƠN HÀNG MỖI TRANG
+    const ordersPerPage = 3;
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [orderToDelete, setOrderToDelete] = useState(null);
+
+    // --- 2. State cho Hiệu ứng Confetti ---
+    const [showConfetti, setShowConfetti] = useState(true); // Bắt đầu chạy ngay
 
     const { addItem } = useCartStorage();
 
     useEffect(() => {
-        // 1. Load order history
+        // Tải dữ liệu (như cũ)
         const history = JSON.parse(localStorage.getItem("orderHistory")) || [];
         setOrderHistory(history);
-
-        // 2. Load all products
         setAllProducts(productsData.products || []);
-
-        // 3. Initialize banner visibility
         const initialVisibility = {};
         history.forEach(order => {
             initialVisibility[order.id] = true;
         });
         setBannerVisibility(initialVisibility);
-    }, []);
 
-    // 4. Handle filtering logic
+        // --- 3. Hẹn giờ tắt Confetti ---
+        const confettiTimer = setTimeout(() => {
+            setShowConfetti(false);
+        }, 10000); // Dừng hiệu ứng sau 10 giây
+
+        // Dọn dẹp timer
+        return () => {
+            clearTimeout(confettiTimer);
+        };
+    }, []); // Chỉ chạy 1 lần khi trang tải
+
+    // ... (Tất cả các hàm xử lý: filteredOrders, handleBuyAgain, handleBannerClose, handleDeleteClick, confirmDelete, closeDeleteModal, handlePageChange... giữ nguyên)
+    // (Phần code này đã được thu gọn cho dễ đọc)
     const filteredOrders = orderHistory.filter(order => {
         if (activeTab === "Not Yet Shipped") {
             return order.status?.toLowerCase() === "processing";
@@ -118,8 +124,6 @@ export default function OrderHistoryPage() {
         }
         return true;
     });
-
-    // 5. Handle "Buy Again"
     const handleBuyAgain = (item) => {
         const productToAdd = allProducts.find(p => p.id === item.id);
         if (productToAdd) {
@@ -129,31 +133,48 @@ export default function OrderHistoryPage() {
             console.warn(`Product ${item.id} not found in current product list.`);
         }
     };
-
-    // 6. Handle closing banner
     const handleBannerClose = (orderId) => {
         setBannerVisibility(prev => ({
             ...prev,
             [orderId]: false
         }));
     };
-
-    // --- Pagination Logic ---
+    const handleDeleteClick = (orderId) => {
+        setOrderToDelete(orderId);
+        setShowDeleteModal(true);
+    };
+    const confirmDelete = () => {
+        if (!orderToDelete) return;
+        const newHistory = orderHistory.filter(o => o.id !== orderToDelete);
+        setOrderHistory(newHistory);
+        localStorage.setItem("orderHistory", JSON.stringify(newHistory));
+        setShowDeleteModal(false);
+        setOrderToDelete(null);
+    };
+    const closeDeleteModal = () => {
+        setShowDeleteModal(false);
+        setOrderToDelete(null);
+    };
     const totalPages = Math.ceil(filteredOrders.length / ordersPerPage);
     const indexOfLastOrder = currentPage * ordersPerPage;
     const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
     const currentOrders = filteredOrders.slice(indexOfFirstOrder, indexOfLastOrder);
-
     const handlePageChange = (pageNumber) => {
         if (pageNumber > 0 && pageNumber <= totalPages) {
             setCurrentPage(pageNumber);
-            window.scrollTo(0, 0); // Scroll to top on page change
+            window.scrollTo(0, 0);
         }
     };
+    // --- (Kết thúc code thu gọn) ---
+
 
     return (
         <div className="order-history-page">
-            {/* === VIDEO BACKGROUND & OVERLAY === */}
+            {/* === 4. RENDER CONFETTI === */}
+            {/* Thêm `recycle={false}` để pháo giấy rơi xuống và biến mất */}
+            {showConfetti && <Confetti recycle={false} />}
+
+            {/* (Video background và overlay giữ nguyên) */}
             <video
                 className="video-background"
                 autoPlay
@@ -170,7 +191,16 @@ export default function OrderHistoryPage() {
                 <Row className="g-4">
                     {/* ====== MAIN CONTENT (Left Column) ====== */}
                     <Col lg={8}>
-                        {/* === 1. Header === */}
+
+                        {/* === 5. THÊM THANK YOU HEADER === */}
+                        <div className="thank-you-header-box text-center">
+                            <h2>💖 Thank You For Your Support! 💖</h2>
+                            <p className="lead">
+                                We truly appreciate your purchases. Below is your order history.
+                            </p>
+                        </div>
+
+                        {/* === Header (Your Orders) === */}
                         <div className="order-history-header">
                             <div className="title-group">
                                 <h2>Your Orders</h2>
@@ -178,28 +208,20 @@ export default function OrderHistoryPage() {
                                     {filteredOrders.length}
                                 </Badge>
                             </div>
-
                             <div className="filter-group">
                                 <Nav
                                     variant="tabs"
                                     activeKey={activeTab}
                                     onSelect={(k) => {
                                         setActiveTab(k);
-                                        setCurrentPage(1); // Reset to page 1 on filter change
+                                        setCurrentPage(1);
                                     }}
                                     className="order-tabs"
                                 >
-                                    <Nav.Item>
-                                        <Nav.Link eventKey="Orders">Orders</Nav.Link>
-                                    </Nav.Item>
-                                    <Nav.Item>
-                                        <Nav.Link eventKey="Not Yet Shipped">Not Yet Shipped</Nav.Link>
-                                    </Nav.Item>
-                                    <Nav.Item>
-                                        <Nav.Link eventKey="Cancelled Orders">Cancelled Orders</Nav.Link>
-                                    </Nav.Item>
+                                    <Nav.Item><Nav.Link eventKey="Orders">Orders</Nav.Link></Nav.Item>
+                                    <Nav.Item><Nav.Link eventKey="Not Yet Shipped">Not Yet Shipped</Nav.Link></Nav.Item>
+                                    <Nav.Item><Nav.Link eventKey="Cancelled Orders">Cancelled Orders</Nav.Link></Nav.Item>
                                 </Nav>
-
                                 <Dropdown onSelect={(k) => setTimeFilter(k)} className="time-filter-dropdown">
                                     <Dropdown.Toggle variant="outline-secondary" id="dropdown-time-filter">
                                         {timeFilter}
@@ -214,7 +236,7 @@ export default function OrderHistoryPage() {
                             </div>
                         </div>
 
-                        {/* === 2. Order List === */}
+                        {/* === Order List (Không thay đổi) === */}
                         <div className="order-list-container">
                             {currentOrders.length === 0 ? (
                                 <Card className="text-center p-5 shadow-sm border-0">
@@ -230,7 +252,7 @@ export default function OrderHistoryPage() {
                             ) : (
                                 currentOrders.map((order) => (
                                     <Card className="order-card-item shadow-sm border-0" key={order.id}>
-                                        {/* --- Order Header --- */}
+                                        {/* (Nội dung Card.Header không thay đổi) */}
                                         <Card.Header className="order-card-header">
                                             <div className="header-col">
                                                 <span>ORDER PLACED</span>
@@ -246,15 +268,23 @@ export default function OrderHistoryPage() {
                                             </div>
                                             <div className="header-col order-id-col">
                                                 <span>ORDER # {order.id}</span>
-                                                <div>
+                                                <div className="d-flex justify-content-end align-items-center">
                                                     <Link to={`/order-detail/${order.id}`} className="order-details-link">
                                                         View order details
                                                     </Link>
+                                                    <Button
+                                                        variant="link"
+                                                        className="order-delete-link"
+                                                        onClick={() => handleDeleteClick(order.id)}
+                                                        title="Delete this order"
+                                                    >
+                                                        <FontAwesomeIcon icon={faTrash} />
+                                                    </Button>
                                                 </div>
                                             </div>
                                         </Card.Header>
 
-                                        {/* --- Rating Banner (Conditional) --- */}
+                                        {/* (Nội dung Banner không thay đổi) */}
                                         {bannerVisibility[order.id] && (
                                             <Alert
                                                 variant="warning"
@@ -267,7 +297,7 @@ export default function OrderHistoryPage() {
                                             </Alert>
                                         )}
 
-                                        {/* --- Order Body (Items) --- */}
+                                        {/* (Nội dung Card.Body không thay đổi) */}
                                         <Card.Body className="order-card-body">
                                             <h5 className="order-status-title">
                                                 Delivered {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
@@ -275,13 +305,11 @@ export default function OrderHistoryPage() {
                                             <p className="delivery-note text-muted">
                                                 Your package was delivered. It was handed directly to a resident.
                                             </p>
-
                                             {order.items.map((item) => (
                                                 <Row className="order-product-item g-3" key={item.id}>
                                                     <Col xs={3} sm={2} className="product-image-col">
                                                         <img src={item.image_url} alt={item.name} className="product-image" />
                                                     </Col>
-
                                                     <Col xs={9} sm={10} className="product-details-col">
                                                         <Link to={`/product/${item.id}`} className="product-name-link">
                                                             {item.name}
@@ -318,22 +346,41 @@ export default function OrderHistoryPage() {
                             )}
                         </div>
 
-                        {/* === 3. Pagination Component === */}
+                        {/* (Pagination không thay đổi) */}
                         <PaginationComponent
                             totalPages={totalPages}
                             currentPage={currentPage}
                             onPageChange={handlePageChange}
                         />
-
                     </Col>
 
-                    {/* ====== SIDEBAR (Right Column) ====== */}
+                    {/* ====== SIDEBAR (Right Column) (Không thay đổi) ====== */}
                     <Col lg={4}>
                         <MessageSidebar />
                     </Col>
                 </Row>
             </Container>
+
+            {/* (Modal Xóa không thay đổi) */}
+            <Modal show={showDeleteModal} onHide={closeDeleteModal} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Deletion</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="delete-modal-body">
+                    <FontAwesomeIcon icon={faTrash} size="2x" className="text-danger mb-3" />
+                    <p>Are you sure you want to permanently delete this order?</p>
+                    <strong>Order ID: {orderToDelete}</strong>
+                    <small className="text-muted d-block mt-2">This action cannot be undone.</small>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={closeDeleteModal}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={confirmDelete}>
+                        Yes, Delete Order
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }
-
