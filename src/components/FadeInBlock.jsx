@@ -20,7 +20,7 @@ export default function FadeInBlock({ children, className = "" }) {
           fadeTimeout.current = setTimeout(() => setIsVisible(false), 300);
         }
       },
-      { threshold: 0.35, rootMargin: "-60px 0px -60px 0px" }
+      { threshold: 0.35, rootMargin: "-60px 0px -20px 0px" }
     );
 
     observer.observe(el);

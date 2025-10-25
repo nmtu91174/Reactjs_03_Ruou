@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useCartStorage } from "../hooks/useCartStorage";
+import { useOrderStorage } from "../hooks/useOrderStorage";
 import { useNavigate } from "react-router-dom";
 import {
   CreditCard,
@@ -13,7 +14,8 @@ import {
 import "../css/Checkout.css";
 
 function CheckOut() {
-  const { cartItems, subtotal } = useCartStorage();
+  const { cartItems, subtotal, total, clearCart, createOrderData } = useCartStorage();
+  const { saveOrder } = useOrderStorage();
   const [discount, setDiscount] = useState("");
   const navigate = useNavigate();
 
@@ -39,24 +41,14 @@ function CheckOut() {
     e.preventDefault();
 
     // ✅ Lưu thông tin khách hàng và đơn hàng vào localStorage
-    const orderData = {
-      customer: formData,
-      items: cartItems,
-      subtotal: subtotal.toFixed(2),
-      total: getTotal(),
-      discount,
-      date: new Date().toLocaleString(),
-    };
-    localStorage.setItem("lastOrder", JSON.stringify(orderData));
+    const orderData = createOrderData(formData, discount);
+
+    // ✅ Lưu đơn hàng và xóa giỏ
+    saveOrder(orderData);
+    clearCart();
 
     // 👉 Chuyển sang trang ChucMung.jsx
     navigate("/chucmung");
-  };
-
-  const getTotal = () => {
-    const shipping = subtotal > 0 ? 5 : 0;
-    const tax = subtotal * 0.1;
-    return (subtotal + shipping + tax).toFixed(2);
   };
 
   return (
@@ -239,7 +231,8 @@ function CheckOut() {
             <hr />
             <div className="line total">
               <strong>Total</strong>
-              <strong>{getTotal()} €</strong>
+              {/* 🟢 NHẬT: thay getTotal() bằng total từ useCartStorage */}
+              <strong>{total} €</strong>
             </div>
 
             <div className="discount">

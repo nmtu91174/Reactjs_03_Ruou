@@ -8,6 +8,7 @@ import CheckOut from "./pages/CheckOut.jsx";
 import ChucMung from "./pages/ChucMung.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductDetailPage from "./pages/ProductDetailPage";
+import ProductDetail from "./pages/ProductDetail.jsx";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/product/:productId" element={<ProductDetailPage />} />
         <Route path="/cart" element={<Cart />} />

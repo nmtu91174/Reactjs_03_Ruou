@@ -1,5 +1,5 @@
 html {
   scrollbar-width: thin; /* mảnh */
-  scrollbar-color: #555 #e5e3e3; /* thumb + track */
+  scrollbar-color: #888 rgba(255,255,255,0.97); /* thumb + track */
 }
 

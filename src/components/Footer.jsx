@@ -13,7 +13,10 @@ export default function Footer() {
           {/* Cột trái (logo) */}
           <div className="col-md-3">
             <img
-              src={logo} alt="logo"
+
+              src={logo}
+              alt="Maxwell Logo"
+
               className="footer-logo mb-3"
               style={{ width: "70px" }}
             />

@@ -85,6 +85,17 @@ export default function Navbar() {
     if (e.key === "Enter") handleSearch();
   };
 
+  const openCart = () => {
+  setIsCartOpen(true);
+  };
+
+  const closeCart = () => {
+    setIsCartOpen(false);
+    setTimeout(() => {
+      setCartVisible(false); 
+    }, 700); 
+  };
+
 
   return (
     <>
@@ -346,6 +357,7 @@ export default function Navbar() {
           <button
             className="btn-cartcheck"
             disabled={!confirmed}
+            onClick={() => navigate("/checkout")}  
             style={{
               opacity: confirmed ? 1 : 0.8,
               cursor: confirmed ? "pointer" : "not-allowed",
@@ -361,15 +373,14 @@ export default function Navbar() {
       </div>
 
       {/* BACKDROP */}
-      {(menuOpen || cartOpen) && (
-        <div
-          className="backdrop"
-          onClick={() => {
-            setMenuOpen(false);
-            setCartOpen(false);
-          }}
-        ></div>
-      )}
+      <div
+        className={`backdrop ${(menuOpen || cartOpen) ? "open" : ""}`}
+        onClick={() => {
+          setMenuOpen(false);
+          setCartOpen(false);
+        }}
+      ></div>
+
     </>
   );
 }
