@@ -9,6 +9,8 @@ import ChucMung from "./pages/ChucMung.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductDetailPage from "./pages/ProductDetailPage";
 import ProductDetail from "./pages/ProductDetail.jsx";
+import OrderHistoryPage from "./pages/OrderHistoryPage";
+import OrderDetailPage from "./pages/OrderDetailPage";
 
 export default function App() {
   return (
@@ -22,6 +24,8 @@ export default function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<CheckOut />} />
         <Route path="/chucmung" element={<ChucMung />} />
+        <Route path="/order-history" element={<OrderHistoryPage />} />
+        <Route path="/order-detail/:orderId" element={<OrderDetailPage />} />
       </Routes>
       <Footer />
     </Router>

@@ -1,0 +1,455 @@
+/* src/css/OrderHistoryPage.css */
+
+.order-history-page {
+    position: relative;
+    /* Needed for video background context */
+    padding-top: 120px;
+    /* Space for fixed navbar */
+    padding-bottom: 60px;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    /* Hide video overflow */
+}
+
+/* === Video Background & Overlay === */
+.video-background {
+    position: fixed;
+    /* Fixed position to stay in viewport */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -2;
+    /* Behind overlay and content */
+    filter: blur(4px);
+    /* Optional: blur the video */
+}
+
+.video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Dark overlay for readability */
+    z-index: -1;
+    /* Between video and content */
+}
+
+.page-content {
+    position: relative;
+    /* Ensure content stays above overlay */
+    z-index: 1;
+}
+
+/* === Main Header === */
+/* We make the header background semi-transparent white */
+.order-history-header {
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.title-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.title-group h2 {
+    font-family: 'Font1', serif;
+    font-weight: 600;
+    font-size: 2.25rem;
+    margin: 0;
+    color: #222;
+    /* Dark text on light bg */
+}
+
+.order-count-badge {
+    font-size: 0.9rem;
+    font-weight: 600;
+    background-color: #f0f0f0;
+    /* Light badge */
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 0.3em 0.65em;
+    line-height: 1;
+}
+
+.filter-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.order-tabs.nav-tabs {
+    border-bottom: none;
+}
+
+.order-tabs .nav-link {
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: #6c757d;
+    font-weight: 500;
+    padding: 0.5rem 0.1rem;
+    margin-right: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.order-tabs .nav-link.active {
+    border-color: #455a51;
+    /* Project theme color */
+    color: #222;
+    font-weight: 600;
+}
+
+.time-filter-dropdown .dropdown-toggle {
+    background: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 8px;
+}
+
+/* === Order Card List === */
+.order-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+/* Make cards opaque white to be readable */
+.order-card-item {
+    border-radius: 12px;
+    border: none;
+    overflow: hidden;
+    background-color: #ffffff;
+    /* Opaque white */
+}
+
+.order-card-header {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    gap: 1.5rem 1rem;
+}
+
+.header-col {
+    font-size: 0.75rem;
+    color: #6c757d;
+    text-transform: uppercase;
+    min-width: 120px;
+}
+
+.header-col div {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+    text-transform: none;
+}
+
+.order-id-col {
+    flex-grow: 1;
+    text-align: right;
+}
+
+.order-details-link {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #455a51;
+    /* Link color */
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.order-details-link:hover {
+    text-decoration: underline;
+    color: #b22222;
+    /* Hover color */
+}
+
+/* Yellow Alert Banner */
+.order-alert-banner {
+    margin: 1.25rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+}
+
+.order-alert-banner .btn-close {
+    font-size: 0.75rem;
+    padding: 0.75rem 1rem;
+}
+
+/* Order Body (Items) */
+.order-card-body {
+    padding: 1.25rem;
+}
+
+.order-status-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.delivery-note {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.order-product-item {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.order-product-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.product-image-col {
+    display: flex;
+    align-items: flex-start;
+}
+
+.product-image {
+    width: 100%;
+    max-width: 80px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #eee;
+}
+
+.product-name-link {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #222;
+    text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    /* <-- FIX: Standard property */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-name-link:hover {
+    color: #b22222;
+}
+
+.product-return-policy {
+    font-size: 0.8rem;
+    display: block;
+    margin: 0.25rem 0 1rem 0;
+}
+
+/* === NEW BUTTON STYLES (image_95450e.png) === */
+.product-action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.product-action-buttons .btn {
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    /* Better vertical centering */
+    border-radius: 999px;
+    /* Rounded pill */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    line-height: 1.2;
+    /* Adjusted line-height */
+    transition: all 0.2s ease;
+}
+
+/* 1. Buy it again (Filled) */
+.btn-buy-again {
+    background-color: #455a51;
+    /* Project theme */
+    border-color: #455a51;
+    color: #fff;
+}
+
+.btn-buy-again:hover {
+    background-color: #333;
+    border-color: #333;
+    color: #fff;
+}
+
+/* 2. View/Track (Outline) */
+.btn-view-item,
+.btn-track-package {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+}
+
+.btn-view-item:hover,
+.btn-track-package:hover {
+    background-color: #f8f8f8;
+    border-color: #aaa;
+    color: #000;
+}
+
+/* 3. Ellipsis (Icon Only) */
+.btn-icon-only {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+    width: 2.2rem;
+    height: 2.2rem;
+    padding: 0;
+}
+
+.btn-icon-only:hover {
+    background-color: #f8f8f8;
+    border-color: #aaa;
+    color: #000;
+}
+
+/* === Sidebar Card === */
+.order-sidebar-card {
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    position: sticky;
+    top: 120px;
+    /* Stick below navbar */
+    overflow: hidden;
+    background: #ffffff;
+    /* Opaque white */
+}
+
+.sidebar-chat-icon {
+    font-size: 1.5rem;
+    color: #455a51;
+    /* Project theme */
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+}
+
+.order-sidebar-card .card-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.order-sidebar-card .card-text {
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
+}
+
+.sidebar-send-btn {
+    font-weight: 500;
+    background-color: #455a51;
+    border-color: #455a51;
+    padding: 0.6rem 1rem;
+}
+
+/* === Pagination Styles === */
+.pagination-container {
+    margin-top: 2rem;
+
+    /* Style for page items */
+    .page-item .page-link {
+        color: #455a51;
+        background-color: #fff;
+        border-color: #ddd;
+    }
+
+    /* Style for active page */
+    .page-item.active .page-link {
+        z-index: 3;
+        color: #fff;
+        background-color: #455a51;
+        border-color: #455a51;
+    }
+
+    /* Style for disabled page */
+    .page-item.disabled .page-link {
+        color: #999;
+        background-color: #f8f8f8;
+    }
+}
+
+/* === Responsive === */
+@media (max-width: 991px) {
+    .order-sidebar-card {
+        position: static;
+        /* Un-stick on tablet/mobile */
+    }
+}
+
+@media (max-width: 767px) {
+    .order-history-page {
+        padding-top: 100px;
+    }
+
+    .order-history-header {
+        padding: 1rem;
+    }
+
+    .order-history-header h2 {
+        font-size: 2rem;
+    }
+
+    .filter-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .order-tabs {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .order-tabs .nav-link {
+        margin-right: 0;
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+
+    .time-filter-dropdown .dropdown-toggle {
+        width: 100%;
+    }
+
+    .order-card-header {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .order-id-col {
+        grid-column: 1 / -1;
+        text-align: left;
+        margin-top: 0.5rem;
+    }
+}

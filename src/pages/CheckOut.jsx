@@ -40,14 +40,27 @@ function CheckOut() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // ✅ Lưu thông tin khách hàng và đơn hàng vào localStorage
-    const orderData = createOrderData(formData, discount);
+    const currentOrderData = {
+      id: `MW-${Date.now()}`,
+      customer: formData,
+      items: cartItems,
+      subtotal: subtotal.toFixed(2),
+      // total: getTotal(), // Lấy total từ hook nếu đã tính sẵn
+      total: total, // Sử dụng total từ useCartStorage
+      discount,
+      // currency: "AUD",
+      date: new Date().toLocaleString(),
+      status: "Processing",
+    };
 
-    // ✅ Lưu đơn hàng và xóa giỏ
-    saveOrder(orderData);
-    clearCart();
+    localStorage.setItem("lastOrder", JSON.stringify(currentOrderData));
+    const history = JSON.parse(localStorage.getItem("orderHistory")) || [];
+    history.unshift(currentOrderData);
+    localStorage.setItem("orderHistory", JSON.stringify(history));
+    localStorage.removeItem("cart"); // Xóa giỏ hàng
+    window.dispatchEvent(new Event("cartUpdated")); // Cập nhật UI
 
-    // 👉 Chuyển sang trang ChucMung.jsx
+    // Chuyển trang
     navigate("/chucmung");
   };
 
@@ -208,7 +221,8 @@ function CheckOut() {
                     <small>× {item.qty}</small>
                   </div>
                   <span>
-                    {item.currency} {(item.price * item.qty).toFixed(2)}
+                    {/* {item.currency} */}$
+                    {(item.price * item.qty).toFixed(2)}
                   </span>
                 </div>
               </div>
@@ -218,21 +232,21 @@ function CheckOut() {
           <div className="order-totals">
             <div className="line">
               <span>Subtotal</span>
-              <span>{subtotal.toFixed(2)} €</span>
+              <span>${subtotal.toFixed(2)}</span>
             </div>
             <div className="line">
               <span>Shipping</span>
-              <span>5.00 €</span>
+              <span>$5.00</span>
             </div>
             <div className="line">
               <span>Taxes (10%)</span>
-              <span>{(subtotal * 0.1).toFixed(2)} €</span>
+              <span>${(subtotal * 0.1).toFixed(2)}</span>
             </div>
             <hr />
             <div className="line total">
               <strong>Total</strong>
               {/* 🟢 NHẬT: thay getTotal() bằng total từ useCartStorage */}
-              <strong>{total} €</strong>
+              <strong>${total}</strong>
             </div>
 
             <div className="discount">

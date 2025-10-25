@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "../css/Footer.css";
 import logo from "../assets/logo-footer.webp";
+import { Link } from "react-router-dom";
 
 
 export default function Footer() {
@@ -65,6 +66,9 @@ export default function Footer() {
                 <a href="#" className="text-decoration-none text-dark mb-1">
                   Contact
                 </a>
+                <Link to="/order-history" className="text-decoration-none text-dark mb-1">
+                  Order History
+                </Link>
               </div>
             </div>
           </div>
