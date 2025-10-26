@@ -36,7 +36,8 @@ function Cart() {
                   <div className="item-details">
                     <h5>{item.name}</h5>
                     <p className="price">
-                      {item.currency || "$"} {Number(item.price).toFixed(2)}
+                      {/* {item.currency || "$"}  */}
+                      ${Number(item.price).toFixed(2)}
                     </p>
 
                     <div className="qty-control1">
