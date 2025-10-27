@@ -14,13 +14,12 @@ export default function FadeInBlock({ children, className = "" }) {
       ([entry]) => {
         if (entry.isIntersecting) {
           clearTimeout(fadeTimeout.current);
-          setIsVisible(true); // fade-in ngay khi thấy
+          setIsVisible(true);
         } else {
-          // chỉ fade-out nếu thực sự ra ngoài > 300ms
-          fadeTimeout.current = setTimeout(() => setIsVisible(false), 300);
+          fadeTimeout.current = setTimeout(() => setIsVisible(false), 400);
         }
       },
-      { threshold: 0.35, rootMargin: "-60px 0px -20px 0px" }
+      { threshold: 0.25, rootMargin: "-80px 0px -40px 0px" }
     );
 
     observer.observe(el);
@@ -33,7 +32,7 @@ export default function FadeInBlock({ children, className = "" }) {
   return (
     <div
       ref={ref}
-      className={`fadeInUp ${isVisible ? "visible" : ""} ${className}`}
+      className={`fadeInBlock ${isVisible ? "fadeInBlock--visible" : ""} ${className}`}
     >
       {children}
     </div>
