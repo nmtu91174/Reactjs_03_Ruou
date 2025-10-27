@@ -11,7 +11,7 @@ Website được thiết kế theo phong cách sang trọng, tối giản và ma
 
 | Thành viên | Vai trò | Phụ trách chính |
 |-------------|----------|-----------------|
-| **🧑‍💻 Dương Quang Nhật** | 🧠 **UI/UX Frontend Developer** | Thiết kế & lập trình **Homepage**, **Product Detail Page**, **Header**, **Footer**, tối   ưu hiệu ứng & responsive toàn bộ website |
+| **🧑‍💻 Dương Quang Nhật** | 🧠 **UI/UX Frontend Developer** | Thiết kế & lập trình **Homepage**, **Product Detail Page**, **Header**, **Footer**, tối   ưu hiệu ứng & responsive |
 | **💳 Điêu Chính Đức** | ⚙️ **Frontend Developer** | Phát triển **Cart System** và **Checkout Page**, xử lý localStorage, đồng bộ dữ liệu thanh toán và trang xác nhận đơn hàng |
 | **🛍️ Nguyễn Mạnh Tú** | 🧩 **Frontend Developer** | Xây dựng **Shop Page**, chức năng **Filter**, xử lý dữ liệu từ **JSON sản phẩm** |
 | **📦 Nguyễn Trí Việt** | 💡 **Frontend Developer** | Phát triển **Chi tiết đơn hàng** và **Trang cảm ơn (Chúc mừng)**, hoàn thiện logic sau thanh toán |
