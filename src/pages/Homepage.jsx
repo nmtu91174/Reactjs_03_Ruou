@@ -6,10 +6,22 @@ import SectionTwo from "../components/SectionTwo";
 export default function Homepage() {
   return (
     <>
-      <HeroSection />
-      <SectionTwo />
-      <SectionThree/>
-      <SectionFour/>
+      <section>
+        <HeroSection />
+      </section>
+
+      <section>
+        <SectionTwo />
+      </section>
+
+      <section>
+        <SectionThree />
+      </section>
+
+      <section>
+        <SectionFour />
+      </section>
     </>
   );
 }
+

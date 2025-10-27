@@ -2,7 +2,17 @@
   background: #E3E1E1;
   font-family: "Font2", serif !important;
   color: #000;
+  padding-bottom: 2.8rem;
 }
+
+.section-two {
+  position: relative;
+  overflow: hidden;
+  perspective: 1000px;
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+}
+
 
 /* === TOP AREA === */
 .section-top {
@@ -255,7 +265,8 @@
 .carousel-inner {
   display: flex;
   height: 100%;
-  transition: transform 0.88s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
 .carousel-inner img {
@@ -286,8 +297,12 @@
   content: "";
   position: absolute;
   inset: 0;
-  transition: opacity 0.48s ease-in-out;
   z-index: 0;
+}
+
+.content-overlay::before,
+.content-overlay::after {
+  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Lớp dưới (bình thường) */
@@ -425,6 +440,14 @@
   transform-origin: left;
 }
 
+.btn-hoverline::after {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn-hoverline::before {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
 
 
 /* ===== RIGHT SIDE ===== */
@@ -452,6 +475,7 @@
   transition: opacity 0.48s ease-in-out;
   z-index: 0;
 }
+
 
 /* lớp dưới: trạng thái bình thường */
 .col.right .content-overlay::before {
@@ -529,5 +553,12 @@
 .static-dots .dot:hover {
   background: #fff;
   color: #000;
+}
+
+.section-two img,
+.section-two .content-overlay,
+.section-two .overlay,
+.section-two .text-block {
+  will-change: transform, opacity, filter;
 }
 
