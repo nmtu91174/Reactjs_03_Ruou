@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
-import { useCartStorage } from "../hooks/useCartStorage";
+import { useCartStorage } from "../hooks/useCartStorage"; // ✅ dùng hook lưu LocalStorage
+import { useNavigate } from "react-router-dom"; // ✅ thêm để điều hướng
 import productsData from "../data/maxwell_wines_products.json";
 import "../css/ShopPage.css";
 
 export default function ShopPage() {
-  const { addItem } = useCartStorage(); // ✅ addItem = thêm sản phẩm vào localStorage
+  const { addItem } = useCartStorage(); // ✅ thêm sản phẩm vào localStorage
+  const navigate = useNavigate(); // ✅ hook điều hướng đến product detail
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [quantities, setQuantities] = useState({});
@@ -17,12 +19,12 @@ export default function ShopPage() {
   const [selectedRegion, setSelectedRegion] = useState("");
   const [priceRange, setPriceRange] = useState({ min: 0, max: 1000 });
   const [selectedVintage, setSelectedVintage] = useState("");
-  
+
   // === SEARCH ===
   useEffect(() => {
-  const params = new URLSearchParams(location.search);
-  const keyword = params.get("search") || "";
-  setSearchTerm(keyword);
+    const params = new URLSearchParams(location.search);
+    const keyword = params.get("search") || "";
+    setSearchTerm(keyword);
   }, [location.search]);
 
   // === INIT DATA ===
@@ -43,7 +45,7 @@ export default function ShopPage() {
     setAddedProducts(initialAdded);
   }, []);
 
-  // === WATCH LOCALSTORAGE CHANGES (realtime check) ===
+  // === WATCH LOCALSTORAGE CHANGES ===
   useEffect(() => {
     const checkCart = () => {
       const cart = JSON.parse(localStorage.getItem("cart")) || {};
@@ -67,7 +69,6 @@ export default function ShopPage() {
   // === FILTER LOGIC ===
   useEffect(() => {
     let result = [...products];
-
     if (searchTerm) {
       result = result.filter(
         (p) =>
@@ -75,15 +76,12 @@ export default function ShopPage() {
           p.description.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-
     if (selectedVariety) result = result.filter((p) => p.variety === selectedVariety);
     if (selectedRegion) result = result.filter((p) => p.region === selectedRegion);
     if (selectedVintage) result = result.filter((p) => p.vintage === selectedVintage);
-
     result = result.filter(
       (p) => p.price.regular >= priceRange.min && p.price.regular <= priceRange.max
     );
-
     setFilteredProducts(result);
   }, [searchTerm, selectedVariety, selectedRegion, priceRange, selectedVintage, products]);
 
@@ -107,18 +105,15 @@ export default function ShopPage() {
   // === ADD TO CART ===
   const handleAddToCart = (product) => {
     const qty = quantities[product.id] || 1;
-    addItem(product, qty); // ✅ lưu vào localStorage
+    addItem(product, qty);
+    setAddedProducts((prev) => ({ ...prev, [product.id]: true }));
+    setQuantities((prev) => ({ ...prev, [product.id]: 1 }));
+  };
 
-    setAddedProducts((prev) => ({
-      ...prev,
-      [product.id]: true,
-    }));
-
-    // reset quantity
-    setQuantities((prev) => ({
-      ...prev,
-      [product.id]: 1,
-    }));
+  // === ĐIỀU HƯỚNG TỚI PRODUCT DETAIL ===
+  const openProductDetail = (productId) => {
+    navigate(`/product/${productId}`); // ✅ chuyển đến trang chi tiết
+    window.scrollTo(0, 0);
   };
 
   // === UI ===
@@ -126,7 +121,7 @@ export default function ShopPage() {
     <div className="shop-page">
       <Container fluid>
         <Row>
-          {/* SIDEBAR FILTER */}
+          {/* === SIDEBAR FILTER GIỮ NGUYÊN === */}
           <Col lg={3} md={4} className="shop-filter-sidebar">
             <div className="shop-filter-container">
               <div className="shop-filter-header">
@@ -226,7 +221,7 @@ export default function ShopPage() {
             </div>
           </Col>
 
-          {/* PRODUCT GRID */}
+          {/* === PRODUCT GRID === */}
           <Col lg={9} md={8}>
             <div className="shop-products-header">
               <h2>All Products</h2>
@@ -245,6 +240,7 @@ export default function ShopPage() {
                       className="shop-product-card"
                       onMouseEnter={() => setHoveredProduct(product.id)}
                       onMouseLeave={() => setHoveredProduct(null)}
+                      onClick={() => openProductDetail(product.id)} // ✅ mở trang chi tiết
                     >
                       <div className="shop-product-image-wrapper">
                         <Card.Img
@@ -266,7 +262,10 @@ export default function ShopPage() {
                           {product.description}
                         </Card.Text>
 
-                        <div className="shop-product-footer">
+                        <div
+                          className="shop-product-footer"
+                          onClick={(e) => e.stopPropagation()} // ✅ tránh trigger click card
+                        >
                           <div className="shop-price-section">
                             <span className="shop-price-regular">
                               ${product.price.regular.toFixed(2)}
