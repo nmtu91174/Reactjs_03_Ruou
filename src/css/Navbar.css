@@ -10,6 +10,20 @@
   pointer-events: auto;
 }
 
+/* ===== HEADER FLOAT EFFECT ===== */
+.maxwell-header {
+  backdrop-filter: blur(0px);
+  will-change: background-color, backdrop-filter, box-shadow;
+}
+
+.maxwell-header.scrolled {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  transition: background 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              backdrop-filter 0.6s ease,
+              box-shadow 0.6s ease;
+}
 
 .maxwell-nav {
   display: flex;
@@ -32,8 +46,18 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   font-size: 14px;
-  font-family: "Font1", sans-serif;
-  
+  font-family: "Font1", sans-serif;  
+}
+
+.nav-actions i {
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s;
+}
+.nav-actions i:hover {
+  opacity: 0.8;
+}
+
+.nav-logo .logo {
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .cart-count {
@@ -95,6 +119,12 @@
   transform: scaleX(0);
   transform-origin: right;
 }
+
+.nav-links li:hover {
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+
 
 
 /* ===== LOGO CENTER ===== */
@@ -213,6 +243,11 @@
 .sidebar.left { left: 0; transform: translateX(-100%); }
 .sidebar.right { right: 0; transform: translateX(100%); }
 .sidebar.open { transform: translateX(0); }
+
+.sidebar.open, .cart-sidebar.open {
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.55s ease;
+}
 
 .sidebar-header {
   position: relative;
@@ -428,6 +463,16 @@
   opacity: 1;
   visibility: visible;
 }
+
+.backdrop {
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+              backdrop-filter 0.55s ease;
+}
+.backdrop.open {
+  backdrop-filter: blur(6px);
+  opacity: 1;
+}
+
 
 /* === CART HEADER TRANSITION === */
 .cart-header {
@@ -768,27 +813,17 @@
 
 /* ===== SEARCH OVERLAY ===== */
 .search-overlay {
-  position: absolute;
-  top: 88px; /* chiều cao header */
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  z-index: 1;
-  animation: fadeIn 0.4s ease;
-}
-
-/* ===== SEARCH OVERLAY (Chuẩn Maxwell) ===== */
-.search-overlay {
-  position: fixed; /* luôn cố định theo header */
-  top: 88px; /* nằm ngay dưới header */
+  position: fixed;
+  top: 88px;
   left: 0;
   width: 100%;
   z-index: 100;
-  background: transparent; /* để nền của .search-bar quyết định */
+  background: transparent;
   display: flex;
   justify-content: center;
-  transition: all 0.4s ease;
+  pointer-events: none; /* tránh bắt chuột khi ẩn */
+  opacity: 0;
+  transform: translateY(-16px);
 }
 
 /* ===== THANH SEARCH ===== */
@@ -839,21 +874,45 @@
 }
 
 /* Animation khi xuất hiện */
+/* Khi bật searchbar */
 .search-overlay.show {
-  animation: fadeInDown 0.4s ease forwards;
+  pointer-events: auto;
+  animation: fadeInDown 0.45s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+/* Khi tắt searchbar */
+.search-overlay.show {
+  pointer-events: auto;
+  /* dùng animation-fill-mode để đảm bảo nó dừng ở trạng thái cuối */
+  animation: fadeInDown 0.45s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.search-overlay.fade-out {
+  pointer-events: none;
+  animation: fadeOutUp 0.35s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
 @keyframes fadeInDown {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateY(-14px);
   }
-  to {
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
+@keyframes fadeOutUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
 
 /* Khi navbar chuyển nền trắng → đồng bộ */
 .maxwell-header.scrolled + .search-overlay .search-bar {
@@ -1184,4 +1243,14 @@
 
 .cart-header i:last-of-type {
   margin-left: auto;
+}
+
+/* === PERFORMANCE BOOST === */
+.nav-links li,
+.nav-actions i,
+.logo,
+.sidebar,
+.cart-sidebar,
+.backdrop {
+  will-change: transform, opacity;
 }

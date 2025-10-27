@@ -190,33 +190,44 @@ export default function Navbar() {
 
       {/* ===== SEARCH BAR ===== */}
       {searchOpen && (
-        <div className={`search-overlay ${scrolled ? "scrolled" : ""}`}>
-          <div className="search-bar">
-            <i className="bi bi-search" onClick={handleSearch}></i>
-            <input
-              type="text"
-              placeholder="Search our wines..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyDown={handleKeyDown}
-              autoFocus
-            />
-            <i
-              className="bi bi-x-lg"
-              onClick={() => {
-                const overlay = document.querySelector(".search-overlay");
-                if (overlay) {
-                  overlay.classList.add("fade-out");
-                  setTimeout(() => setSearchOpen(false), 350);
-                } else {
-                  setSearchOpen(false);
-                }
-              }}
-            ></i>
-          </div>
-
+      <div
+        ref={(el) => {
+          if (el) {
+            // force reflow & gắn class .show sau 1 frame
+            requestAnimationFrame(() => {
+              el.classList.add("show");
+            });
+          }
+        }}
+        className={`search-overlay ${scrolled ? "scrolled" : ""}`}
+      >
+        <div className="search-bar">
+          <i className="bi bi-search" onClick={handleSearch}></i>
+          <input
+            type="text"
+            placeholder="Search our wines..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={handleKeyDown}
+            autoFocus
+          />
+          <i
+            className="bi bi-x-lg"
+            onClick={() => {
+              const overlay = document.querySelector(".search-overlay");
+              if (overlay) {
+                overlay.classList.add("fade-out");
+                overlay.classList.remove("show");
+                setTimeout(() => setSearchOpen(false), 350);
+              } else {
+                setSearchOpen(false);
+              }
+            }}
+          ></i>
         </div>
-      )}
+      </div>
+    )}
+
 
       {/* ===== SIDEBAR MENU ===== */}
       <div className={`sidebar left ${menuOpen ? "open" : ""}`}>
