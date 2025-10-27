@@ -38,11 +38,11 @@
 /* === CONTAINER === */
 .productgrid-container {
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  width: 100%;
-  transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
-  gap:1.288rem !important;
+  align-items: stretch;
+  gap: 1.288rem !important;
+  will-change: transform;
+  backface-visibility: hidden;
+  transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1); /* mượt hơn */
 }
 
 /* Khi ở mode carousel thì không wrap */
@@ -64,6 +64,18 @@
   box-sizing: border-box;
   width:20%;
 }
+
+.product-card {
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.5s ease,
+              filter 0.6s ease;
+  will-change: transform, filter;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+}
+
 
 /* === IMAGE === */
 .product-img {
@@ -98,6 +110,23 @@
 .product-card:hover .hover-img {
   opacity: 1;
 }
+
+.product-img img {
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.product-card:hover .base-img {
+  opacity: 0;
+  transform: scale(1.03);
+}
+.product-card:hover .hover-img {
+  opacity: 1;
+  transform: scale(1);
+}
+
 
 /* === INFO === */
 .product-info {
@@ -145,6 +174,25 @@
   pointer-events: none;
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
+
+.bottom-actions {
+  opacity: 0;
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.product-card:hover .bottom-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mode-carousel .productgrid-container,
+.mode-recommendation .productgrid-container {
+  transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 
 /* Hover → fade-in (desktop only) */
 @media (min-width: 1024px) {
