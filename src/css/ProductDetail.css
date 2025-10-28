@@ -360,7 +360,6 @@
 /* === OVERLAY TEXT (TITLE + BUTTON WRAPPER) === */
 .read-overlay .joinclub-overlay-content {
   font-family: "Font2", serif;
-  max-width: 10 ;
 }
 
 .joinclub-overlay-title {
