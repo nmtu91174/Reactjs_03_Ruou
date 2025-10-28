@@ -74,8 +74,9 @@ export default function SectionTwo() {
               <img src="/assets/hp-sec2/Sec2-2.webp" alt="Shop Mead" />
             </div>
           </div>
-
+          
           <div className="content-overlay">
+            <FadeInBlock>
             <div key={activeIndex} className="text-block fade-anim">
               <h2>{activeIndex === 0 ? "Shop Wine" : "Shop Mead"}</h2>
               <p>
@@ -85,6 +86,7 @@ export default function SectionTwo() {
               </p>
               <button className="btn-hoverline">SHOP NOW →</button>
             </div>
+            </FadeInBlock>
 
             <div className="carousel-dots-inline static-dots">
               {[0, 1].map((i) => (
@@ -104,7 +106,7 @@ export default function SectionTwo() {
         <div className="col right">
           <img src="/assets/hp-sec2/Sec2-3.webp" alt="Our Story" />
           <div className="content-overlay">
-            
+            <FadeInBlock>
             <div className="text-block">
               <h2>Our Story</h2>
               <p>
@@ -115,6 +117,7 @@ export default function SectionTwo() {
                 <button className="btn-hoverline">LEARN MORE →</button>
               </div>
             </div>
+            </FadeInBlock>
           </div>
         </div>
       </FadeInBlock>
