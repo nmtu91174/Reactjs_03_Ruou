@@ -50,6 +50,7 @@ Chạy lần lượt các lệnh sau trong terminal:
 ```bash
 npm install
 npm install bootstrap
+npm i bootstrap-icons --no-audit --no-fund
 npm install react-router-dom
 npm install @studio-freight/lenis
 npm install react-confetti
