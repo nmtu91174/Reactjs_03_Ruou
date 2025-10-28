@@ -195,17 +195,9 @@
 
 /* Article card */
 .sf-article {
-  background: #E3E1E1;
   overflow: hidden;
   border-radius: 4px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.4s ease;
-}
-
-
-
-.sf-article:hover {
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
 }
 
 
@@ -319,7 +311,7 @@
   flex-direction: column;
   gap: 1rem;
 
-  
+
   
 }
 }
