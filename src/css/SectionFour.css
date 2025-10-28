@@ -17,7 +17,20 @@
   height: 832px;
   object-fit: cover;
   display: block;
+  filter: brightness(0.92);
+  transition: transform 1.8s cubic-bezier(0.33, 1, 0.68, 1), filter 1.2s ease;
+  will-change: transform, filter;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+
 }
+
+
+.section-four .section-image:hover img {
+  transform: scale(1.03);
+  filter: brightness(1);
+}
+
 
 .section-four .overlay {
   position: absolute;
@@ -27,11 +40,14 @@
   justify-content: space-between;
   color: #fff;
   background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.55) 0%,
-    rgba(0, 0, 0, 0.35) 45%,
-    rgba(0, 0, 0, 0.1) 100%
-  );
+  to right,
+  rgba(0, 0, 0, 0.6) 0%,
+  rgba(0, 0, 0, 0.4) 45%,
+  rgba(0, 0, 0, 0.15) 100%
+);
+  will-change: opacity, transform;
+  transform: translateZ(0);
+
 }
 
 /* TOP LEFT */
@@ -100,6 +116,9 @@
   max-width: 440px;
   font-family: 'Font2';
   font-weight: 300;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25));
+
 }
 
 .strong{
@@ -114,6 +133,10 @@
   padding: 1rem;
   padding-top: 1rem;
   background-color: #E3E1E1;
+  contain: layout paint;
+  will-change: scroll-position;
+  transform: translateZ(0);
+
 }
 
 .section-four.section-four-grid {
@@ -135,7 +158,22 @@
   height: calc(100vh - 7.7rem); /* full khung nhìn trừ header */
   object-fit: cover;
   display: block;
+  will-change: transform, filter;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+
 }
+
+.sf-left-media img {
+  transition: transform 2s cubic-bezier(0.33, 1, 0.68, 1), filter 1.2s ease;
+  filter: brightness(0.95);
+}
+
+.sf-left-media:hover img {
+  transform: scale(1.04);
+  filter: brightness(1);
+}
+
 
 
 
@@ -159,7 +197,17 @@
 .sf-article {
   background: #E3E1E1;
   overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.4s ease;
 }
+
+
+
+.sf-article:hover {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
 
 /* image with overlay button */
 .article-media {
@@ -203,7 +251,15 @@
   font-family: "Font1";
   position: relative;
   padding-bottom: 6px;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  opacity: 0.9;
 }
+
+.article-media:hover .read-btn {
+  transform: translateY(-2px);
+  opacity: 1;
+}
+
 
 .read-btn .underline {
   position: absolute;
@@ -344,7 +400,16 @@
   letter-spacing: 0.06em;
   padding-bottom: 4px;
   color: #fff;
+  transition: color 0.3s ease;
+  text-transform: uppercase;
+
 }
+
+.btn-hoverline:hover {
+  color: #f3f3f3;
+  letter-spacing: 0.08em;
+}
+
 
 .btn-hoverline::after {
   content: "";
@@ -377,3 +442,19 @@
   transform-origin: left;
 }
 
+.section-four .section-image img {
+  transform: translateZ(0) scale(1.02);
+  will-change: transform;
+  transition: transform 1.8s cubic-bezier(0.33, 1, 0.68, 1), filter 1.2s ease;
+}
+
+.section-four:hover .section-image img {
+  transform: translate3d(0, -10px, 0) scale(1.03);
+}
+
+.btn-hoverline,
+.article-media img,
+.read-btn {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}

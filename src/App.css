@@ -1,7 +1,9 @@
 html {
   scrollbar-width: thin; /* mảnh */
   scrollbar-color: #888 rgba(255,255,255,0.97); /* thumb + track */
-  scroll-behavior: smooth; /* ✨ mượt khi scroll tới anchor hoặc chuyển section */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  backface-visibility: hidden;
 }
 
 
@@ -10,3 +12,5 @@ section {
               transform 1s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
+
+

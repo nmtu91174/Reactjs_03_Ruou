@@ -13,10 +13,12 @@ export default function HeroSection() {
         muted
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
+        poster="/assets/hero-fallback.webp"
       >
         <source src="/assets/homepage.mp4" type="video/mp4" />
       </video>
+
 
       <div className="overlay"></div>
 

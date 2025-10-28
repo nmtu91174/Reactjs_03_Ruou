@@ -1,33 +1,49 @@
 import { useEffect, useRef, useState } from "react";
 import "../css/FadeInBlock.css";
 
-export default function FadeInBlock({ children, className = "" }) {
+// ✅ Global observer — chỉ tạo 1 lần duy nhất
+let sharedObserver = null;
+const observersMap = new WeakMap();
+
+export default function FadeInBlock({ children, className = "", fadeOut = true }) {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
-  const fadeTimeout = useRef(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          clearTimeout(fadeTimeout.current);
-          setIsVisible(true);
-        } else {
-          fadeTimeout.current = setTimeout(() => setIsVisible(false), 400);
+    if (!sharedObserver) {
+      sharedObserver = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            const cb = observersMap.get(entry.target);
+            if (cb) cb(entry);
+          }
+        },
+        {
+          threshold: 0.2,
+          rootMargin: "-100px 0px -100px 0px",
         }
-      },
-      { threshold: 0.25, rootMargin: "-80px 0px -22.22px 0px" }
-    );
+      );
+    }
 
-    observer.observe(el);
-    return () => {
-      clearTimeout(fadeTimeout.current);
-      observer.disconnect();
+    const handleIntersect = (entry) => {
+      if (entry.isIntersecting) {
+        requestAnimationFrame(() => setIsVisible(true));
+      } else if (fadeOut) {
+        requestAnimationFrame(() => setIsVisible(false));
+      }
     };
-  }, []);
+
+    observersMap.set(el, handleIntersect);
+    sharedObserver.observe(el);
+
+    return () => {
+      sharedObserver.unobserve(el);
+      observersMap.delete(el);
+    };
+  }, [fadeOut]);
 
   return (
     <div

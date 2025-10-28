@@ -1,116 +1,150 @@
+/* ===== HERO BASE ===== */
 .hero {
   position: relative;
   height: 100vh;
   width: 100%;
   overflow: hidden;
   background: #000;
+  font-family: "Font1", sans-serif;
 
+  /* ✅ Hiệu năng GPU + compositing */
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout paint;
 }
 
 /* === VIDEO NỀN === */
 .hero-video {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   z-index: 1;
   background: #000;
-  pointer-events: none;       
+  pointer-events: none;
 
+  /* ✅ GPU compositing */
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  filter: brightness(0.9);
+  transition: filter 1.2s ease, transform 2s cubic-bezier(0.33, 1, 0.68, 1);
 }
+
+.hero-video:hover {
+  filter: brightness(1);
+  transform: scale(1.02);
+}
+
 /* === OVERLAY MỜ === */
 .overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.18) !important;  
-  z-index: 2 !important;                       
+  inset: 0;
+  z-index: 2;
+  will-change: opacity;
+  transform: translateZ(0);
+  pointer-events: none;
+  transition: opacity 0.5s ease;
 }
 
 /* === NỘI DUNG HERO === */
 .hero .container-fluid {
   position: relative;
-  z-index: 3;  
+  z-index: 3;
+  animation: fadeUp 1.3s cubic-bezier(0.33, 1, 0.68, 1) both;
+  will-change: transform, opacity;
 }
 
-/* === FONT + TEXT === */
-.hero {
-  font-family: "Font1", sans-serif;
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
+/* === TEXT === */
 .hero h1 {
   font-weight: 700;
   letter-spacing: 0.04em;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+  transition: transform 0.6s ease, opacity 0.6s ease;
+  font-size: clamp(2rem,4vw,3.33rem);
 }
+
 .hero p {
   font-weight: 400;
   opacity: 0.9;
   line-height: 1.7;
-  font-family: 'Font2';
+  font-family: "Font2";
+  color: #eee;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 
-/* === NÚT === */
+/* === BUTTONS === */
 .btn-dark {
-  font-family: 'Font1' !important;
+  font-family: "Font1" !important;
   background-color: #000 !important;
   color: #fff !important;
-  transition: all 0.3s ease;
+  transition: all 0.35s ease;
+  border: 1px solid #000 !important;
+  will-change: transform, background-color, color;
 }
+
 .btn-dark:hover {
   background-color: #fff !important;
   color: #000 !important;
+  transform: translateY(-1px);
 }
+
 .btn-outline-light {
-  font-family: 'Font1' !important;
+  font-family: "Font1" !important;
   border: 1px solid #fff !important;
   color: #fff !important;
   background: transparent !important;
-  transition: all 0.3s ease;
+  transition: all 0.35s ease;
+  will-change: transform, color;
 }
+
 .btn-outline-light:hover {
   background-color: #fff !important;
   color: #000 !important;
+  transform: translateY(-1px);
 }
 
-
+/* === FONT SIZES === */
 .c {
-  font-size: 38px;
+  font-size: clamp(2rem, 3.6vw, 3.8rem);
   font-weight: 700;
 }
+
 .a {
-  font-size: 18px;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
 }
 
-@media (max-width: 480px){
-  .hero {
-  position: relative;
-  height: 80h;
-  width: 100%;
-  overflow: hidden;
-  background: #000;
-}
-  .buttonhero{
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-    display: block !important;
-  }
-
-  .herotext{
-    padding-left: 0px !important;
-  }
-
-  .damn {
-    padding-left: 0rem !important;
-    padding-right: 2rem !important;
-  }
-}
-
+/* === PADDING CONTROL === */
 .damn {
   padding-left: 3rem !important;
   padding-right: 3rem !important;
+  will-change: padding;
+}
+
+@media (max-width: 1115px) {
+  .btn {
+    font-size: 0.8rem !important;
+  }
+  .c {
+    font-size: 2rem !important;
+  }
+  .a {
+    font-size: 1.1rem !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -120,15 +154,29 @@
   }
 }
 
-@media (max-width: 1115px) {
-  .btn{
-    font-size: 0.7rem !important;
-  }
-  .c{
-    font-size: 2rem !important;
+@media (max-width: 480px) {
+  .hero {
+    height: 80vh;
   }
 
-  .a{
-    font-size: 1.1rem !important;
+  .buttonhero {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    display: block !important;
   }
+
+  .herotext {
+    padding-left: 0 !important;
+  }
+
+  .damn {
+    padding-left: 0 !important;
+    padding-right: 2rem !important;
+  }
+}
+
+
+.overlay {
+  background: rgba(0, 0, 0, 0.18) !important;  
+  z-index: 2 !important;                       
 }
