@@ -1,6 +1,6 @@
 .section-three {
   background: #E3E1E1;
-  padding: 4.8rem 1.1rem;
+  padding: 3rem 1.1rem;
   color: #000;
   font-family: "Font2", serif;
   overflow: hidden;
@@ -13,7 +13,7 @@
   margin-bottom: 1.3rem;
 }
 .experience-header h3 {
-  font-size: 1.8rem;
+  font-size: 1.528rem;
   letter-spacing: 0.08em;
   font-weight: 600;
   font-family: 'Font1';
@@ -101,7 +101,7 @@
   width: 100%;
 }
 
-/* === spacing chuẩn luxury === */
+/* === spacing chuẩn luxury == */
 .item-text h4 {
   font-size: 1.9rem;
   font-weight: 400;
@@ -221,3 +221,7 @@
 }
 
 
+.experience-container{
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid #c4c3c3;
+}

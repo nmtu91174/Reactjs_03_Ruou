@@ -1,0 +1,490 @@
+/* src/css/OrderHistoryPage.css */
+
+.order-history-page {
+    position: relative;
+    padding-top: 120px;
+    padding-bottom: 60px;
+    /* min-height: 100vh; */
+    /* <-- LỖI GÂY TRÀN FOOTER: Đã xóa */
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+/* === Video Background & Overlay (Không thay đổi) === */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -2;
+    filter: blur(4px);
+}
+
+.video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+}
+
+.page-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* === Main Header (Không thay đổi) === */
+.order-history-header {
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.title-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.title-group h2 {
+    font-family: 'Font1', serif;
+    font-weight: 600;
+    font-size: 2.25rem;
+    margin: 0;
+    color: #222;
+}
+
+.order-count-badge {
+    font-size: 0.9rem;
+    font-weight: 600;
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 0.3em 0.65em;
+    line-height: 1;
+}
+
+.filter-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.order-tabs.nav-tabs {
+    border-bottom: none;
+}
+
+.order-tabs .nav-link {
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: #6c757d;
+    font-weight: 500;
+    padding: 0.5rem 0.1rem;
+    margin-right: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.order-tabs .nav-link.active {
+    border-color: #455a51;
+    color: #222;
+    font-weight: 600;
+}
+
+.time-filter-dropdown .dropdown-toggle {
+    background: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 8px;
+}
+
+/* === Order Card List (Không thay đổi) === */
+.order-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.order-card-item {
+    border-radius: 12px;
+    border: none;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.order-card-header {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    gap: 1.5rem 1rem;
+}
+
+.header-col {
+    font-size: 0.75rem;
+    color: #6c757d;
+    text-transform: uppercase;
+    min-width: 120px;
+}
+
+.header-col div {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+    text-transform: none;
+}
+
+.order-id-col {
+    flex-grow: 1;
+    text-align: right;
+}
+
+.order-details-link {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #455a51;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.order-details-link:hover {
+    text-decoration: underline;
+    color: #b22222;
+}
+
+/* === NÚT XÓA MỚI === */
+.order-delete-link {
+    font-size: 0.85rem;
+    color: #dc3545;
+    /* Màu đỏ bootstrap */
+    padding: 0.25rem 0.5rem;
+    margin-left: 8px;
+    text-decoration: none;
+}
+
+.order-delete-link:hover {
+    color: #a71d2a;
+    background-color: #f8f9fa;
+}
+
+/* === Modal Body === */
+.delete-modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+}
+
+.delete-modal-body p {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* (Các style còn lại .order-alert-banner, .order-card-body, ... không thay đổi) */
+.order-alert-banner {
+    margin: 1.25rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+}
+
+.order-alert-banner .btn-close {
+    font-size: 0.75rem;
+    padding: 0.75rem 1rem;
+}
+
+.order-card-body {
+    padding: 1.25rem;
+}
+
+.order-status-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.delivery-note {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.order-product-item {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.order-product-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.product-image-col {
+    display: flex;
+    align-items: flex-start;
+}
+
+.product-image {
+    width: 100%;
+    max-width: 80px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #eee;
+}
+
+.product-name-link {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #222;
+    text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-name-link:hover {
+    color: #b22222;
+}
+
+.product-return-policy {
+    font-size: 0.8rem;
+    display: block;
+    margin: 0.25rem 0 1rem 0;
+}
+
+.product-action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.product-action-buttons .btn {
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    line-height: 1.2;
+    transition: all 0.2s ease;
+}
+
+.btn-buy-again {
+    background-color: #455a51;
+    border-color: #455a51;
+    color: #fff;
+}
+
+.btn-buy-again:hover {
+    background-color: #333;
+    border-color: #333;
+    color: #fff;
+}
+
+.btn-view-item,
+.btn-track-package {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+}
+
+.btn-view-item:hover,
+.btn-track-package:hover {
+    background-color: #f8f8f8;
+    border-color: #aaa;
+    color: #000;
+}
+
+.btn-icon-only {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+    width: 2.2rem;
+    height: 2.2rem;
+    padding: 0;
+}
+
+.btn-icon-only:hover {
+    background-color: #f8f8f8;
+    border-color: #aaa;
+    color: #000;
+}
+
+/* === Sidebar Card (Không thay đổi) === */
+.order-sidebar-card {
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    position: sticky;
+    /* top: 180px; */
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.sidebar-chat-icon {
+    font-size: 1.5rem;
+    color: #455a51;
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+}
+
+.order-sidebar-card .card-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.order-sidebar-card .card-text {
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
+}
+
+.sidebar-send-btn {
+    font-weight: 500;
+    background-color: #455a51;
+    border-color: #455a51;
+    padding: 0.6rem 1rem;
+}
+
+/* === Pagination Styles (Không thay đổi) === */
+.pagination-container {
+    margin-top: 2rem;
+    /* Style for page items */
+}
+
+.pagination-container .page-item .page-link {
+    color: #455a51;
+    background-color: #fff;
+    border-color: #ddd;
+}
+
+/* Style for active page */
+.pagination-container .page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #455a51;
+    border-color: #455a51;
+}
+
+/* Style for disabled page */
+.pagination-container .page-item.disabled .page-link {
+    color: #999;
+    background-color: #f8f8f8;
+}
+
+/* === THÊM MỚI: Thank You Header Box === */
+.thank-you-header-box {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.thank-you-header-box h2 {
+    font-family: 'Font1', serif;
+    font-weight: 600;
+    font-size: 2.5rem;
+    color: #b22222;
+    /* Màu đỏ rượu vang */
+}
+
+.thank-you-header-box .lead {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 0;
+}
+
+/* === THÊM MỚI: Confetti Z-index === */
+/* Đảm bảo pháo giấy bay BÊN TRÊN nội dung nhưng DƯỚI Modal */
+.order-history-page canvas {
+    z-index: 1040 !important;
+    /* Dưới z-index 1050 của Modal Bootstrap */
+    position: fixed !important;
+    /* Bắt buộc nó che phủ toàn màn hình */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* === Responsive (Không thay đổi) === */
+@media (max-width: 991px) {
+    .order-sidebar-card {
+        position: static;
+    }
+}
+
+@media (max-width: 767px) {
+    .order-history-page {
+        padding-top: 100px;
+    }
+
+    .order-history-header {
+        padding: 1rem;
+    }
+
+    .order-history-header h2 {
+        font-size: 2rem;
+    }
+
+    .filter-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .order-tabs {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .order-tabs .nav-link {
+        margin-right: 0;
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+
+    .time-filter-dropdown .dropdown-toggle {
+        width: 100%;
+    }
+
+    .order-card-header {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .order-id-col {
+        grid-column: 1 / -1;
+        text-align: left;
+        margin-top: 0.5rem;
+    }
+}

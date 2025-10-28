@@ -96,10 +96,11 @@
   .footer .d-flex.gap-5.text-end {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr);
-    text-align: left;
+    text-align: left !important;
     justify-items: center;
     gap: 0.8rem 2rem;
-    margin-right: 188px;
+    margin:auto;
+
   }
 
   /* Subscribe nằm sau menu */
@@ -150,7 +151,7 @@
     padding-bottom: 0px !important;
   }
   .part2{
-    padding-bottom: 0px !important;
+    padding: 1.5rem 0rem 0rem 0rem !important;
   }
 
   .ic{
@@ -179,6 +180,8 @@
     display: inline-block;
     margin: 0 8px;
   }
+
+
 }
 
 .mail{

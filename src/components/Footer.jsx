@@ -1,6 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "../css/Footer.css";
+import logo from "../assets/logo-footer.webp";
+import { Link } from "react-router-dom";
+
 
 export default function Footer() {
   return (
@@ -11,8 +14,10 @@ export default function Footer() {
           {/* Cột trái (logo) */}
           <div className="col-md-3">
             <img
-              src="/assets/logo-footer.webp"
+
+              src={logo}
               alt="Maxwell Logo"
+
               className="footer-logo mb-3"
               style={{ width: "70px" }}
             />
@@ -61,6 +66,9 @@ export default function Footer() {
                 <a href="#" className="text-decoration-none text-dark mb-1">
                   Contact
                 </a>
+                <Link to="/order-history" className="text-decoration-none text-dark mb-1">
+                  Order History
+                </Link>
               </div>
             </div>
           </div>
@@ -100,11 +108,11 @@ export default function Footer() {
         <div className="row justify-content-between align-items-center text-center text-md-start ">
           <div className="col-md-9 text">
             <p className="mb-0">
-              © Maxwell Wines 2025 &nbsp; 
+              © Maxwell Wines 2025 &nbsp;
             </p>
             <p className="mb-0">
-                SA Liquor Licensing Act 1997, Section 113. 
-              Liquor Licence Number: 57005946 Producer’s Licence 57600699. 
+              SA Liquor Licensing Act 1997, Section 113.
+              Liquor Licence Number: 57005946 Producer’s Licence 57600699.
               Liquor Must Not Be Supplied To Persons Under 18.
             </p>
           </div>

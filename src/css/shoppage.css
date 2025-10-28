@@ -1,255 +1,341 @@
-/* ShopPage.css */
+/* ============================
+   GLOBAL STYLE
+============================ */
 
 .shop-page {
-    padding-top: 100px;
-    min-height: 100vh;
-    background-color: #f8f9fa;
-}
-
-/* ===== SIDEBAR LỌC (BÊN TRÁI) ===== */
-
-.filter-sidebar {
-    background: white;
+    font-family: "Poppins", "Roboto", sans-serif;
+    background-color: #fafafa;
+    color: #333;
     padding: 20px;
-    border-right: 1px solid #e0e0e0;
-    position: sticky;
-    top: 100px;
-    height: fit-content;
-    max-height: calc(100vh - 120px);
-    overflow-y: auto;
 }
 
-.filter-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.filter-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid #111;
-    padding-bottom: 10px;
-}
-
-.filter-header h3 {
-    font-size: 24px;
+h2,
+h3,
+h5 {
     font-weight: 600;
-    margin: 0;
+    color: #222;
 }
 
-.clear-btn {
-    font-size: 14px;
-    color: #666;
-    text-decoration: none;
-    padding: 0;
+button,
+.btn {
+    font-family: inherit;
 }
 
-.clear-btn:hover {
-    color: #111;
-}
-
-/* MỖI SECTION LỌC */
-.filter-section {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.filter-section h5 {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.filter-section .form-control,
-.filter-section .form-select {
-    border: 1px solid #ddd;
-    padding: 10px;
-    font-size: 14px;
-}
-
-/* LỌC GIÁ */
-.price-inputs {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.price-inputs .form-control {
-    flex: 1;
-}
-
-.price-inputs span {
-    font-weight: 600;
-}
-
-/* KẾT QUẢ LỌC */
-.filter-results {
-    padding: 15px;
-    background: #f0f0f0;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.filter-results p {
-    margin: 0;
-    font-size: 14px;
-}
-
-/* ===== DANH SÁCH SẢN PHẨM (BÊN PHẢI) ===== */
-.products-header {
-    padding: 20px;
-    border-bottom: 2px solid #111;
-    margin-bottom: 30px;
-}
-
-.products-header h2 {
-    font-size: 32px;
-    font-weight: 600;
-    margin: 0;
-}
-
-/* CARD SẢN PHẨM */
-.product-card {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-.product-image-wrapper {
-    position: relative;
+/* ============================
+   SIDEBAR FILTER
+============================ */
+.shop-filter-sidebar {
+    margin-top: 1rem;
     background: #fff;
+    border-radius: 12px;
     padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 300px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    /* position: sticky; */
+    /* top: 6rem; */
+    height: fit-content;
 }
 
-.product-image-wrapper img {
-    max-height: 100%;
-    max-width: 100%;
-    object-fit: contain;
-}
-
-.stock-badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #28a745;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.product-card .card-body {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-.product-card .card-title {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    min-height: 50px;
-}
-
-.product-info {
-    color: #666;
-    font-size: 13px;
+.shop-filter-container h3 {
+    font-size: 2rem;
     margin-bottom: 10px;
 }
 
-.product-description {
-    font-size: 14px;
-    color: #555;
-    line-height: 1.5;
-    flex-grow: 1;
+.shop-clear-btn {
+    font-size: 0.9rem;
+    color: #777;
+    text-decoration: underline;
 }
 
-.product-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid #e0e0e0;
+.shop-clear-btn:hover {
+    color: #000;
 }
 
-.price-section {
-    display: flex;
-    flex-direction: column;
-}
-
-.price-regular {
-    font-size: 20px;
-    font-weight: 700;
-    color: #111;
-}
-
-.price-club {
-    font-size: 12px;
-    color: #666;
-}
-
-.add-to-cart-btn {
-    padding: 8px 20px;
-    font-size: 14px;
-    font-weight: 600;
-    background: #111;
-    border: none;
-    transition: background 0.3s ease;
-}
-
-.add-to-cart-btn:hover {
-    background: #333;
-}
-
-/* KHÔNG TÌM THẤY SẢN PHẨM */
-.no-results {
-    text-align: center;
-    padding: 60px 20px;
-}
-
-.no-results p {
-    font-size: 18px;
-    color: #666;
+.shop-filter-section {
     margin-bottom: 20px;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-    .shop-page {
-        padding-top: 80px;
+.shop-filter-section h5 {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.shop-price-inputs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.shop-filter-results {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    text-align: right;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* ============================
+   PRODUCTS GRID
+============================ */
+.shop-products-header {
+    margin-top: 1rem;
+    margin-bottom: 20px;
+}
+
+.shop-products-header h2 {
+    border-bottom: 3px solid #000;
+    display: inline-block;
+    padding-bottom: 4px;
+}
+
+.shop-product-card {
+    border: none;
+    border-radius: 12px;
+    padding: 20px;
+    overflow: hidden;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); */
+    transition: all 0.3s ease;
+    background: none;
+    margin: 10px 0;
+}
+
+.shop-product-card:hover {
+    transform: translateY(-5px);
+    /* box-shadow: 0 8px 14px rgba(0, 0, 0, 0.12); */
+}
+
+.shop-product-image-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.shop-product-image-wrapper img {
+    width: 100%;
+    aspect-ratio: 5 / 5;
+    height: auto;
+    /* object-fit: cover; */
+    transition: transform 0.4s ease;
+}
+
+.shop-product-card:hover .shop-product-image-wrapper img {
+    transform: scale(2);
+}
+
+.shop-stock-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #28a745;
+    color: white;
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 8px;
+}
+
+/* ============================
+   PRODUCT CONTENT
+============================ */
+.shop-product-info {
+    color: #777;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.shop-product-description {
+    font-size: 0.85rem;
+    color: #555;
+    min-height: 50px;
+}
+
+.shop-product-footer {
+    margin-top: 10px;
+}
+
+.shop-price-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.shop-price-regular {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.shop-price-club {
+    font-size: 0.9rem;
+    color: #b12704;
+    font-weight: 500;
+}
+
+.shop-bottom-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* ============================
+   QUANTITY CONTROL
+============================ */
+.shop-qty-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f1f1f1;
+    border-radius: 8px;
+    padding: 4px 8px;
+}
+
+.shop-qty-control button {
+    border: none;
+    background: transparent;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #555;
+}
+
+.shop-qty-control button:hover {
+    color: #000;
+}
+
+.shop-qty-control span {
+    font-weight: 500;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* ============================
+   ADD TO CART BUTTON
+============================ */
+.shop-btn-add {
+    flex: 1;
+    border: none;
+    background-color: #455a51;
+    color: #fff;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.shop-btn-add:hover {
+    background-color: #333;
+}
+
+.shop-btn-add.shop-added {
+    background-color: #28a745;
+}
+
+/* ============================
+   NO RESULTS
+============================ */
+.shop-no-results {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.shop-no-results p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* ============================
+   RESPONSIVE DESIGN
+============================ */
+@media (max-width: 992px) {
+    .shop-filter-sidebar {
+        margin-bottom: 30px;
     }
 
-    .filter-sidebar {
-        position: relative;
-        top: 0;
-        max-height: none;
+    .shop-price-inputs {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .shop-product-card {
         margin-bottom: 20px;
     }
 
-    .products-header h2 {
-        font-size: 24px;
+    .shop-bottom-actions {
+        flex-direction: column;
+        align-items: stretch;
     }
 
-    .product-card .card-title {
-        min-height: auto;
+    .shop-btn-add {
+        width: 100%;
     }
+}
+
+/* ============================
+   ADDITIONAL STYLES*/
+
+.shop-products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Thêm khoảng cách cho card (thay vì .shop-mb-4) */
+.shop-product-card {
+    margin-bottom: 20px;
+}
+
+/* ============================
+   SHOP HERO VIDEO
+============================ */
+.shop-hero {
+    height: 50vh;
+    /* <-- Đặt chiều cao 50% (hoặc 40vh, 300px,...) */
+    min-height: 500px;
+}
+
+/* Đảm bảo nội dung shop bắt đầu ngay dưới hero */
+.shop-page {
+    padding-top: 40px;
+    /* Tạo khoảng cách với video ở trên */
+}
+
+/* ============================
+   STICKY SIDEBAR (Desktop)
+============================ */
+
+/* 'md' breakpoint của Bootstrap là 768px */
+@media (min-width: 768px) {
+    .shop-filter-sidebar {
+        /* 1. Kích hoạt sticky */
+        position: sticky;
+
+        /* 2. Vị trí dính: 
+       Navbar (88px) + padding-top của .shop-page (40px) = 128px 
+    */
+        top: 128px;
+
+        /* 3. Quan trọng: Ngăn sidebar bị quá cao so với màn hình */
+        /* 128px (top) + 20px (khoảng hở dưới) = 148px */
+        max-height: calc(100vh - 148px);
+        overflow-y: auto;
+        /* Cho phép cuộn bên trong sidebar nếu nó quá dài */
+    }
+}
+
+.shop-product-link {
+    text-decoration: none;
+    color: inherit;
+    /* Kế thừa màu chữ (đen) */
+}
+
+.shop-product-link:hover .shop-product-card {
+    /* (Bạn đã có hiệu ứng hover trên card rồi) */
+    color: #b12704;
+    /* Ví dụ: đổi màu chữ khi hover */
+}
+
+.shop-product-link:hover .card-title {
+    color: #b12704;
+    /* Đổi màu tiêu đề khi hover */
 }

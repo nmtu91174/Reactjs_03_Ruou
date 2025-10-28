@@ -52,6 +52,7 @@
       "volume": "750ml",
       "product_url": "https://maxwellwines.com.au/products/ellen-street-shiraz-2022",
       "image_url": "https://maxwellwines.com.au/cdn/shop/files/EllenStreetShirazbottle1200x1200.png?v=1754440689&width=1100",
+      "image2_url": "Reactjs_03_Ruou/assets/json_img/EllenStShiraz.webp",
       "stock_status": "In Stock"
     },
     {
@@ -74,9 +75,9 @@
     },
     {
       "id": "grenache-rose-2024",
-      "name": "Grenache Rosé 2024",
+      "name": "Grenache Rose 2024",
       "vintage": "2024",
-      "variety": "Grenache Rosé",
+      "variety": "Rosé",
       "region": "McLaren Vale",
       "description": "Fresh, vibrant, textured. Inspired by the great dry style Roses of Provence.",
       "tasting_notes": "Fresh and vibrant with excellent texture, inspired by the dry style rosés of Provence. A sophisticated and refreshing rosé wine.",
@@ -87,7 +88,8 @@
       },
       "volume": "750ml",
       "product_url": "https://maxwellwines.com.au/products/grenache-rose-2024",
-      "image_url": "https://maxwellwines.com.au/cdn/shop/files/Fianobottle1200x1200_2506f7ec-29ee-4b2e-a7c9-450e6a31f2b8.png?v=1754441315&width=1100",
+      "image_url": "https://maxwellwines.com.au/cdn/shop/files/GrenacheRosebottle1200x1200_580e1e19-a6b4-4a57-9f31-ec451a0e4284.png?v=1754442403&width=1100",
+      "image2_url": "https://maxwellwines.com.au/cdn/shop/files/GrenacheRoselifestyleshot2_12267f45-e7cb-4cb1-9770-79100c89ff01.jpg?v=1754442403&width=1350",
       "stock_status": "In Stock"
     },
     {
@@ -124,6 +126,7 @@
       "volume": "750ml",
       "product_url": "https://maxwellwines.com.au/products/honey-mead-750ml",
       "image_url": "https://maxwellwines.com.au/cdn/shop/files/HoneyMeadbottle1200x1200.png?v=1754442572&width=1100",
+      "image2_url": "Reactjs_03_Ruou/assets/json_img/HoneyMead.webp",
       "stock_status": "In Stock"
     },
     {
@@ -214,6 +217,7 @@
       "volume": "750ml",
       "product_url": "https://maxwellwines.com.au/products/fresca-grenache-2024",
       "image_url": "https://maxwellwines.com.au/cdn/shop/files/FrescaGrenachebottle1200x1200.png?v=1754441893&width=1100",
+      "image2_url": "Reactjs_03_Ruou/assets/json_img/Fresca-Grenache.webp",
       "stock_status": "In Stock"
     },
     {
@@ -322,6 +326,7 @@
       "volume": "750ml",
       "product_url": "https://maxwellwines.com.au/products/tiers-of-wisdom-grenache-2024",
       "image_url": "https://maxwellwines.com.au/cdn/shop/files/TiersWisdombottle1200x1200.png?v=1754444695&width=1100",
+      "image2_url": "Reactjs_03_Ruou/assets/json_img/TiersofWisdom.webp",
       "stock_status": "In Stock"
     },
     {
@@ -376,6 +381,7 @@
       "volume": "750ml",
       "product_url": "https://maxwellwines.com.au/products/gsm-2023",
       "image_url": "https://maxwellwines.com.au/cdn/shop/files/GSMbottle1200x1200.png?v=1754442473&width=1100",
+      "image2_url": "Reactjs_03_Ruou/assets/json_img/GSM.webp",
       "stock_status": "In Stock"
     },
     {
@@ -394,6 +400,7 @@
       "volume": "750ml",
       "product_url": "https://maxwellwines.com.au/products/chardonnay-2024",
       "image_url": "https://maxwellwines.com.au/cdn/shop/files/Chardonnaybottle1200x1200_a30caee2-8a24-4df0-ad8d-3ecb4fbbcc7b.png?v=1754440390&width=1100",
+      "image2_url": "Reactjs_03_Ruou/assets/json_img/Adelaide-Hills.webp",
       "stock_status": "In Stock"
     },
     {
