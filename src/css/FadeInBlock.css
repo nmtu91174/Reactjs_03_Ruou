@@ -1,6 +1,6 @@
 .fadeInBlock {
   opacity: 0;
-  transform: translateY(48px) scale(0.97);
+  transform: translateY(48px) scale(0.99);
   filter: blur(0.48);
   transition:
     opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
