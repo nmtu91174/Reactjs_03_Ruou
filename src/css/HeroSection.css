@@ -177,7 +177,6 @@
 
 
 .overlay {
-  background: rgba(0, 0, 0, 0.18) !important;  
   z-index: 2 !important;                       
 }
 
@@ -280,4 +279,5 @@
     font-size: 0.9rem;
   }
 }
+
 

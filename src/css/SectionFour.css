@@ -41,9 +41,9 @@
   color: #fff;
   background: linear-gradient(
   to right,
-  rgba(0, 0, 0, 0.6) 0%,
-  rgba(0, 0, 0, 0.4) 45%,
-  rgba(0, 0, 0, 0.15) 100%
+  rgba(0, 0, 0, 0.1) 0%,
+  rgba(0, 0, 0, 0.0) 45%,
+  rgba(0, 0, 0, 0.1) 100%
 );
   will-change: opacity, transform;
   transform: translateZ(0);
@@ -458,3 +458,4 @@
   will-change: transform, opacity;
   transform: translateZ(0);
 }
+

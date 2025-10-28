@@ -1,76 +1,33 @@
 import { useEffect, useRef, useState } from "react";
 import "../css/FadeInBlock.css";
 
-/**
- * FadeInBlock — dành riêng cho Lenis Smooth Scroll
- * ------------------------------------------------
- * - Hỗ trợ fadeIn, fadeOut, và fadeIn lại khi quay ngược
- * - Tương thích hoàn toàn với Lenis (transform-based scroll)
- */
-export default function FadeInBlock({
-  children,
-  className = "",
-  fadeOut = true,
-  once = false, // nếu muốn chỉ fade 1 lần
-}) {
+export default function FadeInBlock({ children, className = "" }) {
   const ref = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
-  const ticking = useRef(false);
-  const scrollY = useRef(0);
-  const scrollDir = useRef("down"); // theo dõi hướng cuộn
+  const fadeTimeout = useRef(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    const lenis = window.lenis;
-
-    const checkVisibility = () => {
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const vh = window.innerHeight;
-
-      const inView = rect.top < vh * 0.85 && rect.bottom > vh * 0.1;
-
-      // FadeIn
-      if (inView && !isVisible) {
-        setIsVisible(true);
-      }
-
-      // FadeOut
-      if (!inView && fadeOut && !once && isVisible) {
-        // fadeOut chỉ khi phần tử thật sự rời viewport
-        if (rect.bottom < 0 || rect.top > vh) {
-          setIsVisible(false);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          clearTimeout(fadeTimeout.current);
+          setIsVisible(true);
+        } else {
+          fadeTimeout.current = setTimeout(() => setIsVisible(false), 400);
         }
-      }
+      },
+      { threshold: 0.25, rootMargin: "-88px 0px -22.22px 0px" }
+    );
 
-      ticking.current = false;
-    };
-
-    const handleScroll = (e) => {
-      const currentY = lenis ? lenis.scroll : window.scrollY;
-      scrollDir.current = currentY > scrollY.current ? "down" : "up";
-      scrollY.current = currentY;
-
-      if (!ticking.current) {
-        requestAnimationFrame(checkVisibility);
-        ticking.current = true;
-      }
-    };
-
-    // Lenis event hoặc fallback
-    if (lenis) lenis.on("scroll", handleScroll);
-    else window.addEventListener("scroll", handleScroll);
-
-    // initial check
-    checkVisibility();
-
+    observer.observe(el);
     return () => {
-      if (lenis) lenis.off("scroll", handleScroll);
-      else window.removeEventListener("scroll", handleScroll);
+      clearTimeout(fadeTimeout.current);
+      observer.disconnect();
     };
-  }, [fadeOut, once, isVisible]);
+  }, []);
 
   return (
     <div
