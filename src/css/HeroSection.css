@@ -180,3 +180,104 @@
   background: rgba(0, 0, 0, 0.18) !important;  
   z-index: 2 !important;                       
 }
+
+/* Tablet Landscape (1024px) */
+@media (max-width: 1024px) {
+  .hero {
+    height: 90vh;
+  }
+
+  .buttonhero {
+    justify-content: flex-start;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+  }
+
+  .hero p {
+    max-width: 520px;
+  }
+}
+
+/* Tablet Portrait (768px) */
+@media (max-width: 768px) {
+  .hero {
+    height: 85vh;
+  }
+
+  .damn {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+    line-height: 1.15;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    max-width: 90%;
+  }
+
+  .buttonhero {
+    justify-content: flex-start;
+    margin-top: 1.5rem;
+  }
+}
+
+/* Mobile (480px) */
+@media (max-width: 480px) {
+  .hero {
+    height: 80vh;
+    align-items: flex-end;
+  }
+
+  .herotext {
+    padding-left: 1.7rem !important;
+  }
+
+  .hero h1{
+    font-size: 1.8rem !important;
+  }
+
+  .hero p{
+    font-size:1rem !important;
+  }
+
+  .buttonhero {
+    padding-left: 1.7rem !important;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .btn-dark,
+  .btn-outline-light {
+    width: auto;
+    padding: 0.65rem 1.2rem;
+    font-size: 0.85rem !important;
+  }
+
+  .damn {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+}
+
+/* Mobile Small (375px) */
+@media (max-width: 375px) {
+  .hero {
+    height: 75vh;
+  }
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+  .hero p {
+    font-size: 0.9rem;
+  }
+}
+

@@ -1168,7 +1168,9 @@
 
 /* ============ SMALL MOBILE (≤480px) ============ */
 @media (max-width: 480px) {
-
+  .maxwell-nav{
+    padding: 0rem 2.28rem !important;
+  } 
   .nav-logo .logo {
     height: 2.2rem;
   }
