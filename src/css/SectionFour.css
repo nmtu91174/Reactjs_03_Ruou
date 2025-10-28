@@ -451,3 +451,13 @@
   transform: translateZ(0);
 }
 
+.overlay,
+.content-overlay,
+.journal-overlay {
+  pointer-events: none; /* ❌ không chặn hover/click */
+}
+.overlay > *,
+.content-overlay > *,
+.journal-overlay > * {
+  pointer-events: auto; /* ✅ chỉ phần con mới nhận được hover */
+}
