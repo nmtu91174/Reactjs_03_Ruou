@@ -194,7 +194,11 @@ export default function OrderHistoryPage() {
 
                         {/* === 5. THÊM THANK YOU HEADER === */}
                         <div className="thank-you-header-box text-center">
-                            <h2>💖 Thank You For Your Support! 💖</h2>
+                            <h2>
+                                <i className="bi bi-heart-fill sparkling-heart"></i>
+                                &nbsp;Thank You For Your Support!&nbsp;
+                                {/* <i className="bi bi-heart-fill sparkling-heart"></i> */}
+                            </h2>
                             <p className="lead">
                                 We truly appreciate your purchases. Below is your order history.
                             </p>

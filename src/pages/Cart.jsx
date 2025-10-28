@@ -84,7 +84,7 @@ function Cart() {
 function PromoSlider() {
   const promoSlides = [
     {
-      img: "https://www.thespruceeats.com/thmb/RRt94B04rqexveGo09-4FIfKt54=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/red-wine-in-wine-glass--bunch-of-dark-purple-grapes-615395214-5ac5375030371300375622c8.jpg",
+      img: "Reactjs_03_Ruou/assets/Grape-Regions-Of-Austria.jpg",
       title: "Join the Maxwell Wine Club",
       desc: "Enjoy exclusive discounts, early access to new vintages, and member-only events.",
       btn: "JOIN NOW →",
