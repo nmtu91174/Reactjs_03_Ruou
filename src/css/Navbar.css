@@ -468,10 +468,12 @@
 .cart-header {
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
+
 .cart-sidebar.open .cart-header {
   opacity: 1;
   transform: translateY(0);
 }
+
 .cart-sidebar:not(.open) .cart-header {
   opacity: 0;
   transform: translateY(-8px);
@@ -488,7 +490,6 @@
   border-bottom: 1px solid #eee;
 }
 
-<<<<<<< HEAD
 .cart-header i {
   position: absolute;
   left: 24px;
@@ -496,8 +497,6 @@
   cursor: pointer;
 }
 
-=======
->>>>>>> nmtu
 .cart-header h2 {
   font-family: "Font1", serif;
   font-size: 26px;
@@ -842,14 +841,9 @@
   /* nằm ngay dưới header */
   left: 0;
   width: 100%;
-<<<<<<< HEAD
-  z-index: 450;
+  z-index: 100;
   background: transparent;
   /* để nền của .search-bar quyết định */
-=======
-  z-index: 100;
-  background: transparent; /* để nền của .search-bar quyết định */
->>>>>>> nmtu
   display: flex;
   justify-content: center;
   transition: all 0.4s ease;
@@ -999,20 +993,6 @@
 
 /* ============ RESPONSIVE TABLET ============ */
 @media (max-width: 1024px) {
-<<<<<<< HEAD
-  .maxwell-nav {
-    padding: 0 32px;
-    height: 80px;
-  }
-
-  .search-bar {
-    margin-top: -0.5rem;
-    padding: 1rem 1.3rem 1rem 2.2rem;
-  }
-
-
-=======
->>>>>>> nmtu
   .nav-logo .logo {
     height: 2.8rem;
   }
@@ -1052,13 +1032,8 @@
 
 
   .search-bar {
-<<<<<<< HEAD
     margin-top: -1.2rem;
-    padding: 1rem 0.6rem 1rem 1.5rem;
-=======
-     margin-top: -1.2rem;
-     padding: 1rem 2.3rem 1rem 3.2rem;
->>>>>>> nmtu
+    padding: 1rem 2.3rem 1rem 3.2rem;
   }
 
   .nav-logo .logo {
@@ -1252,66 +1227,12 @@
 .cart-header {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* hai icon hai bên, Cart giữa */
+  justify-content: space-between;
+  /* hai icon hai bên, Cart giữa */
   padding: 24px 28px;
   border-bottom: 1px solid #eee;
 }
 
-<<<<<<< HEAD
-/* Toast Notification */
-.toast-notification {
-  position: fixed;
-  top: 100px;
-  right: 20px;
-  background: #28a745;
-  color: white;
-  padding: 15px 25px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 10000;
-  animation: slideIn 0.3s ease-out, fadeOut 0.3s ease-in 2.7s;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.toast-notification i {
-  font-size: 20px;
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateX(400px);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
-}
-
-/* Responsive cho mobile */
-@media (max-width: 768px) {
-  .toast-notification {
-    right: 10px;
-    left: 10px;
-    top: 80px;
-  }
-}
-=======
 .cart-header h2 {
   font-family: "Font1", serif;
   font-size: 26px;
@@ -1342,4 +1263,3 @@
 .cart-header i:last-of-type {
   margin-left: auto;
 }
->>>>>>> nmtu

@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-import { useEffect, useState, useRef, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { CartContext } from "../App";
-import "../css/Navbar.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import productsData from "../data/maxwell_wines_products.json";
-
-export default function Navbar() {
-  const navigate = useNavigate();
-  const { cartItems, addToCart, updateQty, removeFromCart } = useContext(CartContext);
-=======
 import { useEffect, useState, useRef } from "react";
 import { useCartStorage } from "../hooks/useCartStorage";
 import { Link, useNavigate } from "react-router-dom";
@@ -27,7 +15,6 @@ export default function Navbar() {
   const isProduct = location.pathname.startsWith("/product/"); // Kiểm tra nếu là trang sản phẩm
 
   const hasTransparentHeader = isHome || isShop;
->>>>>>> nmtu
 
   const [scrolled, setScrolled] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -36,11 +23,6 @@ export default function Navbar() {
   const [recommended, setRecommended] = useState([]);
   const [searchOpen, setSearchOpen] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
-<<<<<<< HEAD
-
-  // ✅ State cho toast notification
-  const [toast, setToast] = useState({ show: false, message: "" });
-=======
   const [searchTerm, setSearchTerm] = useState("");
 
   const recRef = useRef(null);
@@ -48,7 +30,6 @@ export default function Navbar() {
   // ✅ Hook giỏ hàng thống nhất
   const { cartItems, addItem, updateQty, removeItem, subtotal, totalCount } =
     useCartStorage();
->>>>>>> nmtu
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -61,31 +42,8 @@ export default function Navbar() {
     setRecommended(shuffled.slice(0, 10));
   }, []);
 
-<<<<<<< HEAD
-  // ✅ Wrapper function CÓ Ý NGHĨA - thêm logic hiển thị thông báo
-  const handleAddToCart = (item) => {
-    addToCart(item);
-
-    // Hiển thị toast
-    setToast({
-      show: true,
-      message: `${item.name} đã được thêm vào giỏ hàng!`
-    });
-
-    // Tự động ẩn sau 3 giây
-    setTimeout(() => {
-      setToast({ show: false, message: "" });
-    }, 3000);
-  };
-
-  const subtotal = cartItems.reduce((sum, i) => sum + i.price * i.qty, 0);
-  const totalCount = cartItems.reduce((sum, i) => sum + i.qty, 0);
-
-  const handleScrollRec = (dir) => {
-=======
   // === recommend scroll ===
   const handleScroll = (dir) => {
->>>>>>> nmtu
     if (!recRef.current) return;
     const card = recRef.current.querySelector(".recommend-card");
     if (!card) return;
@@ -97,10 +55,7 @@ export default function Navbar() {
     });
   };
 
-<<<<<<< HEAD
-=======
   // === disable body scroll khi sidebar mở ===
->>>>>>> nmtu
   useEffect(() => {
     document.body.style.overflow = menuOpen || cartOpen ? "hidden" : "auto";
   }, [menuOpen, cartOpen]);
@@ -156,32 +111,23 @@ export default function Navbar() {
         <nav className="maxwell-nav">
           <div className="nav-left mobile-only">
             <img
-<<<<<<< HEAD
-              src={scrolled || hovered ? "/assets/icon-menu.png" : "/assets/icon-menu2.png"}
-=======
               src={
                 scrolled || hovered
                   ? "Reactjs_03_Ruou/assets/icon-menu.png"
                   : "Reactjs_03_Ruou/assets/icon-menu2.png"
               }
->>>>>>> nmtu
               alt="menu"
               onClick={() => setMenuOpen(true)}
             />
           </div>
 
           <ul className="nav-links desktop-only">
-<<<<<<< HEAD
-            <li>RESTAURANT</li>
-            <li onClick={() => navigate('/shop')} style={{ cursor: 'pointer' }}>SHOP</li>
-=======
             <li onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
               RESTAURANT
             </li>
             <li onClick={() => navigate("/shop")} style={{ cursor: "pointer" }}>
               SHOP
             </li>
->>>>>>> nmtu
             <li>VISIT</li>
             <li>CLUB</li>
             <li>EVENTS</li>
@@ -189,11 +135,6 @@ export default function Navbar() {
           </ul>
 
           <div className="nav-logo">
-<<<<<<< HEAD
-            <Link to="/">
-              <img
-                src={scrolled || hovered ? "/assets/logo-black.webp" : "/assets/logo-white.webp"}
-=======
             <Link
               to="/"
               onClick={(e) => {
@@ -211,18 +152,12 @@ export default function Navbar() {
                       : "Reactjs_03_Ruou/assets/logo-white.webp"  // home + transparent
                     : "Reactjs_03_Ruou/assets/logo-black.webp"   // các trang khác → logo đen
                 }
->>>>>>> nmtu
                 alt="Maxwell Logo"
                 className="logo"
               />
             </Link>
           </div>
 
-<<<<<<< HEAD
-          <div className="nav-actions">
-            <button className="btn-reserve desktop-only">RESERVATIONS</button>
-            <i className="bi bi-person desktop-only" style={{ color: iconColor, fontSize: "24px" }}></i>
-=======
 
           {/* === ACTIONS === */}
           <div className="nav-actions">
@@ -233,16 +168,11 @@ export default function Navbar() {
               style={{ color: iconColor, fontSize: "24px" }}
             ></i>
 
->>>>>>> nmtu
             <i
               className="bi bi-search desktop-only"
               style={{ color: iconColor, fontSize: "18px", cursor: "pointer" }}
               onClick={() => setSearchOpen(true)}
             ></i>
-<<<<<<< HEAD
-            <div className="bag-icon" onClick={() => setCartOpen(true)} style={{ position: "relative" }}>
-              <i className="bi bi-bag" style={{ color: iconColor, fontSize: "20px" }}></i>
-=======
 
             {/* === CART ICON === */}
             <div
@@ -254,25 +184,13 @@ export default function Navbar() {
                 className="bi bi-bag"
                 style={{ color: iconColor, fontSize: "20px" }}
               ></i>
->>>>>>> nmtu
               <span className="cart-count">{totalCount}</span>
             </div>
           </div>
         </nav>
       </header>
 
-<<<<<<< HEAD
-      {/* ✅ Toast Notification */}
-      {toast.show && (
-        <div className="toast-notification">
-          <i className="bi bi-check-circle"></i>
-          <span>{toast.message}</span>
-        </div>
-      )}
-
-=======
       {/* ===== SEARCH BAR ===== */}
->>>>>>> nmtu
       {searchOpen && (
         <div className={`search-overlay ${scrolled ? "scrolled" : ""}`}>
           <div className="search-bar">
@@ -302,10 +220,7 @@ export default function Navbar() {
         </div>
       )}
 
-<<<<<<< HEAD
-=======
       {/* ===== SIDEBAR MENU ===== */}
->>>>>>> nmtu
       <div className={`sidebar left ${menuOpen ? "open" : ""}`}>
         <div className="sidebar-header">
           <i className="bi bi-x-lg" onClick={() => setMenuOpen(false)} style={{ cursor: "pointer" }}></i>
@@ -314,11 +229,7 @@ export default function Navbar() {
 
         <ul className="sidebar-links">
           <li><span>Restaurant</span></li>
-<<<<<<< HEAD
-          <li className="has-arrow" onClick={() => handleNavigate('/shop')}>
-=======
           <li className="has-arrow" onClick={() => handleNavigate("/shop")}>
->>>>>>> nmtu
             <span>Shop</span>
           </li>
           <li className="has-arrow"><span>Visit</span></li>
@@ -345,10 +256,6 @@ export default function Navbar() {
         <div className="cart-header">
           <i className="bi bi-x-lg" onClick={() => setCartOpen(false)}></i>
           <h2>Cart</h2>
-<<<<<<< HEAD
-        </div>
-
-=======
           <i
             className="bi bi-bag"
             onClick={() => { navigate("/cart"); setCartOpen(false) }}
@@ -357,7 +264,6 @@ export default function Navbar() {
           ></i>
         </div>
 
->>>>>>> nmtu
         <div className="cart-body">
           {cartItems.length === 0 ? (
             <p className="empty-cart">Your cart is empty</p>
@@ -365,10 +271,6 @@ export default function Navbar() {
             <div className="cart-list">
               {cartItems.map((item) => (
                 <div className="cart-item" key={item.id}>
-<<<<<<< HEAD
-                  <i className="bi bi-x" onClick={() => removeFromCart(item.id)}></i>
-                  <img src={item.image_url} alt={item.name} className="cart-thumb" />
-=======
                   <i
                     className="bi bi-x"
                     onClick={() => removeItem(item.id)}
@@ -378,22 +280,15 @@ export default function Navbar() {
                     alt={item.name}
                     className="cart-thumb"
                   />
->>>>>>> nmtu
                   <div className="cart-info">
                     <h5>{item.name}</h5>
                   </div>
                   <div className="cart-right">
                     <div className="item-price">${item.price.toFixed(2)}</div>
                     <div className="qty-box">
-<<<<<<< HEAD
-                      <button onClick={() => updateQty(item.id, -1)}>-</button>
-                      <span>{item.qty}</span>
-                      <button onClick={() => updateQty(item.id, 1)}>+</button>
-=======
                       <button onClick={() => updateQty(item.id, item.qty - 1)}>-</button>
                       <span>{item.qty}</span>
                       <button onClick={() => updateQty(item.id, item.qty + 1)}>+</button>
->>>>>>> nmtu
                     </div>
                   </div>
                 </div>
@@ -401,18 +296,11 @@ export default function Navbar() {
             </div>
           )}
 
-<<<<<<< HEAD
-=======
           {/* === RECOMMEND === */}
->>>>>>> nmtu
           <div className="cart-recommend">
             <div className="recommend-header">
               <h4>We Recommend</h4>
               <div className="arrows">
-<<<<<<< HEAD
-                <i className="bi bi-arrow-left" onClick={() => handleScrollRec("left")}></i>
-                <i className="bi bi-arrow-right" onClick={() => handleScrollRec("right")}></i>
-=======
                 <i
                   className="bi bi-arrow-left"
                   onClick={() => handleScroll("left")}
@@ -421,7 +309,6 @@ export default function Navbar() {
                   className="bi bi-arrow-right"
                   onClick={() => handleScroll("right")}
                 ></i>
->>>>>>> nmtu
               </div>
             </div>
 
@@ -432,14 +319,9 @@ export default function Navbar() {
                   <div className="recommend-content">
                     <h5>{rec.name}</h5>
                     <p>${rec.price.regular.toFixed(2)}</p>
-<<<<<<< HEAD
-                    {/* ✅ Giờ dùng handleAddToCart có ý nghĩa */}
-                    <button className="add-btn" onClick={() => handleAddToCart(rec)}>+</button>
-=======
                     <button className="add-btn" onClick={() => addItem(rec)}>
                       +
                     </button>
->>>>>>> nmtu
                   </div>
                 </div>
               ))}
@@ -447,10 +329,7 @@ export default function Navbar() {
           </div>
         </div>
 
-<<<<<<< HEAD
-=======
         {/* FOOTER */}
->>>>>>> nmtu
         <div className="cart-footer">
           <div className="subtotal-row">
             <span>SUBTOTAL</span>
@@ -464,45 +343,25 @@ export default function Navbar() {
             />
             <span>I confirm that I am over 18 years of age</span>
           </label>
-<<<<<<< HEAD
-          <button
-            className="btn-cartcheck"
-            disabled={!confirmed}
-=======
 
           <button
             className="btn-cartcheck"
             disabled={!confirmed}
             onClick={() => { navigate("/checkout"); setCartOpen(false); }}
->>>>>>> nmtu
             style={{
               opacity: confirmed ? 1 : 0.8,
               cursor: confirmed ? "pointer" : "not-allowed",
             }}
-<<<<<<< HEAD
-=======
           // onClick={() => {
           //   navigate("/checkout");
           //   setCartOpen(false);
           // }}
->>>>>>> nmtu
           >
             CHECKOUT
           </button>
         </div>
       </div>
 
-<<<<<<< HEAD
-      {(menuOpen || cartOpen) && (
-        <div
-          className="backdrop"
-          onClick={() => {
-            setMenuOpen(false);
-            setCartOpen(false);
-          }}
-        ></div>
-      )}
-=======
       {/* BACKDROP */}
       <div
         className={`backdrop ${(menuOpen || cartOpen) ? "open" : ""}`}
@@ -512,7 +371,6 @@ export default function Navbar() {
         }}
       ></div>
 
->>>>>>> nmtu
     </>
   );
 }

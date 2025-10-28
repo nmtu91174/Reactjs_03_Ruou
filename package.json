@@ -19,10 +19,7 @@
     "lucide-react": "^0.546.0",
     "react": "^19.1.1",
     "react-bootstrap": "^2.10.10",
-<<<<<<< HEAD
-=======
     "react-confetti": "^6.4.0",
->>>>>>> nmtu
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.4"
   },
