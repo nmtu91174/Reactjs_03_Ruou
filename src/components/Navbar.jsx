@@ -95,10 +95,10 @@ export default function Navbar() {
   };
 
 
-  const handleNavigate = (path) => {
-    navigate(path);
-    setMenuOpen(false);
-  };
+  // const handleNavigate = (path) => {
+  //   navigate(path);
+  //   setMenuOpen(false);
+  // };
 
   return (
     <>
