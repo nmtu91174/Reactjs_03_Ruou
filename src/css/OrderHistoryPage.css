@@ -155,9 +155,9 @@
 }
 
 .order-details-link {
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-weight: 500;
-    color: #455a51;
+    color: #000000;
     text-decoration: none;
     margin-left: 10px;
 }
@@ -165,6 +165,7 @@
 .order-details-link:hover {
     text-decoration: underline;
     color: #b22222;
+    transform: scale(1.1);
 }
 
 /* === NÚT XÓA MỚI === */
@@ -252,6 +253,10 @@
     border-radius: 8px;
     background: #fff;
     border: 1px solid #eee;
+}
+
+.product-image-col :hover {
+    transform: scale(2);
 }
 
 .product-name-link {
@@ -486,5 +491,42 @@
         grid-column: 1 / -1;
         text-align: left;
         margin-top: 0.5rem;
+    }
+}
+
+/* === THÊM MỚI: Hiệu ứng Sparkling Heart === */
+
+/* Căn chỉnh lại H2 để icon và chữ thẳng hàng */
+.thank-you-header-box h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    /* Khoảng cách giữa icon và chữ */
+}
+
+.sparkling-heart {
+    color: #b22222;
+    /* Giữ màu đỏ rượu vang */
+    /* Thêm hiệu ứng lấp lánh */
+    animation: sparkle 2s infinite ease-in-out;
+    display: inline-block;
+}
+
+/* Định nghĩa hiệu ứng lấp lánh */
+@keyframes sparkle {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        text-shadow: none;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+        /* Thêm hiệu ứng glow màu hồng nhạt */
+        text-shadow: 0 0 12px #ffcccc, 0 0 18px #ffcccc;
     }
 }

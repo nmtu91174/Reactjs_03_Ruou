@@ -105,6 +105,11 @@
     color: #b22222;
 }
 
+.product-image:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: scale(2);
+}
+
 .product-item-detail .product-meta {
     font-size: 0.9rem;
     color: #6c757d;
@@ -142,7 +147,7 @@
 
 /* --- Right Sidebar --- */
 .detail-sidebar-col {
-    background-color: #fcfcfc;
+    background-color: #d1d1d1;
     border-radius: 0 12px 12px 0;
 }
 

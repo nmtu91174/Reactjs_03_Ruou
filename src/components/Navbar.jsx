@@ -186,6 +186,13 @@ export default function Navbar() {
               ></i>
               <span className="cart-count">{totalCount}</span>
             </div>
+            {/* ===== START: ADDED HISTORY ICON ===== */}
+            <i
+              className="bi bi-clock-history desktop-only"
+              style={{ color: iconColor, fontSize: "20px", cursor: "pointer" }}
+              onClick={() => navigate('/order-history')}
+            ></i>
+            {/* ===== END: ADDED HISTORY ICON ===== */}
           </div>
         </nav>
       </header>
