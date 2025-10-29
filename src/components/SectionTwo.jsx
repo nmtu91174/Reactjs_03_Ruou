@@ -30,7 +30,7 @@ export default function SectionTwo() {
       {/* ===== IMAGE OVERLAY SECTION ===== */}
       <div className="section-image">
         <img
-          src="Reactjs_03_Ruou/assets/hp-sec2/Sec2.webp"
+          src="assets/hp-sec2/Sec2.webp"
           alt="Maxwell Restaurant"
           draggable="false"
         />
@@ -70,8 +70,8 @@ export default function SectionTwo() {
                 transform: `translateX(-${activeIndex * 50}%)`,
               }}
             >
-              <img src="Reactjs_03_Ruou/assets/hp-sec2/Sec2-1.webp" alt="Shop Wine" />
-              <img src="Reactjs_03_Ruou/assets/hp-sec2/Sec2-2.webp" alt="Shop Mead" />
+              <img src="assets/hp-sec2/Sec2-1.webp" alt="Shop Wine" />
+              <img src="assets/hp-sec2/Sec2-2.webp" alt="Shop Mead" />
             </div>
           </div>
 
@@ -102,7 +102,7 @@ export default function SectionTwo() {
 
         {/* RIGHT: STATIC IMAGE */}
         <div className="col right">
-          <img src="Reactjs_03_Ruou/assets/hp-sec2/Sec2-3.webp" alt="Our Story" />
+          <img src="assets/hp-sec2/Sec2-3.webp" alt="Our Story" />
           <div className="content-overlay">
 
             <div className="text-block">

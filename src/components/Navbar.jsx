@@ -112,8 +112,8 @@ export default function Navbar() {
             <img
               src={
                 scrolled || hovered
-                  ? "/assets/icon-menu.png"
-                  : "/assets/icon-menu2.png"
+                  ? "assets/icon-menu.png"
+                  : "assets/icon-menu2.png"
               }
               alt="menu"
               onClick={() => setMenuOpen(true)}
@@ -149,9 +149,9 @@ export default function Navbar() {
                 src={
                   hasTransparentHeader
                     ? scrolled || hovered
-                      ? "/assets/logo-black.webp"  // home + scroll/hover
-                      : "/assets/logo-white.webp"  // home + transparent
-                    : "/assets/logo-black.webp"   // các trang khác → logo đen
+                      ? "assets/logo-black.webp"  // home + scroll/hover
+                      : "assets/logo-white.webp"  // home + transparent
+                    : "assets/logo-black.webp"   // các trang khác → logo đen
                 }
                 alt="Maxwell Logo"
                 className="logo"
@@ -237,7 +237,7 @@ export default function Navbar() {
             style={{ cursor: "pointer" }}
           ></i>
           <img
-            src="/assets/logo-black.webp"
+            src="assets/logo-black.webp"
             alt="Logo"
             className="sidebar-logo"
           />
@@ -260,7 +260,7 @@ export default function Navbar() {
         </div>
 
         <div className="sidebar-book">
-          <img src="/assets/sitebar.webp" alt="Book a Table" />
+          <img src="assets/sitebar.webp" alt="Book a Table" />
           <div className="book-info">
             <h4>Book a Table</h4>
             <button>Learn More →</button>

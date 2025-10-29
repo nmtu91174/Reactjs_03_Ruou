@@ -24,26 +24,26 @@ export default function ProductDetail() {
   const handleAddToCart = () => addItem(product, qty);
 
   // === Sidebar controls ===
-const openSidebar = (tab) => {
-  if (isSidebarOpen && tab !== activeTab) {
-    setIsSidebarOpen(false);
-    setTimeout(() => {
+  const openSidebar = (tab) => {
+    if (isSidebarOpen && tab !== activeTab) {
+      setIsSidebarOpen(false);
+      setTimeout(() => {
+        setActiveTab(tab);
+        setIsSidebarOpen(true);
+      }, 500);
+    } else {
       setActiveTab(tab);
       setIsSidebarOpen(true);
-    }, 500); 
-  } else {
-    setActiveTab(tab);
-    setIsSidebarOpen(true);
-  }
-};
+    }
+  };
 
-const closeSidebar = () => {
-  setIsSidebarOpen(false);
-  setTimeout(() => setActiveTab(null), 500); 
-};
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+    setTimeout(() => setActiveTab(null), 500);
+  };
 
-  
-  
+
+
 
   return (
     <>
@@ -118,7 +118,7 @@ const closeSidebar = () => {
       <section className="productdetail-hero">
         <video
           className="productdetail-hero-video"
-          src="/assets/detail.mp4"
+          src="assets/detail.mp4"
           autoPlay
           muted
           loop

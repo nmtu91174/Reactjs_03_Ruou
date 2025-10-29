@@ -6,14 +6,14 @@ export default function SectionFour() {
   const articles = [
     {
       id: "a1",
-      img: "/assets/hp-sec4/right-1.webp",
+      img: "assets/hp-sec4/right-1.webp",
       tag: "NEWS",
       title: "Maxwell Restaurant Wins Two Chef Hats",
       url: ""
     },
     {
       id: "a2",
-      img: "/assets/hp-sec4/right-2.webp",
+      img: "assets/hp-sec4/right-2.webp",
       tag: "NEWS",
       title: "Gourmet Traveller Restaurant of the Year, SA",
       url: ""
@@ -26,7 +26,7 @@ export default function SectionFour() {
       <section className="section-four">
         <div className="section-image">
           <img
-            src="/assets/hp-sec4/sec4.webp"
+            src="assets/hp-sec4/sec4.webp"
             alt="Join the Maxwell Clan Wine Club"
             draggable="false"
           />
@@ -69,7 +69,7 @@ export default function SectionFour() {
         <div className="sf-left">
           <div className="sf-left-media">
             <img
-              src="/assets/hp-sec4/left.webp"
+              src="assets/hp-sec4/left.webp"
               alt="Maxwell Wines"
               draggable="false"
             />

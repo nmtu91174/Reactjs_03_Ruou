@@ -183,7 +183,7 @@ export default function OrderHistoryPage() {
                 playsInline
                 preload="auto"
             >
-                <source src="/assets/Maxwellwine.mp4" type="video/mp4" />
+                <source src="assets/Maxwellwine.mp4" type="video/mp4" />
             </video>
             <div className="video-overlay"></div>
 
