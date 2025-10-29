@@ -259,7 +259,7 @@ export default function ShopPage() {
           preload="auto"
         >
           {/* 4. Đặt đường dẫn video (từ /public) */}
-          <source src="Reactjs_03_Ruou/assets/Maxwellwine.mp4" type="video/mp4" />
+          <source src="/assets/Maxwellwine.mp4" type="video/mp4" />
         </video>
         <div className="overlay"></div>
 

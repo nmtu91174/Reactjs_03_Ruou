@@ -84,7 +84,7 @@ function Cart() {
 function PromoSlider() {
   const promoSlides = [
     {
-      img: "Reactjs_03_Ruou/assets/Grape-Regions-Of-Austria.jpg",
+      img: "/assets/Grape-Regions-Of-Austria.jpg",
       title: "Join the Maxwell Wine Club",
       desc: "Enjoy exclusive discounts, early access to new vintages, and member-only events.",
       btn: "JOIN NOW →",
