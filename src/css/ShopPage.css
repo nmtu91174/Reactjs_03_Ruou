@@ -24,6 +24,13 @@ button,
 /* ============================
    SIDEBAR FILTER
 ============================ */
+
+.shop-filter-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
 .shop-filter-sidebar {
     margin-top: 1rem;
     background: #fff;
@@ -44,10 +51,13 @@ button,
     font-size: 0.9rem;
     color: #777;
     text-decoration: underline;
+    transition: all 0.5s ease;
+
 }
 
 .shop-clear-btn:hover {
     color: #000;
+    transform: scale(2);
 }
 
 .shop-filter-section {

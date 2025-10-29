@@ -110,6 +110,12 @@
     border-radius: 8px;
 }
 
+.nav-link:hover {
+    color: #440404;
+    transition: all 0.3s ease;
+    transform: scale(1.2);
+}
+
 /* === Order Card List (Không thay đổi) === */
 .order-list-container {
     display: flex;
@@ -160,12 +166,13 @@
     color: #000000;
     text-decoration: none;
     margin-left: 10px;
+    transition: all 0.3s ease;
 }
 
 .order-details-link:hover {
     text-decoration: underline;
     color: #b22222;
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 
 /* === NÚT XÓA MỚI === */
