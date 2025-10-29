@@ -4,7 +4,7 @@ name: Deploy React App to GitHub Pages
 # Kích hoạt workflow khi bạn push lên branch 'nhatduong2132'
 on:
   push:
-    branches: [ "nmtu" ]
+    branches: [ "nmtu_backup" ]
 
 # Cho phép workflow này ghi vào repository
 permissions:
